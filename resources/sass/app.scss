@@ -1,0 +1,17 @@
+
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
+
+$fa-font-path: "../webfonts";
+
+@import "~font-awesome/css/font-awesome.css";
+// Base
+// TODO: este base contiene los estilos de layout (header, sub header) del portal ucsc
+//@import 'components/app';
+
+// Variables
+//@import 'variables';
+@import '~bootstrap/scss/bootstrap';
+
+@import '~toastr/toastr';
+

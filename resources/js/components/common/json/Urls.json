@@ -1,0 +1,32 @@
+{
+    "CENTRO_PRACTICAS": {
+        "GET_ALL": "api/centroPractica/getAll",
+        "SAVE": "api/centroPractica/save",
+        "GET": "api/centroPractica/get/",
+        "DELETE": "api/centroPractica/delete/"
+    },
+    "EXTERNO": {
+        "COMUNAS": "https://apis.digital.gob.cl/dpa/comunas",
+        "REGIONES": "https://apis.digital.gob.cl/dpa/regiones",
+        "COMUNAS_REGION": "https://apis.digital.gob.cl/dpa/regiones/{codigo}/comunas",
+        "GET_ESTABLECIMIENTOS_MINEDUC": "http://api.datos.mineduc.cl/api/v2/datastreams/VISTA-DE-DIREC-DE-ESTAB/data.ajson/?auth_key=pGDCfTH3M1WycCYAO2QnMojt2AVcl92XujWWMurd"
+    },
+    "ESTADO_SOLICITUD": {
+        "GET_ALL": "api/estadoSolicitud/getAll",
+        "SAVE": "api/estadoSolicitud/save",
+        "GET": "api/estadoSolicitud/get/",
+        "DELETE": "api/estadoSolicitud/delete/"
+    },
+    "PROFESOR_TUTOR": {
+        "GET_ALL": "api/profesorTutor/getAll",
+        "SAVE": "api/profesorTutor/save",
+        "GET": "api/profesorTutor/get/",
+        "DELETE": "api/profesorTutor/delete/"
+    },
+    "TIPO_SOLICITUD": {
+        "GET_ALL": "api/tipoSolicitud/getAll",
+        "SAVE": "api/tipoSolicitud/save",
+        "GET": "api/tipoSolicitud/get/",
+        "DELETE": "api/tipoSolicitud/delete/"
+    }
+}

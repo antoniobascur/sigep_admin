@@ -1,0 +1,23 @@
+{
+    "HOME":{
+        "TITULO":"Ejemplo Titulo",
+        "HELP":"En esta sección se puede observar ...."
+    },
+    "CENTRO_PRACTICAS":{
+        "TITULO":"Centros de Practicas",
+        "HELP":"En esta sección se puede observar ...."
+    },
+    "ESTADO_SOLICITUD":{
+        "TITULO":"Estado Policitud",
+        "HELP":"En esta sección se puede observar ...."
+    },
+    "PROFESOR_TUTOR":{
+        "TITULO":"Profesor Tutor",
+        "HELP":"En esta sección se puede observar ...."
+    },
+    "TIPO_SOLICITUD":{
+        "TITULO":"Tipo Solicitud",
+        "HELP":"En esta sección se puede observar ...."
+    }
+
+}

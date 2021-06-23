@@ -1,0 +1,17 @@
+{
+    "FORMULARIO":{
+        "SAVE_EXITO":"Agregado con éxito!",
+        "SAVE_ERROR":"Existió un problema al guardar el formulario, intente más tarde.",
+        "VALIDATE_ERROR": "Tiene errores en el formulario, corríjalos antes de continuar."
+
+    },
+    "CONFIRMACION": {
+        "ELIMINACION": "¿Esta seguro que desea eliminar "
+    },
+    "GRID": {
+        "ELIMINACION_EXITO": "Eliminado con éxito!",
+        "ELIMINACION_ERROR": "Existió un problema al eliminar el elemento, intente más tarde."
+    }
+
+
+}

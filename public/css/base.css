@@ -1,0 +1,816 @@
+@charset "UTF-8";
+
+/**
+ *	CSS base v0.1.0
+ */
+* {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+body {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+div#sub-header {
+    z-index: 999;
+}
+
+#iframe-app {
+    width: 100%;
+    border: 0;
+    position: fixed;
+    height: 100vh;
+}
+
+#iframe-app body {
+    height: 100vh;
+}
+
+#app {
+    height: 100vh;
+}
+
+#app-wrapper {
+    width: 100%;
+    height: inherit;
+}
+
+#app-wrapper #sidebar:not(.collapsed) {
+    width: 17em;
+}
+
+#app-wrapper #sidebar:not(.collapsed)~#app-container {
+    margin-left: 17em;
+    -moz-transition: margin-left 0.3s linear;
+    -webkit-transition: margin-left 0.3s linear;
+    transition: margin-left 0.3s linear;
+}
+
+#app-wrapper #sidebar.collapsed {
+    width: 4em;
+}
+
+#app-wrapper #sidebar.collapsed~#app-container {
+    margin-left: 4em;
+    -moz-transition: margin-left 0.3s linear;
+    -webkit-transition: margin-left 0.3s linear;
+    transition: margin-left 0.3s linear;
+}
+
+#app-container {
+    padding: 1em;
+}
+
+#app-container h3 {
+    margin-top: 1em;
+    margin-bottom: .2em;
+}
+
+.badge {
+    padding: 0.4em 0.8em;
+    /**
+	 *	Colores de badges
+	 */
+}
+
+.badge.badge-danger {
+    background-color: #F73733;
+}
+
+#app-navigation {
+    margin-bottom: 1em;
+    padding: 0 1em;
+    width: 100%;
+}
+
+#app-navigation #app-navigation-title {
+    width: inherit;
+    float: left;
+}
+
+#app-navigation #app-navigation-title h2 {
+    text-transform: capitalize;
+    margin-bottom: 0;
+}
+
+#app-navigation #app-navigation-breadcrumb {
+    width: inherit;
+    float: left;
+    margin-bottom: 1em;
+}
+
+#app-navigation #app-navigation-breadcrumb ol.breadcrumb {
+    padding-left: .2em;
+    text-transform: capitalize;
+    background-color: transparent;
+}
+
+#app-navigation #app-navigation-breadcrumb ol.breadcrumb li:nth-child(1) a {
+    color: #F73733;
+}
+
+button.btn {
+    border-radius: 2px;
+    /**
+	 *	Íconos en botones
+	 */
+}
+
+button.btn>i {
+    margin-right: .5em;
+}
+
+/**
+ *	Botones normales con énfasis alto
+ */
+button.btn-primary {
+    background-color: #F73733;
+    border-color: #C80B07;
+}
+
+button.btn-primary:hover,
+button.btn-primary:visited,
+button.btn-primary:focus {
+    background-color: #C80B07 !important;
+    border-color: #960805 !important;
+}
+
+button.btn-primary:active {
+    background-color: #960805 !important;
+    border-color: #960805 !important;
+}
+
+/**
+ *	Botones normales con énfasis bajo
+ */
+button.btn-outline-primary {
+    border-color: #F73733;
+    color: #F73733;
+}
+
+button.btn-outline-primary:hover,
+button.btn-outline-primary:visited,
+button.btn-outline-primary:focus {
+    background-color: #F73733 !important;
+    border-color: #C80B07 !important;
+    color: #fff;
+}
+
+button.btn-outline-primary:active {
+    background-color: #C80B07 !important;
+    border-color: #960805 !important;
+    color: #fff;
+}
+
+/**
+ *	Botoneras dentro de grillas
+ *  TODO: deberia ir en estilos de grilla?
+ */
+.k-grid div.btn-group button.btn {
+    padding: 0;
+    width: 28px;
+    height: 28px;
+}
+
+.k-grid div.btn-group button.btn>i {
+    font-size: 12px;
+    margin-right: 0;
+}
+
+/**
+ *	Help button
+ */
+button.help-button {
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    background-color: transparent;
+    border: 0 solid transparent;
+    padding: 0;
+    text-align: center;
+}
+
+button.help-button i {
+    font-size: 2em;
+    color: #656565;
+}
+
+button.help-button:hover i {
+    color: #F73733;
+}
+
+/**
+ *	Outline de buttons
+ */
+button {
+    box-shadow: none !important;
+}
+
+.card {
+    width: 100%;
+    color: #656565;
+    border-radius: 2px;
+    background-color: #FFFFFF !important;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14) !important;
+}
+
+.card .card-body {
+    padding: 1em;
+}
+
+/**
+ *	Sobreescribe estilos de Kendo Dialog
+ */
+.k-dialog .k-dialog-titlebar {
+    background-color: #F73733;
+}
+
+.k-dialog .k-dialog-buttongroup .k-primary {
+    color: #F73733 !important;
+}
+
+.k-dialog .k-dialog-buttongroup .k-primary:hover {
+    background-color: #F73733;
+    color: white !important;
+}
+
+/**
+ *	Sobreescribe estilos de Kendo Editor
+ */
+table.k-editor td.k-editor-toolbar-wrap a[role=button].k-state-selected {
+    background-color: #F73733;
+}
+
+table.k-editor td.k-editor-toolbar-wrap span.k-dropdown-wrap,
+table.k-editor td.k-editor-toolbar-wrap span.k-dropdown-wrap span.k-input {
+    height: 28px;
+}
+
+div.k-animation-container span.k-ct-cell {
+    opacity: 1;
+}
+
+div.k-animation-container span.k-ct-cell.k-state-selected {
+    background-color: #F73733;
+}
+
+/**
+ *	Grid Toolbar
+ */
+.grid-toolbar {
+    background-color: #F6F6F6;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-bottom: 0;
+    padding: 8px !important;
+    height: auto;
+}
+
+.grid-toolbar button i.fa,
+.grid-toolbar button span.k-icon {
+    margin-right: .3em;
+}
+
+.grid-toolbar div.container-fluid {
+    padding: 0;
+    display: inline-block;
+    height: inherit;
+}
+
+.grid-toolbar div.container-fluid label {
+    margin: .2em 0;
+    color: #656565;
+}
+
+.grid-toolbar div.container-fluid button,
+.grid-toolbar div.container-fluid input,
+.grid-toolbar div.container-fluid select {
+    height: 28px;
+}
+
+.grid-toolbar div.container-fluid div.title {
+    color: #656565;
+    width: auto;
+    float: left;
+    margin-top: 5px;
+}
+
+.grid-toolbar div.container-fluid div.title h1,
+.grid-toolbar div.container-fluid div.title h2,
+.grid-toolbar div.container-fluid div.title h3,
+.grid-toolbar div.container-fluid div.title h4,
+.grid-toolbar div.container-fluid div.title h5,
+.grid-toolbar div.container-fluid div.title h6 {
+    margin-bottom: 0;
+}
+
+.grid-toolbar div.container-fluid div.actions {
+    width: auto;
+    float: right;
+}
+
+.grid-toolbar div.container-fluid div.actions div {
+    width: auto;
+    float: left;
+    padding-left: .5em;
+}
+
+.grid-toolbar button {
+    padding: 0 8px;
+    font-size: 14px;
+    border-radius: 2px;
+}
+
+.grid-toolbar div.k-multiselect {
+    height: 28px;
+    border-radius: 2px;
+}
+
+.grid-toolbar div.k-multiselect div.k-multiselect-wrap {
+    height: 28px;
+    border-radius: 2px;
+}
+
+.grid-toolbar div.k-multiselect div.k-multiselect-wrap input.k-input {
+    padding: 4px 8px;
+    font-size: 14px;
+    height: 26px;
+}
+
+.grid-toolbar div.k-multiselect div.k-multiselect-wrap ul[unselectable=on].k-reset li[role=option].k-button {
+    margin: 1px 0 0 1px;
+    border-radius: 2px;
+}
+
+.grid-toolbar div.k-multiselect div.k-multiselect-wrap span.k-icon.k-clear-value {
+    top: 1px;
+}
+
+/**
+ *	Kendo Grid Reset
+ */
+thead.k-grid-header .k-header-column-menu {
+    top: 1px;
+}
+
+thead.k-grid-header a.k-link span.k-icon {
+    color: #F73733;
+}
+
+.k-animation-container ul.k-menu li[role=menuitem].k-item.k-state-selected span.k-link {
+    background-color: #F73733;
+}
+
+.k-animation-container ul.k-menu li[role=menuitemcheckbox] input[type=checkbox] {
+    margin-right: 1em;
+}
+
+.k-animation-container ul.k-menu form.k-filter-menu input,
+.k-animation-container ul.k-menu form.k-filter-menu span.k-dropdown span.k-dropdown-wrap,
+.k-animation-container ul.k-menu form.k-filter-menu .k-input {
+    height: 28px !important;
+}
+
+.k-animation-container ul.k-menu form.k-filter-menu input,
+.k-animation-container ul.k-menu form.k-filter-menu span.k-dropdown {
+    width: 100%;
+}
+
+.k-animation-container ul.k-menu li[role=menuitem].k-item.k-filter-item div.k-action-buttons {
+    margin-top: .5em;
+}
+
+.k-animation-container ul.k-menu li[role=menuitem].k-item.k-filter-item div.k-action-buttons button[type=submit] {
+    color: #F73733;
+}
+
+.k-animation-container ul.k-menu li[role=menuitem].k-item.k-filter-item div.k-action-buttons button[type=submit]:hover {
+    background-color: #F73733;
+    color: #FFF;
+}
+
+.k-grid div.k-grid-pager ul.k-pager-numbers a {
+    color: #F73733;
+}
+
+.k-grid div.k-grid-pager .k-state-selected {
+    background-color: #F73733;
+    color: #fff;
+}
+
+.k-grid span.k-pager-info {
+    margin-right: 0;
+}
+
+/**
+ *	Complemento, puede ir debajo del toolbar
+ */
+.grid-toolbar .complement {
+    margin: 1em 0;
+    transition: all .3s linear;
+}
+
+input,
+input.form-control,
+input.k-textbox {
+    height: 40px;
+    border-radius: 2px;
+    padding: 4px 8px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    font-size: 14px;
+}
+
+input::placeholder,
+input.form-control::placeholder,
+input.k-textbox::placeholder {
+    font-size: 14px;
+    color: #656565;
+    opacity: .5;
+}
+
+/**
+ *	Fake input
+ *  TODO: quitar, bs4 ya tiene una clase para esto
+ */
+input.fake-input {
+    background-color: transparent !important;
+    border: 0;
+    padding-left: 0;
+}
+
+/**
+ *	Validaciones
+ */
+input.form-control.is-invalid {
+    border-color: #F73733;
+}
+
+div.invalid-feedback {
+    color: #F73733;
+}
+
+.k-widget.k-combobobx.form-control.is-invalid {
+    border-width: 1px;
+}
+
+textarea:focus,
+textarea.form-control:focus,
+select,
+select.form-control,
+input.form-control:focus,
+input[type=text]:focus,
+input[type=password]:focus,
+input[type=email]:focus,
+input[type=number]:focus,
+[type=text].form-control:focus,
+[type=password].form-control:focus,
+[type=email].form-control:focus,
+[type=tel].form-control:focus,
+[contenteditable].form-control:focus {
+    box-shadow: none;
+}
+
+/**
+ *	Checkbox de Kendo
+ */
+.k-checkbox:checked+.k-checkbox-label::before {
+    border-color: #F73733;
+    background-color: #F73733;
+}
+
+.k-checkbox-label {
+    padding-left: 2em;
+}
+
+/**
+ *	Label required
+ */
+label.required::after {
+    content: " *";
+    color: #F73733;
+}
+
+/**
+ *	Sobreescribe estilos de Kendo ListBox
+ */
+.k-listbox {
+    width: 100%;
+    height: auto;
+}
+
+.k-listbox ul.k-list li.k-item.k-state-selected {
+    background-color: #F73733;
+}
+
+.k-listbox ul.k-list li.k-ghost {
+    background-color: #F73733;
+}
+
+.k-listbox ul.k-list li.k-drop-hint {
+    border-top-color: #F73733;
+}
+
+li.k-item.k-drag-clue {
+    background-color: #F73733;
+}
+
+.k-listbox div.btn-group button.btn,
+.k-drag-clue div.btn-group button.btn {
+    padding: 0;
+    width: 28px;
+    height: 28px;
+}
+
+.k-listbox div.btn-group button.btn>i,
+.k-drag-clue div.btn-group button.btn>i {
+    font-size: 12px;
+    margin-right: 0;
+}
+
+body {
+    background-color: #F5F5F5;
+}
+
+.full-width {
+    width: 100%;
+}
+
+*::selection {
+    background-color: #F73733 !important;
+    color: #fff;
+}
+
+.k-window {
+    /**
+	 *	Modal forms
+	 */
+    /**
+	 *	Modal footer
+	 */
+    /**
+	 *	Reset
+	 */
+}
+
+.k-window,
+.k-window .k-window-titlebar {
+    border-radius: 2px;
+}
+
+.k-window .modal-footer {
+    padding: 0;
+    border-top: 0;
+    display: initial;
+}
+
+.k-window .modal-footer button {
+    width: 100%;
+}
+
+.k-window .container-fluid {
+    padding: 0;
+}
+
+/**
+ *	Kendo Panelbar
+ */
+.k-panelbar .k-link.k-header {
+    color: #F73733;
+}
+
+.k-panelbar .k-link.k-header.k-state-hover:not(.k-state-selected) {
+    color: #F73733;
+}
+
+.k-panelbar .k-link.k-header.k-state-focused {
+    box-shadow: none;
+}
+
+.k-panelbar .k-link.k-header.k-state-selected {
+    background-color: #F73733;
+}
+
+.k-panelbar .k-link.k-header.k-state-selected.k-state-hover {
+    background-color: #C80B07;
+}
+
+.scroll {
+    height: auto;
+}
+
+.scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.scroll:hover::-webkit-scrollbar {
+    display: initial;
+}
+
+select,
+select.form-control {
+    height: 40px;
+    border-radius: 2px;
+    padding: 4px 8px;
+    padding-left: .2em !important;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    font-size: 14px;
+    box-shadow: none !important;
+}
+
+select::placeholder,
+select.form-control::placeholder {
+    font-size: 14px;
+    color: #656565;
+    opacity: .5;
+}
+
+/**
+ *	Kendo list
+ *	TODO: verificar si va, al parecer no
+ */
+.k-list-container ul.k-list li.k-item.k-state-selected {
+    background-color: #F73733;
+}
+
+.k-list-container ul.k-list li.k-item.k-state-selected:hover {
+    background-color: #C80B07;
+}
+
+table.table {
+    color: #656565;
+    width: 100%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+table.table thead {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+table.table td {
+    padding: 8px !important;
+    border-left: 1px solid rgba(0, 0, 0, 0.08);
+    border-right: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+table.table th {
+    background-color: #F6F6F6;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-bottom: 0;
+    padding: 8px !important;
+    height: auto;
+}
+
+table.table tr {
+    height: auto;
+    border-top: 0;
+    border-bottom: 0;
+}
+
+table.table tr:nth-child(odd) {
+    background-color: #FFFFFF;
+}
+
+table.table tr:nth-child(even) {
+    background-color: #F6F6F6;
+}
+
+table.table tr:hover {
+    background-color: #EDEDED;
+}
+
+/**
+ *	Reset Kendo Tabs
+ */
+div.k-tabstrip-wrapper ul.k-tabstrip-items li:not(.k-state-active) span {
+    color: #F73733;
+}
+
+div.k-tabstrip-wrapper ul.k-tabstrip-items li:not(.k-state-active):hover span {
+    color: #C80B07;
+}
+
+div.k-tabstrip-wrapper div.k-content {
+    padding: 1em;
+}
+
+div.k-tabstrip-wrapper div.k-content h1,
+div.k-tabstrip-wrapper div.k-content h2,
+div.k-tabstrip-wrapper div.k-content h3,
+div.k-tabstrip-wrapper div.k-content h4,
+div.k-tabstrip-wrapper div.k-content h5,
+div.k-tabstrip-wrapper div.k-content h6 {
+    margin-bottom: 1em;
+}
+
+/**
+ *	Tab titles
+ */
+div.tab-title {
+    width: 100%;
+    height: auto;
+    display: inline-block;
+    margin-bottom: 1.5em;
+}
+
+div.tab-title h1,
+div.tab-title h2,
+div.tab-title h3,
+div.tab-title h4,
+div.tab-title h5,
+div.tab-title h6 {
+    float: left;
+    width: auto;
+    margin-bottom: 0 !important;
+}
+
+div.tab-title div.tab-title-help {
+    width: auto;
+    float: right;
+}
+
+div.tab-title div.tab-title-help * {
+    float: left;
+}
+
+textarea,
+textarea.form-control {
+    border-radius: 2px;
+    padding: 4px 8px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    font-size: 14px;
+}
+
+.k-tooltip-content {
+    text-align: center;
+}
+
+/**
+ *	Sobreescribe estilos de Kendo TreeView
+ */
+.k-treeview .k-in.k-state-selected {
+    background-color: #F73733;
+}
+
+.k-treeview div.btn-group button.btn {
+    padding: 0;
+    width: 28px;
+    height: 28px;
+}
+
+.k-treeview div.btn-group button.btn>i {
+    font-size: 12px;
+    margin-right: 0;
+}
+
+div.has-loading {
+    position: relative;
+}
+
+div.loading-container {
+    background-color: #fff;
+    opacity: 0.5;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 100;
+}
+
+div.loading-container i {
+    margin: 0 auto;
+    opacity: 1;
+    font-size: 5em;
+}
+
+/**
+*	Reset Kendo Switch
+*/
+span.k-switch.k-switch-on span.k-switch-container {
+    background-color: #F73733; }
+
+
+/*abascur
+.border-2 {
+  border-width: 2px !important;
+}*/
+.text-justify {
+    text-align: justify;
+}
+
+/* filterable-multi kendo grid*/
+/* Checkbox */
+ul.k-reset.k-multicheck-wrap>li>label>input[type=checkbox]  {
+    height: 10px;
+}
+/* Buscador */
+div.k-filter-menu-container>div.k-textbox.k-space-right>input{
+    height: 25px;
+}
+
+.k-window{
+    margin-left: 80px!important;
+    margin-top: 5px!important;
+}
+
