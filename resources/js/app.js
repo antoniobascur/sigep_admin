@@ -141,6 +141,7 @@ import EstadoSolicitud from "./components/estadoSolicitud/EstadoSolicitud";
 import ProfesorTutor from "./components/profesorTutor/ProfesorTutor";
 import TipoSolicitud from "./components/tipoSolicitud/TipoSolicitud";
 import FichaPractica from "./components/ficha/FichaPractica";
+import FichaAdscripcion from "./components/fichaAdscripcion/FichaAdscripcion";
 
 // configuración de router
 let router = new VueRouter({
@@ -172,6 +173,10 @@ let router = new VueRouter({
             path: '/fichaPractica',
             name: 'fichaPractica',
             component: FichaPractica
+        },{
+            path: '/fichaAdscripcion',
+            name: 'fichaAdscripcion',
+            component: FichaAdscripcion
         }
     ]
 });
