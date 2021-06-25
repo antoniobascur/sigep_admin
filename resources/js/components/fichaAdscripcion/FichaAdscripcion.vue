@@ -48,37 +48,229 @@
         >
             <form ID="form" class="modal-form" @submit.prevent="validate">
                 <div class="row">
-                    <div class="form-group col-md-6">
-                        <label class="required">Tipo solicitud</label>
+                    <div class="form-group col-md-12">
+                        <label class="required">Carrera o Programa</label>
                         <input
                             class="form-control"
                             type="text"
-                            data-vv-as="TIPO_SOLICITUD"
-                            ID="TIPO_SOLICITUD"
-                            name="TIPO_SOLICITUD"
-                            v-model="form.TIPO_SOLICITUD"
+                            data-vv-as="CARRERA_PROGRAMA"
+                            ID="CARRERA_PROGRAMA"
+                            name="CARRERA_PROGRAMA"
+                            v-model="form.CARRERA_PROGRAMA"
                             v-on:keyup="searchTipoSolicitud"
-                            placeholder="Ej: Autogestión"
+                            placeholder="Ej: Educación Diferencial"
                             v-validate="'required|max:50'"
-                            :class="{'is-invalid': errors.has('TIPO_SOLICITUD')}"
+                            :class="{'is-invalid': errors.has('CARRERA_PROGRAMA')}"
                         />
-                        <div class="invalid-feedback">{{ errors.first('TIPO_SOLICITUD') }}</div>
+                        <div class="invalid-feedback">{{ errors.first('CARRERA_PROGRAMA') }}</div>
                     </div>
                     <div class="form-group col-md-6">
-                        <label class="required">Descripción</label>
+                        <label class="required">Nombre Educador(a) en formación o Profesor(a) en formación</label>
                         <input
                             type="text"
                             class="form-control"
-                            ID="DESCRIPCION"
-                            name="DESCRIPCION"
-                            v-model="form.DESCRIPCION"
+                            ID="EDUCADOR"
+                            name="EDUCADOR"
+                            v-model="form.EDUCADOR"
                             placeholder="Ej: Descripción ..."
                             v-validate="'required|max:100'"
-                            data-vv-as="DESCRIPCION"
-                            :class="{'is-invalid': errors.has('DESCRIPCION')}"
+                            data-vv-as="EDUCADOR"
+                            :class="{'is-invalid': errors.has('EDUCADOR')}"
                         />
-                        <div class="invalid-feedback">{{ errors.first('DESCRIPCION') }}</div>
+                        <div class="invalid-feedback">{{ errors.first('EDUCADOR') }}</div>
                     </div>
+                    <div class="form-group col-md-3">
+                        <label class="required">RUT</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            ID="RUT"
+                            name="RUT"
+                            v-model="form.RUT"
+                            placeholder="Ej: 9.999.999-9"
+                            v-validate="'required|max:100'"
+                            data-vv-as="RUT"
+                            :class="{'is-invalid': errors.has('RUT')}"
+                        />
+                        <div class="invalid-feedback">{{ errors.first('RUT') }}</div>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label class="required">E mail</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            ID="MAIL"
+                            name="MAIL"
+                            v-model="form.MAIL"
+                            placeholder="Ej: ejemplo@email.com..."
+                            v-validate="'required|max:100'"
+                            data-vv-as="MAIL"
+                            :class="{'is-invalid': errors.has('MAIL')}"
+                        />
+                        <div class="invalid-feedback">{{ errors.first('MAIL') }}</div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="required">Dirección</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            ID="DIRECCION"
+                            name="DIRECCION"
+                            v-model="form.DIRECCION"
+                            placeholder=""
+                            v-validate="'required|max:100'"
+                            data-vv-as="DIRECCION"
+                            :class="{'is-invalid': errors.has('DIRECCION')}"
+                        />
+                        <div class="invalid-feedback">{{ errors.first('DIRECCION') }}</div>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label class="required">Comuna</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            ID="COMUNA"
+                            name="COMUNA"
+                            v-model="form.COMUNA"
+                            placeholder=""
+                            v-validate="'required|max:100'"
+                            data-vv-as="COMUNA"
+                            :class="{'is-invalid': errors.has('COMUNA')}"
+                        />
+                        <div class="invalid-feedback">{{ errors.first('COMUNA') }}</div>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label class="required">Teléfono</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            ID="TELEFONO"
+                            name="TELEFONO"
+                            v-model="form.TELEFONO"
+                            placeholder=""
+                            v-validate="'required|max:100'"
+                            data-vv-as="TELEFONO"
+                            :class="{'is-invalid': errors.has('TELEFONO')}"
+                        />
+                        <div class="invalid-feedback">{{ errors.first('TELEFONO') }}</div>
+                    </div>
+                    <div class="form-group col-md-9">
+                        <label class="required">Profesor(a) Tutor responsable UCSC</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            ID="PROFESOR_TUTOR"
+                            name="PROFESOR_TUTOR"
+                            v-model="form.PROFESOR_TUTOR"
+                            placeholder=""
+                            v-validate="'required|max:100'"
+                            data-vv-as="PROFESOR_TUTOR"
+                            :class="{'is-invalid': errors.has('PROFESOR_TUTOR')}"
+                        />
+                        <div class="invalid-feedback">{{ errors.first('PROFESOR_TUTOR') }}</div>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label class="required">Nivel de Práctica</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            ID="NIVEL_PRACTICA"
+                            name="NIVEL_PRACTICA"
+                            v-model="form.NIVEL_PRACTICA"
+                            placeholder=""
+                            v-validate="'required|max:100'"
+                            data-vv-as="NIVEL_PRACTICA"
+                            :class="{'is-invalid': errors.has('NIVEL_PRACTICA')}"
+                        />
+                        <div class="invalid-feedback">{{ errors.first('NIVEL_PRACTICA') }}</div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label class="required">Nombre del Centro de Práctica</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            ID="CENTRO_PRACTICA"
+                            name="CENTRO_PRACTICA"
+                            v-model="form.CENTRO_PRACTICA"
+                            placeholder=""
+                            v-validate="'required|max:100'"
+                            data-vv-as="CENTRO_PRACTICA"
+                            :class="{'is-invalid': errors.has('CENTRO_PRACTICA')}"
+                        />
+                        <div class="invalid-feedback">{{ errors.first('CENTRO_PRACTICA') }}</div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label class="required">Dependencia Administrativa</label><br>
+                        <input type="checkbox" id="particular" value="particular" v-model="checkedDependencia">
+                        <label for="particular">Particular</label>
+                        <input type="checkbox" id="subvencionado" value="subvencionado" v-model="checkedDependencia">
+                        <label for="subvencionado">P. Subvencionado</label>
+                        <input type="checkbox" id="municipalizado" value="municipalizado" v-model="checkedDependencia">
+                        <label for="municipalizado">Municipalizado</label>
+                        <input type="checkbox" id="corporado" value="corporado" v-model="checkedDependencia">
+                        <label for="corporado">Corporado</label>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label class="required">Enseñanza</label><br>
+                        <input type="radio" id="media" value="media" v-model="picked">
+                        <label for="media">Media</label>
+                        <input type="radio" id="hc" value="hc" v-model="picked">
+                        <label for="hc">HC</label>
+                        <input type="radio" id="tp" value="tp" v-model="picked">
+                        <label for="tp">Media</label>
+                        <input type="radio" id="basica" value="basica" v-model="picked">
+                        <label for="basica">Básica</label>
+                        <input type="radio" id="parv" value="parv" v-model="picked">
+                        <label for="parv">Ed. Parvularia</label>
+                        <input type="radio" id="otra" value="otra" v-model="picked">
+                        <label for="hc">Otra</label>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="required">Dirección</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            ID="DIRECCION_CP"
+                            name="DIRECCION_CP"
+                            v-model="form.DIRECCION_CP"
+                            placeholder=""
+                            v-validate="'required|max:100'"
+                            data-vv-as="DIRECCION_CP"
+                            :class="{'is-invalid': errors.has('DIRECCION_CP')}"
+                        />
+                        <div class="invalid-feedback">{{ errors.first('DIRECCION_CP') }}</div>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label class="required">Comuna</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            ID="COMUNA_CP"
+                            name="COMUNA_CP"
+                            v-model="form.COMUNA_CP"
+                            placeholder=""
+                            v-validate="'required|max:100'"
+                            data-vv-as="COMUNA_CP"
+                            :class="{'is-invalid': errors.has('COMUNA_CP')}"
+                        />
+                        <div class="invalid-feedback">{{ errors.first('COMUNA_CP') }}</div>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label class="required">Teléfono</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            ID="TELEFONO_CP"
+                            name="TELEFONO_CP"
+                            v-model="form.TELEFONO_CP"
+                            placeholder=""
+                            v-validate="'required|max:100'"
+                            data-vv-as="TELEFONO_CP"
+                            :class="{'is-invalid': errors.has('TELEFONO_CP')}"
+                        />
+                        <div class="invalid-feedback">{{ errors.first('TELEFONO_CP') }}</div>
+                    </div>
+
                 </div>
 
                 <button type="submit" class="btn btn-primary float-right" :disabled="submit">
@@ -121,13 +313,13 @@ export default {
             loading: true,
             submit: false,
             propsToPass: {
-                titulo: "Tipo Solicitud",
-                element: "TIPO_SOLICITUD",
+                titulo: "Ficha Adscripción",
+                element: "FICHA_ADSCRIPCION",
             },
             form: {
                 ID: 0,
-                TIPO_SOLICITUD: null,
-                DESCRIPCION: null,
+                CARRERA_PROGRAMA: null,
+                EDUCADOR: null,
                 EDITAR_FORMULARIO: false,
 
             },
@@ -139,8 +331,8 @@ export default {
         },
         tituloKendoWindows() {
             return this.form.EDITAR_FORMULARIO
-                ? "Editar Tipo solicitud"
-                : "Nuevo Tipo solicitud";
+                ? "Editar Ficha Adscripción"
+                : "Nueva Ficha Adscripción";
         },
     },
     created: function () {
@@ -153,8 +345,8 @@ export default {
         eventHub.$on("onEdit", (data) => {
 
             this.form.ID = data.obj.ID;
-            this.form.TIPO_SOLICITUD = data.obj.TIPO_SOLICITUD;
-            this.form.DESCRIPCION = data.obj.DESCRIPCION;
+            this.form.CARRERA_PROGRAMA = data.obj.CARRERA_PROGRAMA;
+            this.form.EDUCADOR = data.obj.EDUCADOR;
             this.form.EDITAR_FORMULARIO = true;
             this.$nextTick(() => {
 
@@ -163,9 +355,9 @@ export default {
         });
         eventHub.$on("onDelete", (data) => {
             this.form.ID = data.obj.ID;
-            this.form.TIPO_SOLICITUD = data.obj.TIPO_SOLICITUD;
+            this.form.CARRERA_PROGRAMA = data.obj.CARRERA_PROGRAMA;
             kendo
-                .confirm(AlertMessage.CONFIRMACION.ELIMINACION + this.form.TIPO_SOLICITUD + " ?")
+                .confirm(AlertMessage.CONFIRMACION.ELIMINACION + this.form.CARRERA_PROGRAMA + " ?")
                 .then((result) => {
                     this.delete();
                 });
@@ -181,7 +373,7 @@ export default {
             });
         },
         searchTipoSolicitud() {
-            var keyword = this.form.TIPO_SOLICITUD;
+            var keyword = this.form.CARRERA_PROGRAMA;
 
             if (keyword != null && keyword.length > 0) {
                 console.log(keyword);
@@ -189,8 +381,8 @@ export default {
         },
         resetForm() {
             this.form.ID = 0;
-            this.form.TIPO_SOLICITUD = null;
-            this.form.DESCRIPCION = null;
+            this.form.CARRERA_PROGRAMA = null;
+            this.form.EDUCADOR = null;
             this.form.EDITAR_FORMULARIO = false;
         },
 
@@ -210,8 +402,8 @@ export default {
             let url = Urls[this.propsToPass.element].SAVE;
             let formData = new FormData();
             formData.append("ID", this.form.ID);
-            formData.append("TIPO_SOLICITUD", this.form.TIPO_SOLICITUD);
-            formData.append("DESCRIPCION", this.form.DESCRIPCION);
+            formData.append("CARRERA_PROGRAMA", this.form.CARRERA_PROGRAMA);
+            formData.append("EDUCADOR", this.form.EDUCADOR);
 
 
             axios
@@ -229,8 +421,8 @@ export default {
 
                     if (response.status) {
                         this.form.ID = response.data.data.id;
-                        this.form.TIPO_SOLICITUD = response.data.data.tipo_solicitud;
-                        this.form.DESCRIPCION = response.data.data.descripcion;
+                        this.form.CARRERA_PROGRAMA = response.data.data.CARRERA_PROGRAMA;
+                        this.form.EDUCADOR = response.data.data.EDUCADOR;
 
                         this.windowForm.kendoWidget().close();
                         console.log("axios");
