@@ -28,5 +28,11 @@
         "SAVE": "api/tipoSolicitud/save",
         "GET": "api/tipoSolicitud/get/",
         "DELETE": "api/tipoSolicitud/delete/"
+    },
+    "FICHA_ADSCRIPCION": {
+        "GET_ALL": "api/fichaAdscripcion/getAll",
+        "SAVE": "api/fichaAdscripcion/save",
+        "GET": "api/fichaAdscripcion/get/",
+        "DELETE": "api/fichaAdscripcion/delete/"
     }
 }

@@ -41,3 +41,9 @@ Route::group(['prefix' => 'tipoSolicitud'], function () {
     Route::post('/get/{id}', ['uses' => 'TipoSolicitudController@get']);
     Route::get('/delete/{id}', ['uses' => 'TipoSolicitudController@delete']);
 });
+Route::group(['prefix' => 'fichaAdscripcion'], function () {
+    Route::get('/getAll', ['uses' => 'FichaAdscripcionController@getAll']);
+    Route::post('/save', ['uses' => 'FichaAdscripcionController@save']);
+    Route::post('/get/{id}', ['uses' => 'FichaAdscripcionController@get']);
+    Route::get('/delete/{id}', ['uses' => 'FichaAdscripcionController@delete']);
+});

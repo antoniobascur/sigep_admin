@@ -12,4 +12,7 @@ export const state = {
     dsTipoSolicitud: {
         data: []
     },
+    dsFichaAdscripcion: {
+        data: []
+    },
 }

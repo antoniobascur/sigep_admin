@@ -50,18 +50,19 @@
                 <div class="row">
                     <div class="form-group col-md-12">
                         <label class="required">Carrera o Programa</label>
-                        <input
-                            class="form-control"
-                            type="text"
-                            data-vv-as="CARRERA_PROGRAMA"
-                            ID="CARRERA_PROGRAMA"
-                            name="CARRERA_PROGRAMA"
+                        <select
                             v-model="form.CARRERA_PROGRAMA"
-                            v-on:keyup="searchTipoSolicitud"
-                            placeholder="Ej: Educación Diferencial"
-                            v-validate="'required|max:50'"
-                            :class="{'is-invalid': errors.has('CARRERA_PROGRAMA')}"
-                        />
+                            @change=""
+                            id="CARRERA_PROGRAMA"
+                            data-old=""
+                            name="CARRERA_PROGRAMA"
+                            class="form-control selectpicker"
+                        >
+                            <option disabled value="">Seleccione una Carrera</option>
+                            <option value="ED_DIFERENCIAL">EDUCACIÓN DIFERENCIAL</option>
+                            <option value="ED_MATEMATICAS">EDUCACIÓN MEDIA EN MATEMÁTICAS</option>
+                        </select>
+
                         <div class="invalid-feedback">{{ errors.first('CARRERA_PROGRAMA') }}</div>
                     </div>
                     <div class="form-group col-md-6">
@@ -73,6 +74,7 @@
                             name="EDUCADOR"
                             v-model="form.EDUCADOR"
                             placeholder="Ej: Descripción ..."
+                            v-on:keyup="searchEducador"
                             v-validate="'required|max:100'"
                             data-vv-as="EDUCADOR"
                             :class="{'is-invalid': errors.has('EDUCADOR')}"
@@ -199,31 +201,31 @@
                         />
                         <div class="invalid-feedback">{{ errors.first('CENTRO_PRACTICA') }}</div>
                     </div>
-                    <div class="form-group col-md-12">
+                    <div id="dependencia" class="form-group col-md-12" >
                         <label class="required">Dependencia Administrativa</label><br>
-                        <input type="checkbox" id="particular" value="particular" v-model="checkedDependencia">
+                        <input type="radio" id="particular" value="particular" name="dependencia">
                         <label for="particular">Particular</label>
-                        <input type="checkbox" id="subvencionado" value="subvencionado" v-model="checkedDependencia">
+                        <input type="radio" id="subvencionado" value="subvencionado" name="dependencia">
                         <label for="subvencionado">P. Subvencionado</label>
-                        <input type="checkbox" id="municipalizado" value="municipalizado" v-model="checkedDependencia">
+                        <input type="radio" id="municipalizado" value="municipalizado" name="dependencia">
                         <label for="municipalizado">Municipalizado</label>
-                        <input type="checkbox" id="corporado" value="corporado" v-model="checkedDependencia">
+                        <input type="radio" id="corporado" value="corporado" name="dependencia">
                         <label for="corporado">Corporado</label>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="required">Enseñanza</label><br>
-                        <input type="radio" id="media" value="media" v-model="picked">
+                        <input type="radio" id="media" value="media" name="enseñanza">
                         <label for="media">Media</label>
-                        <input type="radio" id="hc" value="hc" v-model="picked">
+                        <input type="radio" id="hc" value="hc" name="enseñanza">
                         <label for="hc">HC</label>
-                        <input type="radio" id="tp" value="tp" v-model="picked">
+                        <input type="radio" id="tp" value="tp" name="enseñanza">
                         <label for="tp">Media</label>
-                        <input type="radio" id="basica" value="basica" v-model="picked">
+                        <input type="radio" id="basica" value="basica" name="enseñanza">
                         <label for="basica">Básica</label>
-                        <input type="radio" id="parv" value="parv" v-model="picked">
+                        <input type="radio" id="parv" value="parv" name="enseñanza">
                         <label for="parv">Ed. Parvularia</label>
-                        <input type="radio" id="otra" value="otra" v-model="picked">
-                        <label for="hc">Otra</label>
+                        <input type="radio" id="otra" value="otra" name="enseñanza">
+                        <label for="otra">Otra</label>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="required">Dirección</label>
@@ -270,6 +272,148 @@
                         />
                         <div class="invalid-feedback">{{ errors.first('TELEFONO_CP') }}</div>
                     </div>
+                    <div class="form-group col-md-6">
+                        <label class="required">Nombre del Director(a)</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            ID="DIRECTOR_CP"
+                            name="DIRECTOR_CP"
+                            v-model="form.DIRECTOR_CP"
+                            placeholder=""
+                            v-validate="'required|max:100'"
+                            data-vv-as="DIRECTOR_CP"
+                            :class="{'is-invalid': errors.has('DIRECTOR_CP')}"
+                        />
+                        <div class="invalid-feedback">{{ errors.first('DIRECTOR_CP') }}</div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="required">E mail (Director)</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            ID="EMAIL_DIRECTOR_CP"
+                            name="EMAIL_DIRECTOR_CP"
+                            v-model="form.EMAIL_DIRECTOR_CP"
+                            placeholder=""
+                            v-validate="'required|max:100'"
+                            data-vv-as="EMAIL_DIRECTOR_CP"
+                            :class="{'is-invalid': errors.has('EMAIL_DIRECTOR_CP')}"
+                        />
+                        <div class="invalid-feedback">{{ errors.first('EMAIL_DIRECTOR_CP') }}</div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="required">Nombre Jefe(a) de UTP</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            ID="NOMBRE_UTP_CP"
+                            name="NOMBRE_UTP_CP"
+                            v-model="form.NOMBRE_UTP_CP"
+                            placeholder=""
+                            v-validate="'required|max:100'"
+                            data-vv-as="NOMBRE_UTP_CP"
+                            :class="{'is-invalid': errors.has('NOMBRE_UTP_CP')}"
+                        />
+                        <div class="invalid-feedback">{{ errors.first('NOMBRE_UTP_CP') }}</div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="required">E mail (Jefe(a) de UTP)</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            ID="EMAIL_UTP"
+                            name="EMAIL_UTP"
+                            v-model="form.EMAIL_UTP"
+                            placeholder=""
+                            v-validate="'required|max:100'"
+                            data-vv-as="EMAIL_UTP"
+                            :class="{'is-invalid': errors.has('EMAIL_UTP')}"
+                        />
+                        <div class="invalid-feedback">{{ errors.first('EMAIL_UTP') }}</div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="required">Nombre Educador(a) o Profesor(a) Colaborador(a) Centro de Práctica</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            ID="NOMBRE_EDUCADOR_CP"
+                            name="NOMBRE_EDUCADOR_CP"
+                            v-model="form.NOMBRE_EDUCADOR_CP"
+                            placeholder=""
+                            v-validate="'required|max:100'"
+                            data-vv-as="NOMBRE_EDUCADOR_CP"
+                            :class="{'is-invalid': errors.has('NOMBRE_EDUCADOR_CP')}"
+                        />
+                        <div class="invalid-feedback">{{ errors.first('NOMBRE_EDUCADOR_CP') }}</div>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label class="required">RUT</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            ID="RUT_EDUCADOR_CP"
+                            name="RUT_EDUCADOR_CP"
+                            v-model="form.RUT_EDUCADOR_CP"
+                            placeholder=""
+                            v-validate="'required|max:100'"
+                            data-vv-as="RUT_EDUCADOR_CP"
+                            :class="{'is-invalid': errors.has('RUT_EDUCADOR_CP')}"
+                        />
+                        <div class="invalid-feedback">{{ errors.first('NOMBRE_EDUCADOR_CP') }}</div>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label class="required">E mail</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            ID="MAIL_EDUCADOR_CP"
+                            name="MAIL_EDUCADOR_CP"
+                            v-model="form.MAIL_EDUCADOR_CP"
+                            placeholder=""
+                            v-validate="'required|max:100'"
+                            data-vv-as="MAIL_EDUCADOR_CP"
+                            :class="{'is-invalid': errors.has('MAIL_EDUCADOR_CP')}"
+                        />
+                        <div class="invalid-feedback">{{ errors.first('MAIL_EDUCADOR_CP') }}</div>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label class="required">Teléono de Contacto</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            ID="TELEFONO_EDUCADOR_CP"
+                            name="TELEFONO_EDUCADOR_CP"
+                            v-model="form.TELEFONO_EDUCADOR_CP"
+                            placeholder=""
+                            v-validate="'required|max:100'"
+                            data-vv-as="TELEFONO_EDUCADOR_CP"
+                            :class="{'is-invalid': errors.has('TELEFONO_EDUCADOR_CP')}"
+                        />
+                        <div class="invalid-feedback">{{ errors.first('TELEFONO_EDUCADOR_CP') }}</div>
+                    </div>
+                    <div class="form-group col-md-9">
+                        <label class="required">Título</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            ID="TITULO_EDUCADOR_CP"
+                            name="TITULO_EDUCADOR_CP"
+                            v-model="form.TITULO_EDUCADOR_CP"
+                            placeholder=""
+                            v-validate="'required|max:100'"
+                            data-vv-as="TITULO_EDUCADOR_CP"
+                            :class="{'is-invalid': errors.has('TITULO_EDUCADOR_CP')}"
+                        />
+                        <div class="invalid-feedback">{{ errors.first('TELEFONO_EDUCADOR_CP') }}</div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label class="required">Egresado de la UCSC</label><br>
+                        <input type="radio" id="si" value="si" name="egresado_ucsc">
+                        <label for="si">Sí</label>
+                        <input type="radio" id="no" value="no" name="egresado_ucsc">
+                        <label for="no">No</label>
+                    </div>
 
                 </div>
 
@@ -298,6 +442,8 @@ import AlertMessage from "../common/json/AlertMessage.json";
 import eventHub from "../../eventHub";
 import Grid from "./grid/Grid";
 
+
+
 export default {
     components: {
         HelpButton,
@@ -320,6 +466,30 @@ export default {
                 ID: 0,
                 CARRERA_PROGRAMA: null,
                 EDUCADOR: null,
+                RUT: null,
+                MAIL: null,
+                DIRECCION: null,
+                COMUNA: null,
+                TELEFONO: null,
+                PROFESOR_TUTOR: null,
+                NIVEL_PRACTICA: null,
+                CENTRO_PRACTICA: null,
+                DEPENDENCIA: null,
+                ENSEÑANZA: null,
+                DIRECCION_CP: null,
+                COMUNA_CP: null,
+                TELEFONO_CP: null,
+                DIRECTOR_CP: null,
+                EMAIL_DIRECTOR_CP: null,
+                NOMBRE_UTP_CP: null,
+                EMAIL_UTP: null,
+                NOMBRE_EDUCADOR_CP: null,
+                RUT_EDUCADOR_CP: null,
+                MAIL_EDUCADOR_CP: null,
+                TELEFONO_EDUCADOR_CP: null,
+                TITULO_EDUCADOR_CP: null,
+                EGRESADO_UCSC: null,
+
                 EDITAR_FORMULARIO: false,
 
             },
@@ -337,11 +507,9 @@ export default {
     },
     created: function () {
         this.loading = false;
-
         eventHub.$on("LoadingOff", () => {
             this.loading = false;
         });
-
         eventHub.$on("onEdit", (data) => {
 
             this.form.ID = data.obj.ID;
@@ -364,20 +532,11 @@ export default {
         });
     },
     methods: {
-
         onDialogForm() {
-
             this.$nextTick(() => {
                 (!this.form.EDITAR_FORMULARIO)?this.resetForm():"";
                 this.windowForm.kendoWidget().center().open();
             });
-        },
-        searchTipoSolicitud() {
-            var keyword = this.form.CARRERA_PROGRAMA;
-
-            if (keyword != null && keyword.length > 0) {
-                console.log(keyword);
-            }
         },
         resetForm() {
             this.form.ID = 0;
@@ -385,7 +544,6 @@ export default {
             this.form.EDUCADOR = null;
             this.form.EDITAR_FORMULARIO = false;
         },
-
         validate() {
             this.$validator.validate().then((results) => {
                 if (results) this.saveForm();
@@ -393,21 +551,61 @@ export default {
                     toastr.error(
                         AlertMessage.FORMULARIO.VALIDATE_ERROR
                     );
-
                 }
             });
         },
-        saveForm() {
+        searchEducador() {
+            var keyword = this.form.EDUCADOR;
 
+            if (keyword != null && keyword.length > 0) {
+                //traer informacion del estudiante
+                //console.log(keyword);
+                console.log('traer informacion del estudiante');
+            }
+        },
+
+        getCarreras(){
+
+        },
+
+        saveForm() {
             let url = Urls[this.propsToPass.element].SAVE;
             let formData = new FormData();
+            //obtengo valores radio buttons
+            //VALIDAR SELECCION !!!
+            this.form.DEPENDENCIA = $('input[name="dependencia"]:checked').val();
+            this.form.ENSEÑANZA = $('input[name="enseñanza"]:checked').val();
+            this.form.EGRESADO_UCSC = $('input[name="egresado_ucsc"]:checked').val();
+
             formData.append("ID", this.form.ID);
             formData.append("CARRERA_PROGRAMA", this.form.CARRERA_PROGRAMA);
             formData.append("EDUCADOR", this.form.EDUCADOR);
+            formData.append("RUT", this.form.RUT);
+            formData.append("MAIL", this.form.MAIL);
+            formData.append("DIRECCION", this.form.DIRECCION);
+            formData.append("COMUNA", this.form.COMUNA);
+            formData.append("TELEFONO", this.form.TELEFONO);
+            formData.append("PROFESOR_TUTOR", this.form.PROFESOR_TUTOR);
+            formData.append("NIVEL_PRACTICA", this.form.NIVEL_PRACTICA);
+            formData.append("CENTRO_PRACTICA", this.form.CENTRO_PRACTICA);
+            formData.append("DEPENDENCIA", this.form.DEPENDENCIA);
+            formData.append("ENSEÑANZA", this.form.ENSEÑANZA);
+            formData.append("DIRECCION_CP", this.form.DIRECCION_CP);
+            formData.append("COMUNA_CP", this.form.COMUNA_CP);
+            formData.append("TELEFONO_CP", this.form.TELEFONO_CP);
+            formData.append("DIRECTOR_CP", this.form.DIRECTOR_CP);
+            formData.append("EMAIL_DIRECTOR_CP", this.form.EMAIL_DIRECTOR_CP);
+            formData.append("NOMBRE_UTP_CP", this.form.NOMBRE_UTP_CP);
+            formData.append("EMAIL_UTP", this.form.EMAIL_UTP);
+            formData.append("NOMBRE_EDUCADOR_CP", this.form.NOMBRE_EDUCADOR_CP);
+            formData.append("RUT_EDUCADOR_CP", this.form.RUT_EDUCADOR_CP);
+            formData.append("MAIL_EDUCADOR_CP", this.form.MAIL_EDUCADOR_CP);
+            formData.append("TELEFONO_EDUCADOR_CP", this.form.TELEFONO_EDUCADOR_CP);
+            formData.append("TITULO_EDUCADOR_CP", this.form.TITULO_EDUCADOR_CP);
+            formData.append("EGRESADO_UCSC", this.form.EGRESADO_UCSC);
+            console.log(this.form);
 
-
-            axios
-                .post(url, formData, {
+            axios.post(url, formData, {
                     headers: {
                         "Content-Type": "multipart/form-data",
                         "X-Requested-With": "XMLHttpRequest",
