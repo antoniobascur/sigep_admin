@@ -50,18 +50,19 @@
                 <div class="row">
                     <div class="form-group col-md-12">
                         <label class="required">Carrera o Programa</label>
-                        <select
-                            v-model="form.CARRERA_PROGRAMA"
-                            @change=""
-                            id="CARRERA_PROGRAMA"
-                            data-old=""
+
+                        <kendo-dropdownlist
+                            :ref="'CARRERA_PROGRAMA'"
+                            class="form-control"
                             name="CARRERA_PROGRAMA"
-                            class="form-control selectpicker"
-                        >
-                            <option disabled value="">Seleccione una Carrera</option>
-                            <option value="ED_DIFERENCIAL">EDUCACIÓN DIFERENCIAL</option>
-                            <option value="ED_MATEMATICAS">EDUCACIÓN MEDIA EN MATEMÁTICAS</option>
-                        </select>
+                            v-model="form.CARRERA_PROGRAMA"
+                            :data-source="dsCarrera"
+                            :data-text-field="'CARRERA'"
+                            :data-value-field="'UA'"
+                            :optionLabel="'Seleccione'"
+                            :filter="'contains'"
+                            :class="{'is-invalid': errors.has('dsCarrera')}"
+                        ></kendo-dropdownlist>
 
                         <div class="invalid-feedback">{{ errors.first('CARRERA_PROGRAMA') }}</div>
                     </div>
@@ -462,6 +463,10 @@ export default {
                 titulo: "Ficha Adscripción",
                 element: "FICHA_ADSCRIPCION",
             },
+            dsCarrera: [        { CARRERA: "MAte", UA: "10" },
+                { CARRERA: "Leng", UA: "20" },
+                { CARRERA: "Ingl", UA: "30" }],
+
             form: {
                 ID: 0,
                 CARRERA_PROGRAMA: null,
@@ -506,6 +511,7 @@ export default {
         },
     },
     created: function () {
+        this.getCarreras();
         this.loading = false;
         eventHub.$on("LoadingOff", () => {
             this.loading = false;
@@ -554,6 +560,7 @@ export default {
                 }
             });
         },
+
         searchEducador() {
             var keyword = this.form.EDUCADOR;
 
@@ -565,6 +572,30 @@ export default {
         },
 
         getCarreras(){
+
+
+                let url = Urls["CARRERAS"].GET_ALL;
+                axios
+                    .get(url, {
+                        headers: {
+                            "Content-Type": "multipart/form-data",
+                            "X-Requested-With": "XMLHttpRequest",
+                            "X-CSRF-TOKEN": window.csrf_token,
+                        },
+                    })
+                    .then((response) => {
+                        //console.log(response.data.data);
+                        if (response.data.data.length > 0) {
+                            this.dsCarrera = response.data.data;
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log("ERROR:", error);
+                        onError();
+                    })
+                    .finally(() => {
+                        eventHub.$emit("LoadingOff");
+                    });
 
         },
 

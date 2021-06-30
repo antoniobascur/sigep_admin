@@ -34,5 +34,11 @@
         "SAVE": "api/fichaAdscripcion/save",
         "GET": "api/fichaAdscripcion/get/",
         "DELETE": "api/fichaAdscripcion/delete/"
+    },
+    "CARRERAS": {
+        "GET_ALL": "api/carreras/getAll",
+        "SAVE": "api/carreras/save",
+        "GET": "api/carreras/get/",
+        "DELETE": "api/carreras/delete/"
     }
 }
