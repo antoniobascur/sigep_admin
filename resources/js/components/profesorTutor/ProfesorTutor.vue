@@ -193,13 +193,13 @@ export default {
         },
     },
     created: function () {
-        this.loading = false;
+       // this.loading = false;
 
         eventHub.$on("LoadingOff", () => {
             this.loading = false;
         });
 
-        eventHub.$on("onEdit", (data) => {
+        eventHub.$on("onEditProfesorTutor", (data) => {
 
 
 
@@ -217,7 +217,7 @@ export default {
                 this.windowForm.kendoWidget().center().open();
             });
         });
-        eventHub.$on("onDelete", (data) => {
+        eventHub.$on("onDeleteProfesorTutor", (data) => {
             this.form.ID = data.obj.ID;
             this.form.RUN = data.obj.RUN;
             kendo
@@ -302,8 +302,8 @@ export default {
                         toastr.success(AlertMessage.FORMULARIO.SAVE_EXITO);
                         eventHub.$emit(
                             !this.form.EDITAR_FORMULARIO
-                                ? "onAddTogridElement"
-                                : "onEditTogridElement",
+                                ? "onAddTogridElementProfesorTutor"
+                                : "onEditTogridElementProfesorTutor",
                             {obj: this.form}
                         );
                     }
@@ -339,7 +339,7 @@ export default {
                         this.windowForm.kendoWidget().close();
                         this.form.ID = response.data.data;
 
-                        eventHub.$emit("onDeleteToGridElement", {
+                        eventHub.$emit("onDeleteToGridElementProfesorTutor", {
                             obj: this.form,
                         });
                         toastr.success(AlertMessage.GRID.ELIMINACION_EXITO);
@@ -354,9 +354,9 @@ export default {
         },
     },
     beforeDestroy() {
-        eventHub.$off("LoadingOff");
-        eventHub.$off("onEdit");
-        eventHub.$off("onDelete");
+       // eventHub.$off("LoadingOff");
+        eventHub.$off("onEditProfesorTutor");
+        eventHub.$off("onDeleteProfesorTutor");
 
     }
 }

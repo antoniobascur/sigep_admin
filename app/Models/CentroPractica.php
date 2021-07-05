@@ -101,6 +101,22 @@ class CentroPractica
         //dd($results);
         return $results;
     }
+    public static function getByRbd($id)
+    {
+        try {
+            $results = DB::connection(self::CONEXION_BD)->select(
+                "
+            SELECT * FROM
+	        CENTRO_PRACTICAS
+	  	    WHERE CENTRO_PRACTICAS.RBD=?",
+                [$id]
+            );
+        } catch (\Illuminate\Database\QueryException $ex) {
+            $results = "Error: " . $ex->getMessage();
+        }
+        //dd($results);
+        return $results;
+    }
 
     /**
      * @return array|string

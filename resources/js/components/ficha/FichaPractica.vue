@@ -1,24 +1,43 @@
 <template>
+    <!--<div>
+          <H5>Seleccione Tipo de ficha</H5>
+          <div id="tipoficha" class="form-group col-md-12" >
+              <label class="required">Adscripción</label><br>
+              <input type="radio" id="ADSCRIPCION" v-model="TIPO_FICHA" value="ADSCRIPCION" name="ADSCRIPCION">
+              <label for="AUTOGESTION">Autogestión</label>
+              <input type="radio" id="AUTOGESTION"v-model="TIPO_FICHA"  value="AUTOGESTION" name="AUTOGESTION">
+            <label for="CONTINUIDAD">Continuidad</label>
+              <input type="radio" id="CONTINUIDAD"v-model="TIPO_FICHA"  value="CONTINUIDAD" name="CONTINUIDAD">
+
+      </div>
+-->
 
     <kendo-tabstrip>
         <ul>
-            <li class="k-state-active">
-                One
+            <li class="k-state-active" > <!--v-else-if="TIPO_FICHA === 'ADSCRIPCION'">-->
+
+                Ficha de Adscripción
             </li>
             <li>
-                Two
+                Ficha Autogestion
             </li>
             <li>
-                Three
+                Ficha Continuidad
             </li>
         </ul>
+
+
         <div>
             <ficha-adscripcion></ficha-adscripcion>
         </div>
+
         <div>
-            <ficha-evaluacion></ficha-evaluacion>
+           <ficha-evaluacion></ficha-evaluacion>
         </div>
+
         <div>
+        <!--    <ficha-continuidad></ficha-continuidad>
+        -->
         </div>
     </kendo-tabstrip>
 
@@ -32,13 +51,17 @@ import {MultiSelect} from "@progress/kendo-dropdowns-vue-wrapper";
 import {DateInput} from "@progress/kendo-vue-dateinputs";
 import {KendoWindow} from "@progress/kendo-window-vue-wrapper";
 import Grid from "../centroPractica/grid/Grid";
-import fichaAdscripcion from "./form/fichaAdscripcion";
-import fichaEvaluacion from "./form/fichaEvaluacion";
 import FichaAdscripcion from "./form/fichaAdscripcion";
 import FichaEvaluacion from "./form/fichaEvaluacion";
+//import FichaContinuidad from "./form/fichaContinuidad";
+
+//import FichaAutogestion from "./form/fichaAutogestion";
+
 export default {
     components: {
+     //   FichaContinuidad,
         FichaEvaluacion,
+//      FichaAutogestion,
         FichaAdscripcion,
         HelpButton,
         Loading,
@@ -53,6 +76,7 @@ export default {
             actions: ["Maximize", "Close"],
             loading: true,
             submit: false,
+            TIPO_FICHA: null,
             propsToPass: {
                 titulo: "Centros de practicas",
                 ayuda: "lorem ",
@@ -60,25 +84,7 @@ export default {
             },
             dsRegiones: [],
             dsComunas: [],
-            form: {
-                ID: 0,
-                NOMBRE_ESTABLECIMIENTO: null,
-                NOMBRE_DIRECTOR: null,
-                RBD: null,
-                DEPENDENCIA_ADMINISTRATIVA: null,
-                NOMBRE_JEFE_UTP: null,
-                TELEFONO: null,
-                CUPOS_PRACTICA: null,
-                GRUPO_PRACTICA: null,
-                EMAIL_DIRECTOR: null,
-                TIPO_ENSENANZA: null,
-                COMUNA: null,
-                DIRECCION: null,
-                REGION: null,
-                EMAIL_JEFE_UTP: null,
-                EDITAR_FORMULARIO: false,
 
-            },
         }
     }
 }

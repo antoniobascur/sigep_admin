@@ -21,12 +21,12 @@ export default {
 
     methods: {
         onEdit() {
-            eventHub.$emit("onEdit", { obj: this.templateArgs });
+            eventHub.$emit("onEditProfesorTutor", { obj: this.templateArgs });
             //alert("Editar" + this.templateArgs.id);
         },
         onDelete() {
             //alert("Ver" + this.templateArgs.id);
-            eventHub.$emit("onDelete", { obj: this.templateArgs });
+            eventHub.$emit("onDeleteProfesorTutor", { obj: this.templateArgs });
         },
     },
 };
