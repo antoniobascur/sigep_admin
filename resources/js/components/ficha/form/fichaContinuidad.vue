@@ -196,9 +196,9 @@
 
                 <div id="exalumno" class="form-group col-md-12" >
                     <label class="required">Exalumnoextablecimiento</label><br>
-                    <input type="radio" id="si" value="si" name="exalumno">
+                    <input type="radio" id="si" value="si"  v-model="form.EXALUMNO" name="exalumno">
                     <label for="si">Si</label>
-                    <input type="radio" id="no" value="no" name="exalumno">
+                    <input type="radio" id="no" value="no" v-model="form.EXALUMNO" name="exalumno">
                     <label for="no">No</label>
             </div>
                 <div class="form-group col-md-6">
@@ -263,12 +263,12 @@
 </template>
 
 <script>
-import Loading from "../common/Loading";
+import Loading from "../../common/Loading";
 import {DateInput} from "@progress/kendo-vue-dateinputs";
 import {MultiSelect} from "@progress/kendo-dropdowns-vue-wrapper";
-import Urls from "../common/json/Urls.json";
-import AlertMessage from "../common/json/AlertMessage.json";
-import eventHub from "../../eventHub";
+import Urls from "../../common/json/Urls.json";
+import AlertMessage from "../../common/json/AlertMessage.json";
+import eventHub from "../../../eventHub";
 
 
 export default {
@@ -287,7 +287,7 @@ export default {
     },
     computed: {
         form() {
-            return this.$store.state.fichaAutogestion;
+            return this.$store.state.fichaContinuidad;
         },
     },
 

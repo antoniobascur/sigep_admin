@@ -254,12 +254,12 @@
 </template>
 
 <script>
-import Loading from "../common/Loading";
+import Loading from "../../common/Loading";
 import {DateInput} from "@progress/kendo-vue-dateinputs";
 import {MultiSelect} from "@progress/kendo-dropdowns-vue-wrapper";
-import Urls from "../common/json/Urls.json";
-import AlertMessage from "../common/json/AlertMessage.json";
-import eventHub from "../../eventHub";
+import Urls from "../../common/json/Urls.json";
+import AlertMessage from "../../common/json/AlertMessage.json";
+import eventHub from "../../../eventHub";
 
 
 export default {

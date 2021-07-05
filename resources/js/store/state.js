@@ -57,6 +57,24 @@ export const state = {
         EMAIL_OTORGA_CUPO: null,
         NOMBRE_PROF_COLABORADOR_CP: null,
 
+    },
+    fichaContinuidad:{
+        RUT: null,
+        CARRERA: null,
+        NIVEL_PRACTICA: null,
+        NOMBRE: null,
+        EMAIL: null,
+        TELEFONO: null,
+        RBD: null,
+        CENTRO_PRACTICA: null,
+        DIRECTOR_CP: null,
+        DEPENDENCIA: null,
+        TELEFONO_CP: null,
+        CANTIDAD_VECES: null,
+        EXALUMNO: null,
+        NOMBRE_PROF_COLABORADOR_CP: null,
+        OBSERVACION_HORARIO_CURSO: null,
+        RAZON_CONTINUIDAD: null,
     }
 
 }
