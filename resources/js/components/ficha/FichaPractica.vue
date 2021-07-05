@@ -3,7 +3,7 @@
     <kendo-tabstrip>
         <ul>
             <li class="k-state-active">
-                One
+                Ficha de Adscripción
             </li>
             <li>
                 Two
@@ -60,25 +60,7 @@ export default {
             },
             dsRegiones: [],
             dsComunas: [],
-            form: {
-                ID: 0,
-                NOMBRE_ESTABLECIMIENTO: null,
-                NOMBRE_DIRECTOR: null,
-                RBD: null,
-                DEPENDENCIA_ADMINISTRATIVA: null,
-                NOMBRE_JEFE_UTP: null,
-                TELEFONO: null,
-                CUPOS_PRACTICA: null,
-                GRUPO_PRACTICA: null,
-                EMAIL_DIRECTOR: null,
-                TIPO_ENSENANZA: null,
-                COMUNA: null,
-                DIRECCION: null,
-                REGION: null,
-                EMAIL_JEFE_UTP: null,
-                EDITAR_FORMULARIO: false,
 
-            },
         }
     }
 }

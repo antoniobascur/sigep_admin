@@ -36,9 +36,11 @@
         "DELETE": "api/fichaAdscripcion/delete/"
     },
     "CARRERAS": {
-        "GET_ALL": "api/carreras/getAll",
-        "SAVE": "api/carreras/save",
-        "GET": "api/carreras/get/",
-        "DELETE": "api/carreras/delete/"
+        "GET_ALL": "api/estudiante/getAllCarreras"
+    },
+    "ESTUDIANTES": {
+        "GET_ALL": "api/estudiante/getAll",
+        "GET": "api/estudiante/get/"
     }
+
 }

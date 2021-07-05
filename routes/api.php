@@ -47,3 +47,16 @@ Route::group(['prefix' => 'fichaAdscripcion'], function () {
     Route::post('/get/{id}', ['uses' => 'FichaAdscripcionController@get']);
     Route::get('/delete/{id}', ['uses' => 'FichaAdscripcionController@delete']);
 });
+Route::group(['prefix' => 'ficha'], function () {
+    Route::get('/getAll', ['uses' => 'FichaController@getAll']);
+    Route::post('/save', ['uses' => 'FichaController@save']);
+    Route::post('/get/{id}', ['uses' => 'FichaController@get']);
+    Route::get('/delete/{id}', ['uses' => 'FichaController@delete']);
+});
+
+Route::group(['prefix' => 'estudiante'], function () {
+    Route::get('/getAll', ['uses' => 'EstudianteController@getAll']);
+    Route::get('/getAllCarreras', ['uses' => 'EstudianteController@getAllCarreras']);
+    Route::get('/get/{id}', ['uses' => 'EstudianteController@get']);
+
+});
