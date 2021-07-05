@@ -21,33 +21,34 @@ class FichaController extends Controller
 
             $id = $request->ID;
 
-            $carreraPrograma=$request->CARRERA_PROGRAMA;
-            $educador=$request->EDUCADOR;
+            $carrera=$request->CARRERA;
+            $nombre=$request->NOMBRE;
             $rut=$request->RUT;
-            $mail=$request->MAIL;
+            $email=$request->EMAIL;
             $direccion=$request->DIRECCION;
             $comuna=$request->COMUNA;
             $telefono=$request->TELEFONO;
             $profesorTutor=$request->PROFESOR_TUTOR;
             $nivelPractica=$request->NIVEL_PRACTICA;
+            $rbd=$request->RBD;
             $centroPractica=$request->CENTRO_PRACTICA;
             $dependencia=$request->DEPENDENCIA;
-            $enseñanza=$request->ENSEÑANZA;
+            $ensenanza=$request->ENSENANZA;
             $direccionCp=$request->DIRECCION_CP;
             $comunaCp=$request->COMUNA_CP;
             $telefonoCp=$request->TELEFONO_CP;
             $directorCp=$request->DIRECTOR_CP;
             $emailDirectorCp=$request->EMAIL_DIRECTOR_CP;
             $nombreUtpCp=$request->NOMBRE_UTP_CP;
-            $emailUtp=$request->EMAIL_UTP;
-            $nombreEducadorCp=$request->NOMBRE_EDUCADOR_CP;
-            $rutEducadorCp=$request->RUT_EDUCADOR_CP;
-            $mailEducadorCp=$request->MAIL_EDUCADOR_CP;
-            $telefonoEducadorCp=$request->TELEFONO_EDUCADOR_CP;
-            $tituloEducadorCp=$request->TITULO_EDUCADOR_CP;
+            $emailUtpCp=$request->EMAIL_UTP_CP;
+            $nombreProfesorColaboradorCp=$request->NOMBRE_PROFESOR_COLABORADOR_CP;
+            $rutProfesorColaboradorCp=$request->RUT_PROFESOR_COLABORADOR_CP;
+            $emailProfesorColaboradorCp=$request->EMAIL_PROFESOR_COLABORADOR_CP;
+            $telefonoProfesorColaboradorCp=$request->TELEFONO_PROFESOR_COLABORADOR_CP;
+            $tituloProfesorColaboradorCp=$request->TITULO_PROFESOR_COLABORADOR_CP;
             $egresadoUcsc=$request->EGRESADO_UCSC;
 
-            $dev = new FichaAdscripcion($carreraPrograma,$educador,$rut,$mail,$direccion,$comuna,$telefono,$profesorTutor,$nivelPractica,$centroPractica,$dependencia,$enseñanza,$direccionCp,$comunaCp,$telefonoCp,$directorCp,$emailDirectorCp,$nombreUtpCp,$emailUtp,$nombreEducadorCp,$rutEducadorCp,$mailEducadorCp,$telefonoEducadorCp,$tituloEducadorCp,$egresadoUcsc);
+            $dev = new FichaAdscripcion($carrera,$nombre,$rut,$email,$direccion,$comuna,$telefono,$profesorTutor,$nivelPractica,$rbd,$centroPractica,$dependencia,$ensenanza,$direccionCp,$comunaCp,$telefonoCp,$directorCp,$emailDirectorCp,$nombreUtpCp,$emailUtpCp,$nombreProfesorColaboradorCp,$rutProfesorColaboradorCp,$emailProfesorColaboradorCp,$telefonoProfesorColaboradorCp,$tituloProfesorColaboradorCp,$egresadoUcsc);
 
             if ($id != 0) {
                 $dev->id = $id;

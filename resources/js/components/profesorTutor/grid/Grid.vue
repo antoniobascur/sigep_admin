@@ -114,13 +114,13 @@ export default {
     created() {
         this.getData();
 
-        eventHub.$on("onAddTogridElement", (data) => {
+        eventHub.$on("onAddTogridElementProfesorTutor", (data) => {
             this.getData();
          /*   this.$store.state.dsCentroPracticas.data = this.$store.state.dsCentroPracticas.data.concat(
                 data.obj
             );*/
         });
-        eventHub.$on("onEditTogridElement", (data) => {
+        eventHub.$on("onEditTogridElementProfesorTutor", (data) => {
             this.getData();
      /*      data = data.obj;
             console.log(data);
@@ -129,7 +129,7 @@ export default {
             items.splice(index, 1, data);
             this.$store.state.dsCentroPracticas.data = items;*/
         });
-        eventHub.$on("onDeleteToGridElement", (data) => {
+        eventHub.$on("onDeleteToGridElementProfesorTutor", (data) => {
 
          var items = this.$store.state.dsProfesorTutor.data;
             let index = items.findIndex((item) => item.ID == data.obj.ID);
@@ -139,8 +139,8 @@ export default {
         });
     },
     beforeDestroy() {
-        eventHub.$off("onAddTogridElement");
-        eventHub.$off("onEditTogridElement");
+        eventHub.$off("onAddTogridElementProfesorTutor");
+        eventHub.$off("onEditTogridElementProfesorTutor");
 
     },
 }

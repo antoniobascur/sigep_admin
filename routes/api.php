@@ -17,8 +17,9 @@ header('Access-Control-Allow-Origin: *');
 Route::group(['prefix' => 'centroPractica'], function () {
     Route::get('/getAll', ['uses' => 'CentroPracticasController@getAll']);
     Route::post('/save', ['uses' => 'CentroPracticasController@save']);
-    Route::post('/get/{id}', ['uses' => 'CentroPracticasController@get']);
+    Route::get('/get/{id}', ['uses' => 'CentroPracticasController@get']);
     Route::get('/delete/{id}', ['uses' => 'CentroPracticasController@delete']);
+    Route::get('/getByRbd/{id}', ['uses' => 'CentroPracticasController@getByRbd']);
 });
 
 Route::group(['prefix' => 'estadoSolicitud'], function () {
@@ -41,11 +42,20 @@ Route::group(['prefix' => 'tipoSolicitud'], function () {
     Route::post('/get/{id}', ['uses' => 'TipoSolicitudController@get']);
     Route::get('/delete/{id}', ['uses' => 'TipoSolicitudController@delete']);
 });
-Route::group(['prefix' => 'fichaAdscripcion'], function () {
-    Route::get('/getAll', ['uses' => 'FichaAdscripcionController@getAll']);
-    Route::post('/save', ['uses' => 'FichaAdscripcionController@save']);
-    Route::post('/get/{id}', ['uses' => 'FichaAdscripcionController@get']);
-    Route::get('/delete/{id}', ['uses' => 'FichaAdscripcionController@delete']);
+
+
+Route::group(['prefix' => 'ficha'], function () {
+    Route::get('/getAll', ['uses' => 'FichaController@getAll']);
+    Route::post('/save', ['uses' => 'FichaController@save']);
+    Route::post('/get/{id}', ['uses' => 'FichaController@get']);
+    Route::get('/delete/{id}', ['uses' => 'FichaController@delete']);
+});
+
+Route::group(['prefix' => 'estudiante'], function () {
+    Route::get('/getAll', ['uses' => 'EstudianteController@getAll']);
+    Route::get('/getAllCarreras', ['uses' => 'EstudianteController@getAllCarreras']);
+    Route::get('/get/{id}', ['uses' => 'EstudianteController@get']);
+
 });
 Route::group(['prefix' => 'ficha'], function () {
     Route::get('/getAll', ['uses' => 'FichaController@getAll']);

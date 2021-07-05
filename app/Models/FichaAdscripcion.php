@@ -11,6 +11,34 @@ use Illuminate\Support\Facades\DB;
 class FichaAdscripcion
 {
     public $id;
+    public $carrera;
+    public $nombre;
+    public $rut;
+    public $email;
+    public $direccion;
+    public $comuna;
+    public $telefono;
+    public $profesorTutor;
+    public $nivelPractica;
+    public $rbd;
+    public $centroPractica;
+    public $dependencia;
+    public $ensenanza;
+    public $direccionCp;
+    public $comunaCp;
+    public $telefonoCp;
+    public $directorCp;
+    public $emailDirectorCp;
+    public $nombreUtpCp;
+    public $emailUtpCp;
+    public $nombreProfColaboradorCp;
+    public $rutProfColaboradorCp;
+    public $emailProfColaboradorCp;
+    public $telefonoProfColaboradorCp;
+    public $tituloProfColaboradorCp;
+    public $egresadoUcsc;
+
+
 
     /**
      *
@@ -19,15 +47,16 @@ class FichaAdscripcion
 
     /**
      * FichaAdscripcion constructor.
-     * @param null $carreraPrograma
-     * @param null $educador
+     * @param null $carrera
+     * @param null $nombre
      * @param null $rut
-     * @param null $mail
+     * @param null $email
      * @param null $direccion
      * @param null $comuna
      * @param null $telefono
      * @param null $profesorTutor
      * @param null $nivelPractica
+     * @param null $rbd
      * @param null $centroPractica
      * @param null $dependencia
      * @param null $ensenanza
@@ -38,25 +67,26 @@ class FichaAdscripcion
      * @param null $emailDirectorCp
      * @param null $nombreUtpCp
      * @param null $emailUtpCp
-     * @param null $nombreEducadorCp
-     * @param null $rutEducadorCp
-     * @param null $emailEducadorCp
-     * @param null $telefonoEducadorCp
-     * @param null $tituloEducadorCp
+     * @param null $nombreProfColaboradorCp
+     * @param null $rutProfColaboradorCp
+     * @param null $emailProfColaboradorCp
+     * @param null $telefonoProfColaboradorCp
+     * @param null $tituloProfColaboradorCp
      * @param null $egresadoUcsc
      */
 
 
     public function __construct(
-     $carreraPrograma = null,
-     $educador= null,
+     $carrera = null,
+     $nombre= null,
      $rut= null,
-     $mail= null,
+     $email= null,
      $direccion= null,
      $comuna= null,
      $telefono= null,
      $profesorTutor= null,
      $nivelPractica= null,
+     $rbd= null,
      $centroPractica= null,
      $dependencia= null,
      $ensenanza= null,
@@ -67,22 +97,23 @@ class FichaAdscripcion
      $emailDirectorCp= null,
      $nombreUtpCp= null,
      $emailUtpCp= null,
-     $nombreEducadorCp= null,
-     $rutEducadorCp= null,
-     $emailEducadorCp= null,
-     $telefonoEducadorCp= null,
-     $tituloEducadorCp = null,
+     $nombreProfColaboradorCp = null,
+     $rutProfColaboradorCp = null,
+     $emailProfColaboradorCp = null,
+     $telefonoProfColaboradorCp = null,
+     $tituloProfColaboradorCp = null,
      $egresadoUcsc= null
     ) {
-        $this->carreraPrograma = $carreraPrograma;
-        $this->educador = $educador;
+        $this->carrera = $carrera;
+        $this->nombre = $nombre;
         $this->rut = $rut;
-        $this->mail = $mail;
+        $this->email = $email;
         $this->direccion = $direccion;
         $this->comuna = $comuna;
         $this->telefono = $telefono;
         $this->profesorTutor = $profesorTutor;
         $this->nivelPractica = $nivelPractica;
+        $this->rbd = $rbd;
         $this->centroPractica = $centroPractica;
         $this->dependencia = $dependencia;
         $this->ensenanza = $ensenanza;
@@ -93,11 +124,11 @@ class FichaAdscripcion
         $this->emailDirectorCp = $emailDirectorCp;
         $this->nombreUtpCp = $nombreUtpCp;
         $this->emailUtpCp = $emailUtpCp;
-        $this->nombreEducadorCp = $nombreEducadorCp;
-        $this->rutEducadorCp = $rutEducadorCp;
-        $this->emailEducadorCp = $emailEducadorCp;
-        $this->telefonoEducadorCp = $telefonoEducadorCp;
-        $this->tituloEducadorCp = $tituloEducadorCp;
+        $this->nombreProfColaboradorCp = $nombreProfColaboradorCp;
+        $this->rutProfColaboradorCp = $rutProfColaboradorCp;
+        $this->emailProfColaboradorCp = $emailProfColaboradorCp;
+        $this->telefonoProfColaboradorCp = $telefonoProfColaboradorCp;
+        $this->tituloProfColaboradorCp = $tituloProfColaboradorCp;
         $this->egresadoUcsc = $egresadoUcsc;
     }
 
@@ -150,29 +181,29 @@ class FichaAdscripcion
             DB::connection(self::CONEXION_BD)->insert(
                 "INSERT INTO FICHA
                         (ID,
-                        RUN_ESTUDIANTE,
-                        TIPO_SOLICITUD_ID,
-                        ESTADO_SOLICITUD_ID,
-                        PROFESOR_COLABORADOR_ID,
-                        PROFESOR_COLABORADOR_CENTRO_PRACTICAS_ID,
-                        PROGRAMACION_PRACTICA_ID
+                        NIVEL_PRACTICA,
+                        INICIO_PRACTICA,
+                        TERMINO_PRACTICA,
+                        OBSERVACION,
+                        FECHA_HORA_CREACION,
+                        FICHA_HORA_ACTUALIZACION
                         ) values
                         (?,?,?,?,?,?,?)
                         ON DUPLICATE KEY UPDATE ID = VALUES(ID),
-                        RUN_ESTUDIANTE = VALUES(RUN_ESTUDIANTE),
-                        TIPO_SOLICITUD_ID = VALUES(TIPO_SOLICITUD_ID),
-                        ESTADO_SOLICITUD_ID = VALUES(ESTADO_SOLICITUD_ID),
-                        PROFESOR_COLABORADOR_ID = VALUES(PROFESOR_COLABORADOR_ID),
-                        PROFESOR_COLABORADOR_CENTRO_PRACTICAS_ID = VALUES(PROFESOR_COLABORADOR_CENTRO_PRACTICAS_ID),
-                        PROGRAMACION_PRACTICA_ID = VALUES(PROGRAMACION_PRACTICA_ID)",
+                        NIVEL_PRACTICA = VALUES(NIVEL_PRACTICA),
+                        INICIO_PRACTICA = VALUES(INICIO_PRACTICA),
+                        TERMINO_PRACTICA = VALUES(TERMINO_PRACTICA),
+                        OBSERVACION = VALUES(OBSERVACION),
+                        FECHA_HORA_CREACION = VALUES(FECHA_HORA_CREACION),
+                        FICHA_HORA_ACTUALIZACION = VALUES(FICHA_HORA_ACTUALIZACION)",
                 [
                     $this->id,
-                    $this->rut,
-                    '2',
-                    '1',
-                    '6',
-                    '5',
-                    '3'
+                    $this->nivelPractica,
+                    $this->inicioPractica,
+                    $this->TerminoPractica,
+                    $this->Observacion,
+                    $this->FechaHoraCreacion,
+                    $this->FechaHoraActualizacion,
 
                 ]
             );
@@ -190,7 +221,7 @@ class FichaAdscripcion
     {
         try {
             $submit = DB::connection(self::CONEXION_BD)->delete(
-                "DELETE FROM CENTRO_PRACTICAS WHERE ID=? ",
+                "DELETE FROM FICHA WHERE ID=? ",
                 array($id)
             );
             // dd($submit);

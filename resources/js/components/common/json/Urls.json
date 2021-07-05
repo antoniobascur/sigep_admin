@@ -3,6 +3,7 @@
         "GET_ALL": "api/centroPractica/getAll",
         "SAVE": "api/centroPractica/save",
         "GET": "api/centroPractica/get/",
+        "GET_RBD": "api/centroPractica/getByRbd/",
         "DELETE": "api/centroPractica/delete/"
     },
     "EXTERNO": {

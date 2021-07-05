@@ -87,6 +87,18 @@ class CentroPracticasController extends Controller
         return response()->json($respuesta, 200);
     }
 
+    public function getByRbd($idCentroPracticas){
+        try {
+
+            $result = CentroPractica::getByRbd($idCentroPracticas);
+
+            $respuesta = Helper::createStdResponse(true, "Procesado con éxito!", $result);
+        } catch (Exception $e) {
+            return response()->json(Helper::createStdResponse(false, "Error " . $e->getCode(), "", $e->getMessage()), 400);
+        }
+        return response()->json($respuesta, 200);
+    }
+
     public function delete($idCentroPracticas){
         try {
 

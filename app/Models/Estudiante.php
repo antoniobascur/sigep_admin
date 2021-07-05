@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Support\Facades\DB;
 
 /**
- * Class TipoSolicitud
+ * Class Estudiante
  * @package App\Models
  */
 class Estudiante{
