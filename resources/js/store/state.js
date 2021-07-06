@@ -38,7 +38,14 @@ export const state = {
         EMAIL_PROF_COLABORADOR_CP: null,
         TELEFONO_PROF_COLABORADOR_CP: null,
         TITULO_PROF_COLABORADOR_CP: null,
-        EGRESADO_UCSC: null
+        EGRESADO_UCSC: null,
+        NOMBRE_OTORGA_CUPO: null,
+        TELEFONO_OTORGA_CUPO: null,
+        EMAIL_OTORGA_CUPO: null,
+        OBSERVACION_HORARIO_CURSO: null,
+        RAZON_CONTINUIDAD: null,
+        CANTIDAD_VECES: null,
+        EXALUMNO: null,
     },
 
     fichaAutogestion:{
