@@ -29,7 +29,7 @@
                                 </button>
                             </div>
                         </div>
-
+                        <Grid></Grid>
                         <!--TODO:Contenido-->
                     </div>
                 </div>
@@ -162,7 +162,7 @@ import Loading from "../common/Loading";
 import {MultiSelect} from "@progress/kendo-dropdowns-vue-wrapper";
 import {DateInput} from "@progress/kendo-vue-dateinputs";
 import {KendoWindow} from "@progress/kendo-window-vue-wrapper";
-import Grid from "../centroPractica/grid/Grid";
+import Grid from "../ficha/grid/Grid";
 import FichaAdscripcion from "./form/fichaAdscripcion";
 import FichaEvaluacion from "./form/fichaEvaluacion";
 import FichaContinuidad from "./form/fichaContinuidad";
@@ -193,9 +193,9 @@ export default {
             tituloKendoWindowsFormNuevo:"NUEVA FICHA ",
             tituloKendoWindowsFormActualizar:"VER FICHA ",
             propsToPass: {
-                titulo: "Centros de practicas",
+                titulo: "Ficha Practica",
                 ayuda: "lorem ",
-                element: "CENTRO_PRACTICAS",
+                element: "FICHA_ADSCRIPCION",
             },
             dsRegiones: [],
             dsComunas: [],

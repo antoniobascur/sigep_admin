@@ -200,7 +200,7 @@
                     <input type="radio" id="hc" v-model="form.ENSENANZA" value="hc" name="ensenanza">
                     <label for="hc">HC</label>
                     <input type="radio" id="tp" v-model="form.ENSENANZA" value="tp" name="ensenanza">
-                    <label for="tp">Media</label>
+                    <label for="tp">Basica</label>
                     <input type="radio" id="basica" v-model="form.ENSENANZA" value="basica" name="ensenanza">
                     <label for="basica">Básica</label>
                     <input type="radio" id="parv" v-model="form.ENSENANZA" value="parv" name="ensenanza">

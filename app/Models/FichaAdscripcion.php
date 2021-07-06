@@ -11,16 +11,16 @@ use Illuminate\Support\Facades\DB;
 class FichaAdscripcion
 {
     public $id;
-    public $carrera;
-    public $nombre;
+ //   public $carrera;
+ //   public $nombre;
     public $rut;
-    public $email;
+ /*   public $email;
     public $direccion;
     public $comuna;
     public $telefono;
-    public $profesorTutor;
+    public $profesorTutor;*/
     public $nivelPractica;
-    public $rbd;
+  /*  public $rbd;
     public $centroPractica;
     public $dependencia;
     public $ensenanza;
@@ -37,7 +37,7 @@ class FichaAdscripcion
     public $telefonoProfColaboradorCp;
     public $tituloProfColaboradorCp;
     public $egresadoUcsc;
-
+*/
 
 
     /**
@@ -77,16 +77,16 @@ class FichaAdscripcion
 
 
     public function __construct(
-     $carrera = null,
-     $nombre= null,
+/*     $carrera = null,
+     $nombre= null,*/
      $rut= null,
-     $email= null,
+ /*    $email= null,
      $direccion= null,
      $comuna= null,
      $telefono= null,
-     $profesorTutor= null,
-     $nivelPractica= null,
-     $rbd= null,
+     $profesorTutor= null,*/
+     $nivelPractica= null /*saque la coma*/
+ /*    $rbd= null,
      $centroPractica= null,
      $dependencia= null,
      $ensenanza= null,
@@ -102,18 +102,18 @@ class FichaAdscripcion
      $emailProfColaboradorCp = null,
      $telefonoProfColaboradorCp = null,
      $tituloProfColaboradorCp = null,
-     $egresadoUcsc= null
+     $egresadoUcsc= null*/
     ) {
-        $this->carrera = $carrera;
-        $this->nombre = $nombre;
+   /*     $this->carrera = $carrera;
+        $this->nombre = $nombre;*/
         $this->rut = $rut;
-        $this->email = $email;
+  /*      $this->email = $email;
         $this->direccion = $direccion;
         $this->comuna = $comuna;
         $this->telefono = $telefono;
-        $this->profesorTutor = $profesorTutor;
+        $this->profesorTutor = $profesorTutor; */
         $this->nivelPractica = $nivelPractica;
-        $this->rbd = $rbd;
+  /*      $this->rbd = $rbd;
         $this->centroPractica = $centroPractica;
         $this->dependencia = $dependencia;
         $this->ensenanza = $ensenanza;
@@ -129,7 +129,7 @@ class FichaAdscripcion
         $this->emailProfColaboradorCp = $emailProfColaboradorCp;
         $this->telefonoProfColaboradorCp = $telefonoProfColaboradorCp;
         $this->tituloProfColaboradorCp = $tituloProfColaboradorCp;
-        $this->egresadoUcsc = $egresadoUcsc;
+        $this->egresadoUcsc = $egresadoUcsc; */
     }
 
     /**
@@ -182,28 +182,25 @@ class FichaAdscripcion
                 "INSERT INTO FICHA
                         (ID,
                         NIVEL_PRACTICA,
-                        INICIO_PRACTICA,
-                        TERMINO_PRACTICA,
-                        OBSERVACION,
-                        FECHA_HORA_CREACION,
-                        FICHA_HORA_ACTUALIZACION
-                        ) values
-                        (?,?,?,?,?,?,?)
+                        RUN_ESTUDIANTE) values
+                        (?,?,?)
                         ON DUPLICATE KEY UPDATE ID = VALUES(ID),
                         NIVEL_PRACTICA = VALUES(NIVEL_PRACTICA),
-                        INICIO_PRACTICA = VALUES(INICIO_PRACTICA),
-                        TERMINO_PRACTICA = VALUES(TERMINO_PRACTICA),
-                        OBSERVACION = VALUES(OBSERVACION),
-                        FECHA_HORA_CREACION = VALUES(FECHA_HORA_CREACION),
-                        FICHA_HORA_ACTUALIZACION = VALUES(FICHA_HORA_ACTUALIZACION)",
+                       RUN_ESTUDIANTE = VALUES(RUN_ESTUDIANTE)",
+//                        INICIO_PRACTICA = VALUES(INICIO_PRACTICA),
+//                        TERMINO_PRACTICA = VALUES(TERMINO_PRACTICA),
+//                        OBSERVACION = VALUES(OBSERVACION),
+//                        FECHA_HORA_CREACION = VALUES(FECHA_HORA_CREACION),
+//                        FICHA_HORA_ACTUALIZACION = VALUES(FICHA_HORA_ACTUALIZACION)
                 [
                     $this->id,
                     $this->nivelPractica,
-                    $this->inicioPractica,
-                    $this->TerminoPractica,
-                    $this->Observacion,
-                    $this->FechaHoraCreacion,
-                    $this->FechaHoraActualizacion,
+                    $this->rut
+                    //  $this->inicioPractica,
+                  //  $this->TerminoPractica,
+                  //  $this->Observacion,
+                  //  $this->FechaHoraCreacion,
+                  //  $this->FechaHoraActualizacion,
 
                 ]
             );

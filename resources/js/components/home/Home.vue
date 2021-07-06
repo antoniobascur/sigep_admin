@@ -82,12 +82,12 @@
                         <H5>Información del estado de practicas</H5>
                         <div>
                             <ul id="progressbar" class="text-center">
-                                <li class="active" id="step1"><div class="d-none d-md-block">STEP 1</div></li>
-                                <li class="active" id="step2"><div class="d-none d-md-block">STEP 2</div></li>
-                                <li class="active" id="step3"><div class="d-none d-md-block">STEP 3</div></li>
-                                <li class="" id="step4"><div class="d-none d-md-block">STEP 4</div></li>
-                                <li class="" id="step5"><div class="d-none d-md-block">STEP 5</div></li>
-                                <li class="" id="step6"><div class="d-none d-md-block">STEP 5</div></li>
+                                <li class="active" id="step1"><div class="d-none d-md-block">Especificidades de las prácticas</div></li>
+                                <li class="active" id="step2"><div class="d-none d-md-block">Calendario Semestral</div></li>
+                                <li class="active" id="step3"><div class="d-none d-md-block">Proceso Autogestión / Continuidad</div></li>
+                                <li class="" id="step4"><div class="d-none d-md-block">Visita Centro Práctica</div></li>
+                                <li class="" id="step5"><div class="d-none d-md-block">Asignación y Adscripción</div></li>
+                                <li class="" id="step6"><div class="d-none d-md-block">Carta de presentación</div></li>
                             </ul>
                         </div>
 

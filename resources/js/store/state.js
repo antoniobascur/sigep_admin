@@ -40,6 +40,7 @@ export const state = {
         TITULO_PROF_COLABORADOR_CP: null,
         EGRESADO_UCSC: null
     },
+
     fichaAutogestion:{
         RUT: null,
         CARRERA: null,
