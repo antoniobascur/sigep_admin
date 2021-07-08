@@ -12,6 +12,9 @@ export const state = {
     dsTipoSolicitud: {
         data: []
     },
+    dsSteps: {
+        data: []
+    },
     ficha:{
         CARRERA: null,
         NOMBRE: null,

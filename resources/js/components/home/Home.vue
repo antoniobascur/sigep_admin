@@ -80,17 +80,9 @@
                         </div>
                         <br>
                         <H5>Información del estado de practicas</H5>
-                        <div>
-                            <ul id="progressbar" class="text-center">
-                                <li class="active" id="step1"><div class="d-none d-md-block">Especificidades de las prácticas</div></li>
-                                <li class="active" id="step2"><div class="d-none d-md-block">Calendario Semestral</div></li>
-                                <li class="active" id="step3"><div class="d-none d-md-block">Proceso Autogestión / Continuidad</div></li>
-                                <li class="" id="step4"><div class="d-none d-md-block">Visita Centro Práctica</div></li>
-                                <li class="" id="step5"><div class="d-none d-md-block">Asignación y Adscripción</div></li>
-                                <li class="" id="step6"><div class="d-none d-md-block">Carta de presentación</div></li>
-                            </ul>
-                        </div>
-
+                    <div>
+                        <StepByStep :dsSteps="this.arrayStep"></StepByStep>
+                    </div>
                         <hr>
                         <!-- CUERPO-->
                     </div>
@@ -103,13 +95,23 @@
 <script>
 import Loading from "../common/Loading";
 import HelpButton from "../common/HelpButton";
+import StepByStep from "../common/StepByStep";
     export default {
         components: {
             HelpButton,
             Loading,
+            StepByStep
         },
         data: function () {
             return {
+                arrayStep: [
+                    {"id": 1,"name": "step1","state":"active"},
+                    {"id": 2,"name": "step2","state":"active"},
+                    {"id": 3,"name": "step3","state":"active"},
+                    {"id": 4,"name": "step4","state":"active"},
+                    {"id": 5,"name": "step5","state":""},
+                    {"id": 6,"name": "step6","state":""},
+                ],
                 loading: true,
                 propsToPass: {
                     titulo: "Home Principal",
@@ -132,96 +134,4 @@ import HelpButton from "../common/HelpButton";
     }
 </script>
 
-<style>
-#progressbar {
-    margin-bottom: 30px;
-    overflow: hidden;
-    color: #455A64;
-    padding-left: 0px;
-    margin-top: 30px
-}
 
-#progressbar li {
-    list-style-type: none;
-    width: 16.66%;
-    float: left;
-    position: relative;
-    font-weight: 400
-}
-
-#progressbar #step1:before {
-    content: "1";
-}
-
-#progressbar #step2:before {
-    content: "2";
-}
-
-#progressbar #step3:before {
-    content: "3";
-}
-#progressbar #step4:before {
-    content: "4";
-}
-#progressbar #step5:before {
-    content: "5";
-}
-#progressbar #step6:before {
-    content: "6";
-}
-
-#progressbar li:before {
-    width: 40px;
-    height: 40px;
-    line-height: 45px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    background: #455A64;
-    border-radius: 50%;
-    margin: auto;
-    color: #fff;
-}
-
-#progressbar li:after {
-    content: '';
-    width: 100%;
-    height: 2px;
-    background: #455A64;
-    position: absolute;
-    left: 0;
-    top: 21px;
-    z-index: -1
-}
-
-#progressbar li:last-child:after {
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    position: absolute;
-    left: -50%
-}
-
-#progressbar li:first-child:after {
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-    position: absolute;
-    left: 50%
-}
-
-#progressbar li:last-child:after {
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px
-}
-
-#progressbar li:first-child:after {
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px
-}
-
-#progressbar li.active:before,
-#progressbar li.active:after {
-    background: red!important;
-    background-color: red!important;
-}
-</style>
