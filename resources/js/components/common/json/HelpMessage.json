@@ -18,6 +18,10 @@
     "TIPO_SOLICITUD":{
         "TITULO":"Tipo Solicitud",
         "HELP":"En esta sección se puede observar ...."
+    },
+    "PROGRAMACION_PRACTICA": {
+        "TITULO":"Programación Practica",
+        "HELP":"En esta sección se puede observar ...."
     }
 
 }

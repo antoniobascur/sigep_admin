@@ -48,6 +48,7 @@
         "@progress/kendo-vue-intl": "^0.4.8",
         "@progress/kendo-vue-popup": "^0.4.4",
         "@progress/kendo-window-vue-wrapper": "^2019.3.1023",
-        "@progress/kendo-layout-vue-wrapper": "^2019.3.1023"
+        "@progress/kendo-layout-vue-wrapper": "^2019.3.1023",
+        "@progress/kendo-scheduler-vue-wrapper": "^2019.3.1023"
     }
 }

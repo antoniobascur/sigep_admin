@@ -74,6 +74,14 @@ import AppSidebar from "app-sidebar";
                             href: "fichaPractica", // describe la dirección del link al presionar el ítem. Si en la configuración del sidebar se especifica que se usa Vue Router, href debe contener el nombre de la ruta, en caso contrario, debe contener la ruta absoluta
                             router: true, // si el sidebar está configurado para usar Vue Router, si se añade la propiedad 'router' en false, no se utilizará Vue Router para este elemento
                         },
+                        {
+                            name: "ProgramacionPractica", // nombre del enlace, en este caso será mostrado como 'Ítem 1'
+                            type: "item", // tipo del ítem, puede ser 'item', 'dropdown' y 'header', si no especifica, por defecto pasa a ser 'item'
+                            icon: "fa fa-cogs", // ícono que acompaña al enlace, de momento solo está soportado Font Awesome 4.7
+                            // desactiva tooltip para ese ítem solamente
+                            href: "programacionPractica", // describe la dirección del link al presionar el ítem. Si en la configuración del sidebar se especifica que se usa Vue Router, href debe contener el nombre de la ruta, en caso contrario, debe contener la ruta absoluta
+                            router: true, // si el sidebar está configurado para usar Vue Router, si se añade la propiedad 'router' en false, no se utilizará Vue Router para este elemento
+                        },
 /*{
                             name: "Ficha de Autogestión", // nombre del enlace, en este caso será mostrado como 'Ítem 1'
                             type: "dropdown", // tipo del ítem, puede ser 'item', 'dropdown' y 'header', si no especifica, por defecto pasa a ser 'item'
