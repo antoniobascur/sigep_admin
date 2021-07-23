@@ -15,6 +15,16 @@
                                 <help-button v-bind:element="propsToPass.element"/>
                             </div>
                         </div>
+                        <div class="d-flex flex-row-reverse bd-highlight">
+
+                            <div class="p-2 bd-highlight">
+                                <button class="btn btn-primary" @click="onDialogFormNew">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                    Nuevo
+                                </button>
+
+                            </div>
+                        </div>
                         <!-- CUERPO-->
                         <hr>
                         <H5>Ejemplo calendario</H5>
@@ -22,7 +32,7 @@
 
 
                         <div class="col-md-12">
-                            <scheduler></scheduler>
+
                         </div>
 
                         </div>
@@ -31,19 +41,53 @@
                 </div>
             </div>
         </div>
+
+        <kendo-window
+            :ref="'form_programacion'"
+            :width="'80%'"
+            :height="'auto'"
+            :title="this.tituloKendoWindowsFormNuevo"
+            :visible="false"
+            :modal="true"
+            style="display:none;"
+            :scrollable="false"
+            :actions="actions"
+        >
+            <ficha-programacion></ficha-programacion>
+        </kendo-window>
     </div>
 </template>
 
 <script>
-import scheduler from "../common/scheduler";
+
+import {KendoWindow} from "@progress/kendo-window-vue-wrapper";
 import HelpButton from "../common/HelpButton";
+import FichaProgramacion from "./form/fichaProgramacion";
 export default {
     components: {
+        FichaProgramacion,
         HelpButton,
-        scheduler,
+        KendoWindow,
+    },
+    computed: {
+        windowFormNuevo() {
+            return this.$refs["form_programacion"];
+        }
+    },
+    methods: {
+        resetForm() {
+
+        },
+        onDialogFormNew() {
+            this.$nextTick(() => {
+                this.windowFormNuevo.kendoWidget().center().open();
+            });
+        },
     },
     data: function () {
         return {
+            actions: ["Maximize", "Close"],
+            tituloKendoWindowsFormNuevo:"NUEVA PROGRAMACIÓN ",
             loading: false,
             propsToPass: {
                 titulo: "Programación Practica",
@@ -51,6 +95,7 @@ export default {
                 element: "PROGRAMACION_PRACTICA",
             },
         }}
+
 }
 </script>
 

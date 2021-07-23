@@ -42,10 +42,11 @@
     "ESTUDIANTES": {
         "GET_ALL": "api/estudiante/getAll",
         "GET": "api/estudiante/get/"
-    },"FICHA": {
-    "GET_ALL": "api/ficha/getAll",
-    "SAVE": "api/ficha/save",
-    "GET": "api/ficha/get/",
-    "DELETE": "api/ficha/delete/"
-}
+    },
+    "FICHA": {
+        "GET_ALL": "api/ficha/getAll",
+        "SAVE": "api/ficha/save",
+        "GET": "api/ficha/get/",
+        "DELETE": "api/ficha/delete/"
+    }
 }
