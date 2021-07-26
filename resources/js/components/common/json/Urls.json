@@ -37,7 +37,12 @@
         "DELETE": "api/fichaAdscripcion/delete/"
     },
     "CARRERAS": {
-        "GET_ALL": "api/estudiante/getAllCarreras"
+        "GET_ALL": "api/carrera/getAll"
+    },
+    "ASIGNATURA": {
+        "GET_ALL": "api/asignatura/getAll",
+        "GET_CODE": "api/asignatura/getByCode/",
+        "GET_ALL_UA": "api/asignatura/getAllByUa/"
     },
     "ESTUDIANTES": {
         "GET_ALL": "api/estudiante/getAll",

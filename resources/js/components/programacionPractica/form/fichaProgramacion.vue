@@ -13,7 +13,7 @@
                     ID="ANIO"
                     name="ANIO"
                     v-model="form.ANIO"
-                    placeholder="Ej: Liceo k123"
+                    placeholder="Ej: 2021"
                     v-validate="'required|max:100'"
                     data-vv-as="RUT"
                     :class="{'is-invalid': errors.has('ANIO')}"
@@ -49,6 +49,7 @@
                     v-model="form.CARRERA"
                     :data-source="dsCarrera"
                     :data-text-field="'CARRERA'"
+                    @select="getAsignaturasByUa"
                     :data-value-field="'UA'"
                     :optionLabel="'Seleccione'"
                     :filter="'contains'"
@@ -76,38 +77,60 @@
                 <div class="invalid-feedback">{{ errors.first('NIVEL_PRACTICA') }}</div>
             </div>
             <h5 class="col-md-12"><i class="fa fa-angle-right" aria-hidden="true"></i> Asignatura </h5>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
                 <label class="required">Código Asignatura </label>
 
-                <input
-                    type="text"
+<!--                <input-->
+<!--                    type="text"-->
+<!--                    class="form-control"-->
+<!--                    ID="CODIGO_ASIGNATURA"-->
+<!--                    name="CODIGO_ASIGNATURA"-->
+<!--                    v-model="form.CODIGO_ASIGNATURA"-->
+<!--                    placeholder=""-->
+<!--                    v-on:keyup="searchAsignatura"-->
+<!--                    v-validate="'required|max:100'"-->
+<!--                    data-vv-as="CODIGO_ASIGNATURA"-->
+<!--                    :class="{'is-invalid': errors.has('CODIGO_ASIGNATURA')}"-->
+<!--                />-->
+
+                <kendo-dropdownlist
+                    :ref="'CODIGO_ASIGNATURA'"
                     class="form-control"
-                    ID="CODIGO_ASIGNATURA"
                     name="CODIGO_ASIGNATURA"
                     v-model="form.CODIGO_ASIGNATURA"
-                    placeholder=""
-                    v-on:keyup="searchEstablecimiento"
-                    v-validate="'required|max:100'"
-                    data-vv-as="RBD"
-                    :class="{'is-invalid': errors.has('CODIGO_ASIGNATURA')}"
-                />
-
+                    :data-source="dsAsignatura"
+                    :data-text-field="'COD_ASIGNATURA'"
+                    :data-value-field="'COD_ASIGNATURA'"
+                    :optionLabel="'Seleccione'"
+                    @select="getInfoAsignatura"
+                    :filter="'contains'"
+                    :class="{'is-invalid': errors.has('dsAsignatura')}"
+                ></kendo-dropdownlist>
                 <div class="invalid-feedback">{{ errors.first('CODIGO_ASIGNATURA') }}</div>
             </div>
-            <div class="form-group col-md-6">
-                <label class="required">Nombre Asignatura </label>
-                <input
-                    type="text"
-                    class="form-control"
-                    ID="NOMBRE_ASIGNATURA"
-                    name="NOMBRE_ASIGNATURA"
-                    v-model="form.NOMBRE_ASIGNATURA"
-                    placeholder="Ej: Liceo k123"
-                    v-validate="'required|max:100'"
-                    data-vv-as="RUT"
-                    :class="{'is-invalid': errors.has('NOMBRE_ASIGNATURA')}"
-                />
-                <div class="invalid-feedback">{{ errors.first('NOMBRE_ASIGNATURA') }}</div>
+
+            <div class="form-group col-md-4" v-if="form.CODIGO_ASIGNATURA!=null">
+                <div class="d-flex flex-column">
+                    <div class="p-2 mt-2"><label><i class="fa fa-caret-right" aria-hidden="true"></i>Nombre de la asignatura: {{form.NOMBRE_ASIGNATURA}}</label>
+                    </div>
+                    <div class="p-2"><label><i class="fa fa-caret-right" aria-hidden="true"></i>Nombre Profesor: {{form.PROFESOR_ASIGNATURA}}</label>
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-group col-md-4" v-if="form.CODIGO_ASIGNATURA!=null">
+                <div class="d-flex flex-column">
+                    <div class="p-2 mt-2"><label><i class="fa fa-caret-right" aria-hidden="true"></i>Seccion: {{form.SECCION_ASIGNATURA}}</label>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="form-group col-md-4" v-else>
+            <div class="d-flex flex-column" >
+                <div class="mt-4"><label><i class="fa fa-info-circle" aria-hidden="true"></i> Debe ingresar un Código de asignatura valido</label>
+                </div>
+            </div>
             </div>
             <h5 class="col-md-12"><i class="fa fa-angle-right" aria-hidden="true"></i> Centro de practica</h5>
             <div class="form-group col-md-4">
@@ -127,10 +150,25 @@
                 <div class="invalid-feedback">{{ errors.first('RBD') }}</div>
             </div>
             <div class="col-md-3">
-                <div class="d-flex flex-column">
-                    <div class="p-2"><label><i class="fa fa-caret-right" aria-hidden="true"></i>Nombre del Centro de Práctica: {{form.CENTRO_PRACTICA}}</label>
+                <div v-if="buscandoCentro">
+                    <div class="d-flex flex-column">
+                        <div class="mt-4"><label><i class="fa fa-spinner fa-spin fa-2x fa-fw"></i> Buscando..</label>
+                        </div>
+
                     </div>
-                    <div class="p-2"><label><i class="fa fa-caret-right" aria-hidden="true"></i>Cupos disponibles: {{form.CUPOS_PRACTICA}}</label>
+                </div>
+
+                <div v-else>
+                    <div class="d-flex flex-column" v-if="form.CENTRO_PRACTICA!=null">
+                        <div class="p-2"><label><i class="fa fa-caret-right" aria-hidden="true"></i>Nombre del Centro de Práctica: {{form.CENTRO_PRACTICA}}</label>
+                        </div>
+                        <div class="p-2"><label><i class="fa fa-caret-right" aria-hidden="true"></i>Cupos disponibles: {{form.CUPOS_PRACTICA}}</label>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column" v-else>
+                        <div class="mt-4"><label><i class="fa fa-info-circle" aria-hidden="true"></i> Debe ingresar un RBD de un centro de practica previamente ingresado</label>
+                        </div>
+
                     </div>
                 </div>
 
@@ -211,8 +249,11 @@ export default {
             submit:false,
             dsCarrera:[],
             dsPeriodo:[],
+            dsAsignatura:[],
             dsNivelPractica:[],
             listaCentros:false,
+            buscandoCentro:false,
+            buscandoAsignatura:false,
             form:{
                 ID: 0,
                 ANIO: null,
@@ -221,10 +262,14 @@ export default {
                 NIVEL_PRACTICA: null,
                 CODIGO_ASIGNATURA: null,
                 NOMBRE_ASIGNATURA: null,
+                SECCION_ASIGNATURA:null,
+                PROFESOR_ASIGNATURA:null,
+                RUT_PROFESOR_ASIGNATURA:null,
                 RBD: null,
                 CENTRO_PRACTICA: null,
                 COMUNA_PRACTICA: null,
                 CUPOS_PRACTICA: null,
+
                 CENTROS:[]
             }
 
@@ -234,8 +279,35 @@ export default {
     created: function () {
         this.getPeriodos();
         this.getNivelPractica();
+        this.getCarreras();
     },
     methods: {
+
+        getCarreras(){
+            let url = Urls["CARRERAS"].GET_ALL;
+            axios
+                .get(url, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                        "X-Requested-With": "XMLHttpRequest",
+                        "X-CSRF-TOKEN": window.csrf_token,
+                    },
+                })
+                .then((response) => {
+                    console.log(response.data.data);
+                    if (response.data.data.length > 0) {
+                        this.dsCarrera = response.data.data;
+                    }
+                })
+                .catch(function (error) {
+                    console.log("ERROR:", error);
+                    onError();
+                })
+                .finally(() => {
+                    eventHub.$emit("LoadingOff");
+                });
+
+        },
         addCentro(){
 
             if(this.form.CENTROS.find(el => el.RBD === this.form.RBD)==null && this.form.RBD!=null ){
@@ -245,6 +317,10 @@ export default {
                     COMUNA_PRACTICA: this.form.COMUNA_PRACTICA,
                     CUPOS_PRACTICA: this.form.CUPOS_PRACTICA,
                 });
+                    this.form.RBD=null;
+                    this.form.CENTRO_PRACTICA=null;
+                    this.form.COMUNA_PRACTICA=null;
+                    this.form.CUPOS_PRACTICA=null;
                 this.listaCentros=true;
             }else{
                 console.log("ya se agrego ese RBD");
@@ -286,7 +362,9 @@ export default {
                 this.getEstablecimiento(keyword)
             }
         },
+
         getEstablecimiento(id){
+            this.buscandoCentro=true;
             let url = Urls["CENTRO_PRACTICAS"].GET_RBD+id;
             axios
                 .get(url, {
@@ -312,9 +390,89 @@ export default {
                     onError();
                 })
                 .finally(() => {
+                    this.buscandoCentro=false;
                     eventHub.$emit("LoadingOff");
                 });
         },
+        searchAsignatura() {
+            var keyword = this.form.CODIGO_ASIGNATURA;
+            console.log(keyword);
+            if (keyword != null && keyword.length > 3) {
+                //traer informacion del CENTRO PRACTICA
+                console.log(keyword);
+                console.log('traer informacion de la Asignatura');
+                this.getAsignatura(keyword)
+            }
+        },
+        getAsignatura(id){
+            this.buscandoAsignatura=true;
+            let url = Urls["ASIGNATURA"].GET_CODE+id;
+            axios
+                .get(url, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                        "X-Requested-With": "XMLHttpRequest",
+                        "X-CSRF-TOKEN": window.csrf_token,
+                    },
+                })
+                .then((response) => {
+                    // console.log(response.data.data);
+
+                    if (response.data.data.length > 0) {
+
+                        console.log(response);
+                        this.form.CODIGO_ASIGNATURA = response.data.data[0].COD_ASIGNATURA;
+                        this.form.NOMBRE_ASIGNATURA = response.data.data[0].NOMBRE_ASIGNATURA;
+                        this.form.SECCION_ASIGNATURA = response.data.data[0].SECCION_ASIGNATURA;
+                    }
+                })
+                .catch(function (error) {
+                    console.log("ERROR:", error);
+                    onError();
+                })
+                .finally(() => {
+                    this.buscandoAsignatura=false;
+                    eventHub.$emit("LoadingOff");
+                });
+        },
+        getAsignaturasByUa(value){
+            console.log(value.dataItem.UA);
+            this.buscandoAsignatura=true;
+            let url = Urls["ASIGNATURA"].GET_ALL_UA+value.dataItem.UA;
+            axios
+                .get(url, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                        "X-Requested-With": "XMLHttpRequest",
+                        "X-CSRF-TOKEN": window.csrf_token,
+                    },
+                })
+                .then((response) => {
+                    // console.log(response.data.data);
+
+                    if (response.data.data.length > 0) {
+
+
+                            this.dsAsignatura = response.data.data;
+
+                    }
+                })
+                .catch(function (error) {
+                    console.log("ERROR:", error);
+                    onError();
+                })
+                .finally(() => {
+                    this.buscandoAsignatura=false;
+                    eventHub.$emit("LoadingOff");
+                });
+        },
+        getInfoAsignatura(value){
+            console.log(value);
+            this.form.NOMBRE_ASIGNATURA=value.dataItem.NOMBRE_ASIGNATURA;
+            this.form.SECCION_ASIGNATURA=value.dataItem.SECCION_ASIGNATURA;
+            this.form.PROFESOR_ASIGNATURA=value.dataItem.NOMBRE;
+            this.form.RUT_PROFESOR_ASIGNATURA=value.dataItem.RUT_PROFESOR_TUTOR;
+        }
     }
 }
 </script>

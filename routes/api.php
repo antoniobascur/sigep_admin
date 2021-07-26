@@ -70,3 +70,13 @@ Route::group(['prefix' => 'estudiante'], function () {
     Route::get('/get/{id}', ['uses' => 'EstudianteController@get']);
 
 });
+
+Route::group(['prefix' => 'carrera'], function () {
+    Route::get('/getAll', ['uses' => 'CarreraController@getAll']);
+});
+
+Route::group(['prefix' => 'asignatura'], function () {
+    Route::get('/getByCode/{id}', ['uses' => 'AsignaturaController@getByCode']);
+    Route::get('/getAllByUa/{id}', ['uses' => 'AsignaturaController@getAllByUa']);
+
+});

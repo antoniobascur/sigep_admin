@@ -52,13 +52,43 @@ class Asignatura{
         //dd($results);
         return $results;
     }
+
+    public static function getByCode($id)
+    {
+        try {
+            $results = DB::connection(self::CONEXION_BD)->select(
+                "
+            SELECT * FROM
+	        ASIGNATURA
+	  	    WHERE ASIGNATURA.COD_ASIGNATURA=?",
+                [$id]
+            );
+        } catch (\Illuminate\Database\QueryException $ex) {
+            $results = "Error: " . $ex->getMessage();
+        }
+        //dd($results);
+        return $results;
+    }
+    public static function getAllByUa($id)
+    {
+        try {
+            $results = DB::connection(self::CONEXION_BD)->select(
+                "SELECT  CONCAT(ASIGNATURA.COD_ASIGNATURA, '-', ASIGNATURA.SECCION_ASIGNATURA) AS ASIGNATURA_SECCION,ASIGNATURA.*,PROFESOR_TUTOR.NOMBRE,PROFESOR_TUTOR.APELLIDO  from  ASIGNATURA join PROFESOR_TUTOR ON ASIGNATURA.RUT_PROFESOR_TUTOR=PROFESOR_TUTOR.RUN WHERE ASIGNATURA.UA=?",
+                [$id]
+            );
+        } catch (\Illuminate\Database\QueryException $ex) {
+            $results = "Error: " . $ex->getMessage();
+        }
+        //dd($results);
+        return $results;
+    }
     public static function getAll()
     {
         try {
             $results = DB::connection(self::CONEXION_BD)->select(
                 "
             SELECT * FROM
-	        ESTUDIANTE
+	        ASIGNATURA
 	  	    "
             );
         } catch (\Illuminate\Database\QueryException $ex) {

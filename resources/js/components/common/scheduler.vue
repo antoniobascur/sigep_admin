@@ -1,13 +1,14 @@
 <template>
     <kendo-scheduler :data-source="localDataSource"
                      :date="date"
-                     :height="600"
+                     :height="500"
                      :resources="resources"
+                     @change="onChange"
                    >
-        <kendo-scheduler-view :type="'day'"></kendo-scheduler-view>
-        <kendo-scheduler-view :type="'workWeek'" :selected="true"></kendo-scheduler-view>
-        <kendo-scheduler-view :type="'week'"></kendo-scheduler-view>
-        <kendo-scheduler-view :type="'month'"></kendo-scheduler-view>
+<!--        <kendo-scheduler-view :type="'day'"></kendo-scheduler-view>-->
+        <kendo-scheduler-view :type="'workWeek'" :selected="true" :showWorkHours="true"></kendo-scheduler-view>
+<!--        <kendo-scheduler-view :type="'week'"></kendo-scheduler-view>-->
+<!--        <kendo-scheduler-view :type="'month'"></kendo-scheduler-view>-->
         <kendo-scheduler-view :type="'agenda'"></kendo-scheduler-view>
     </kendo-scheduler>
 </template>
@@ -23,18 +24,22 @@ export default {
     data: function () {
         return {
             date: new Date(),
+            startTime: new Date("2021/7/26 08:00 AM"),
+            endTime:new Date("2021/6/13 22:00 PM"),
+            workDayStart: new Date("2021/7/26 08:00 AM"),
+            workDayEnd: new Date("2021/7/26 20:00 PM"),
             localDataSource: [
                 {
                     id: 1,
-                    start: new Date("2021/7/8 11:00 AM"),
-                    end: new Date("2021/7/8 1:00 PM"),
+                    start: new Date("2021/7/26 11:00 AM"),
+                    end: new Date("2021/7/26 1:00 PM"),
                     title: "Practica 1",
                     roomId: 1 // The unique identifier of the first room (Meeting Room 101)
                 },
                 {
                     id: 2,
-                    start: new Date("2021/7/8 10:15 AM"),
-                    end: new Date("2021/7/8 12:30 PM"),
+                    start: new Date("2021/7/26 10:15 AM"),
+                    end: new Date("2021/7/26 12:30 PM"),
                     title: "Practica 2",
                     roomId: 2 // The unique identifier of the second room (Meeting Room 102)
                 }
@@ -61,7 +66,12 @@ export default {
 
     },
     methods: {
-
+        onChange: function (ev) {
+            console.log("Event :: change");
+            console.log(ev);
+            console.log(this.localDataSource);
+            console.log(this.resources);
+        },
     }
 }
 </script>
