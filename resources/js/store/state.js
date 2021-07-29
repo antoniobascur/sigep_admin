@@ -25,6 +25,7 @@ export const state = {
         TELEFONO: null,
         PROFESOR_TUTOR: null,
         NIVEL_PRACTICA: null,
+        HORAS_PASANTIA: null,
         RBD: null,
         CENTRO_PRACTICA: null,
         DEPENDENCIA: null,
@@ -49,6 +50,10 @@ export const state = {
         RAZON_CONTINUIDAD: null,
         CANTIDAD_VECES: null,
         EXALUMNO: null,
+        PROPOSITO_VISITA: null,
+        FECHA_VISITA: null,
+        N_VISITA: null,
+        OBSERVACIONES_VISITA: null,
     },
 
     fichaAutogestion:{

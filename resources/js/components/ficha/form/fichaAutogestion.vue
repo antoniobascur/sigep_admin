@@ -20,7 +20,7 @@
                         <div class="invalid-feedback">{{ errors.first('RUT') }}</div>
                     </div>
                     <div class="form-group col-md-6">
-                        <label class="required">Carrera o Programa</label>
+                        <label class="required">Carrera </label>
 
                         <kendo-dropdownlist
                             :ref="'CARRERA'"
@@ -37,37 +37,23 @@
 
                         <div class="invalid-feedback">{{ errors.first('CARRERA') }}</div>
                     </div>
-                    <div class="form-group col-md-3">
-                        <label class="required">Nivel de Práctica</label>
+
+                    <div class="form-group col-md-6">
+                        <label class="required">Nombre Educador(a) en formación</label>
                         <input
                             type="text"
                             class="form-control"
-                            ID="NIVEL_PRACTICA"
-                            name="NIVEL_PRACTICA"
-                            v-model="form.NIVEL_PRACTICA"
-                            placeholder=""
+                            ID="NOMBRE"
+                            name="NOMBRE"
+                            v-model="form.NOMBRE"
+                            placeholder="Ej: Descripción ..."
                             v-validate="'required|max:100'"
-                            data-vv-as="NIVEL_PRACTICA"
-                            :class="{'is-invalid': errors.has('NIVEL_PRACTICA')}"
+                            data-vv-as="NOMBRE"
+                            :class="{'is-invalid': errors.has('NOMBRE')}"
                         />
-                        <div class="invalid-feedback">{{ errors.first('NIVEL_PRACTICA') }}</div>
+                        <div class="invalid-feedback">{{ errors.first('NOMBRE') }}</div>
                     </div>
 
-                    <div class="form-group col-md-6">
-                    <label class="required">Nombre Educador(a) en formación</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        ID="NOMBRE"
-                        name="NOMBRE"
-                        v-model="form.NOMBRE"
-                        placeholder="Ej: Descripción ..."
-                        v-validate="'required|max:100'"
-                        data-vv-as="NOMBRE"
-                        :class="{'is-invalid': errors.has('NOMBRE')}"
-                    />
-                    <div class="invalid-feedback">{{ errors.first('NOMBRE') }}</div>
-                </div>
                     <div class="form-group col-md-3">
                         <label class="required">Email</label>
                         <input
@@ -101,9 +87,27 @@
                     </div>
                 </div>
 
+                <h4>Información Asignatura </h4>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="required">Nivel de práctica</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            ID="NIVEL_PRACTICA"
+                            name="NIVEL_PRACTICA"
+                            v-model="form.NIVEL_PRACTICA"
+                            placeholder=""
+                            v-validate="'required|max:100'"
+                            data-vv-as="NIVEL_PRACTICA"
+                            :class="{'is-invalid': errors.has('NIVEL_PRACTICA')}"
+                        />
+                        <div class="invalid-feedback">{{ errors.first('NIVEL_PRACTICA') }}</div>
+                    </div>
+                </div>
                     <h4>Información Centro de práctica </h4>
                     <div class="row">
-                        <div class="form-group col-md-12">
+                        <div class="form-group col-md-3">
                             <label class="required">RBD</label>
                             <input
                                 type="text"
@@ -119,7 +123,7 @@
                             />
                             <div class="invalid-feedback">{{ errors.first('RBD') }}</div>
                         </div>
-                    <div class="form-group col-md-12">
+                    <div class="form-group col-md-9">
                         <label class="required">Nombre del Centro de Práctica</label>
                         <input
                             type="text"
@@ -149,82 +153,25 @@
                             />
                             <div class="invalid-feedback">{{ errors.first('DIRECTOR_CP') }}</div>
                         </div>
-
-                    <div id="dependencia" class="form-group col-md-12" >
-                        <label class="required">Dependencia Administrativa</label><br>
-                        <input type="radio" id="particular" value="particular" name="dependencia">
-                        <label for="particular">Particular</label>
-                        <input type="radio" id="subvencionado" value="subvencionado" name="dependencia">
-                        <label for="subvencionado">P. Subvencionado</label>
-                        <input type="radio" id="municipalizado" value="municipalizado" name="dependencia">
-                        <label for="municipalizado">Municipalizado</label>
-                        <input type="radio" id="corporado" value="corporado" name="dependencia">
-                        <label for="corporado">Corporado</label>
-                    </div>
-
-                    <div class="form-group col-md-3">
-                        <label class="required">Teléfono</label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            ID="TELEFONO_CP"
-                            name="TELEFONO_CP"
-                            v-model="form.TELEFONO_CP"
-                            placeholder=""
-                            v-validate="'required|max:100'"
-                            data-vv-as="TELEFONO_CP"
-                            :class="{'is-invalid': errors.has('TELEFONO_CP')}"
-                        />
-                        <div class="invalid-feedback">{{ errors.first('TELEFONO_CP') }}</div>
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label class="required">Nombre de quien otorga cupo práctica</label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            ID="NOMBRE_OTORGA_CUPO"
-                            name="NOMBRE_OTORGA_CUPO"
-                            v-model="form.NOMBRE_OTORGA_CUPO"
-                            placeholder=""
-                            v-validate="'required|max:100'"
-                            data-vv-as="NOMBRE_OTORGA_CUPO"
-                            :class="{'is-invalid': errors.has('NOMBRE_OTORGA_CUPO')}"
-                        />
-                        <div class="invalid-feedback">{{ errors.first('NOMBRE_OTORGA_CUPO') }}</div>
-                    </div>
                         <div class="form-group col-md-3">
-                            <label class="required">Teléfono de Contacto</label>
+                            <label class="required">Teléfono</label>
                             <input
                                 type="text"
                                 class="form-control"
-                                ID="TELEFONO_OTORGA_CUPO"
-                                name="TELEFONO_OTORGA_CUPO"
-                                v-model="form.TELEFONO_OTORGA_CUPO"
+                                ID="TELEFONO_CP"
+                                name="TELEFONO_CP"
+                                v-model="form.TELEFONO_CP"
                                 placeholder=""
                                 v-validate="'required|max:100'"
-                                data-vv-as="TELEFONO_OTORGA_CUPO"
-                                :class="{'is-invalid': errors.has('TELEFONO_OTORGA_CUPO')}"
+                                data-vv-as="TELEFONO_CP"
+                                :class="{'is-invalid': errors.has('TELEFONO_CP')}"
                             />
-                            <div class="invalid-feedback">{{ errors.first('TELEFONO_OTORGA_CUPO') }}</div>
+                            <div class="invalid-feedback">{{ errors.first('TELEFONO_CP') }}</div>
                         </div>
+
+
                     <div class="form-group col-md-6">
-                        <label class="required">Cargo dentro de la institución</label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            ID="EMAIL_OTORGA_CUPO"
-                            name="EMAIL_OTORGA_CUPO"
-                            v-model="form.EMAIL_OTORGA_CUPO"
-                            placeholder=""
-                            v-validate="'required|max:100'"
-                            data-vv-as="EMAIL_OTORGA_CUPO"
-                            :class="{'is-invalid': errors.has('EMAIL_OTORGA_CUPO')}"
-                        />
-                        <div class="invalid-feedback">{{ errors.first('EMAIL_OTORGA_CUPO') }}</div>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="required">Nombre Posible Educador(a) o Profesor(a) Colaborador(a) Centro de Práctica</label>
+                        <label class="required">Nombre Educador(a) o Profesor(a) Colaborador(a) Centro de Práctica</label>
                         <input
                             type="text"
                             class="form-control"
@@ -238,8 +185,62 @@
                         />
                         <div class="invalid-feedback">{{ errors.first('NOMBRE_PROF_COLABORADOR_CP') }}</div>
                     </div>
+                        <div class="form-group col-md-3">
+                            <label class="required">Email Profesor(a) Colaborador(a) Centro de práctica </label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                ID="EMAIL_PROF_COLABORADOR_CP"
+                                name="EMAIL_PROF_COLABORADOR_CP"
+                                v-model="form.EMAIL_PROF_COLABORADOR_CP"
+                                placeholder=""
+                                v-validate="'required|max:100'"
+                                data-vv-as="EMAIL_PROF_COLABORADOR_CP"
+                                :class="{'is-invalid': errors.has('EMAIL_PROF_COLABORADOR_CP')}"
+                            />
+                            <div class="invalid-feedback">{{ errors.first('EMAIL_PROF_COLABORADOR_CP') }}</div>
+                        </div>
+                        <div id="dependencia" class="form-group col-md-12" >
+                            <label class="required">Dependencia Administrativa</label><br>
+                            <input type="radio" id="Particular" v-model="form.DEPENDENCIA" value="Particular" name="dependencia">
+                            <label for="Particular">Particular</label>
+                            <input type="radio" id="subvencionado"v-model="form.DEPENDENCIA" value="subvencionado" name="dependencia">
+                            <label for="subvencionado">Particular Subvencionado</label>
+                            <input type="radio" id="municipal" v-model="form.DEPENDENCIA" value="municipal" name="dependencia">
+                            <label for="municipal">Municipal</label>
+                            <input type="radio" id="servicio_local_andalien" v-model="form.DEPENDENCIA" value="servicio_local_andalien" name="dependencia">
+                            <label for="servicio_local_andalien">Servicio Local de Educación Pública Andalién Sur</label>
+                            <input type="radio" id="daem_talcahuano" v-model="form.DEPENDENCIA" value="daem_talcahuano" name="dependencia">
+                            <label for="daem_talcahuano">Daem Talcahuano</label>
+                            <input type="radio" id="daem_hualpen" v-model="form.DEPENDENCIA" value="daem_hualpen" name="dependencia">
+                            <label for="daem_hualpen">Daem Hualpén</label>
+                            <input type="radio" id="daem_san_pedro" v-model="form.DEPENDENCIA" value="daem_san_pedro" name="dependencia">
+                            <label for="daem_san_pedro">Daem San Pedro</label>
+                            <input type="radio" id="daem_coronel" v-model="form.DEPENDENCIA" value="daem_coronel" name="dependencia">
+                            <label for="daem_coronel">Daem Coronel</label>
+                            <input type="radio" id="daem_lota" v-model="form.DEPENDENCIA" value="daem_lota" name="dependencia">
+                            <label for="daem_lota">Daem Lota</label>
+                            <input type="radio" id="daem_penco" v-model="form.DEPENDENCIA" value="daem_penco" name="dependencia">
+                            <label for="daem_penco">Daem Penco</label>
+                            <input type="radio" id="daem_tome" v-model="form.DEPENDENCIA" value="daem_tome" name="dependencia">
+                            <label for="daem_tome">Daem Tomé</label>
+                            <input type="radio" id="arzobispado" v-model="form.DEPENDENCIA" value="arzobispado" name="dependencia">
+                            <label for="arzobispado">Arzobispado de Concepción</label>
+                            <input type="radio" id="junji" v-model="form.DEPENDENCIA" value="junji" name="dependencia">
+                            <label for="junji">JUNJI</label>
+                            <input type="radio" id="cepas" v-model="form.DEPENDENCIA" value="cepas" name="dependencia">
+                            <label for="cepas">CEPAS</label>
+                            <input type="radio" id="hogar_cristo" v-model="form.DEPENDENCIA" value="hogar_cristo" name="dependencia">
+                            <label for="hogar_cristo">Hogar de Cristo</label>
+                            <input type="radio" id="integra" v-model="form.DEPENDENCIA" value="integra" name="dependencia">
+                            <label for="integra">Integra</label>
+                            <input type="radio" id="coemco" v-model="form.DEPENDENCIA" value="coemco" name="dependencia">
+                            <label for="coemco">Coemco</label>
+                            <input type="radio" id="otro" v-model="form.DEPENDENCIA" value="otro" name="dependencia">
+                            <label for="otro">Otro</label>
+                        </div>
 
-                </div>
+                    </div>
 
                 <button type="submit" class="btn btn-primary float-right" :disabled="submit">
                     <i
@@ -405,7 +406,6 @@ created: function () {
                         this.form.DIRECCION_CP = response.data.data[0].DIRECCION;
                         this.form.TELEFONO_CP = response.data.data[0].TELEFONO;
                         this.form.DIRECTOR_CP = response.data.data[0].NOMBRE_DIRECTOR;
-                        this.form.EMAIL_DIRECTOR_CP = response.data.data[0].EMAIL_DIRECTOR;
 
                     }
                 })

@@ -57,10 +57,25 @@
                         <label for="AUTOGESTION" class="form-check-label font-weight-bold">&nbsp;&nbsp;Autogestión</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input type="radio" id="CONTINUIDAD" v-model="TIPO_FICHA" value="CONTINUIDAD" name="CONTINUIDAD">
+                        <input type="radio" class="form-check-input" id="CONTINUIDAD" v-model="TIPO_FICHA" value="CONTINUIDAD" name="CONTINUIDAD">
                         <label for="CONTINUIDAD" class="form-check-label font-weight-bold">&nbsp;&nbsp;Continuidad</label>
                     </div>
-
+                    <div class="form-check form-check-inline">
+                        <input type="radio" class="form-check-input" id="VISITA" v-model="TIPO_FICHA" value="VISITA" name="VISITA">
+                        <label for="VISITA" class="form-check-label font-weight-bold">&nbsp;&nbsp;Visita</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" class="form-check-input" id="TRIADA" v-model="TIPO_FICHA" value="TRIADA" name="TRIADA">
+                        <label for="TRIADA" class="form-check-label font-weight-bold">&nbsp;&nbsp;Triada Informativa</label>
+                    </div>
+            <!--        <div class="form-check form-check-inline">
+                        <input type="radio" class="form-check-input" id="SEGUIMIENTO" v-model="TIPO_FICHA" value="SEGUIMIENTO" name="SEGUIMIENTO">
+                        <label for="SEGUIMIENTO" class="form-check-label font-weight-bold">&nbsp;&nbsp;Seguimiento</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" class="form-check-input" id="EVALUACION" v-model="TIPO_FICHA" value="EVALUACION" name="EVALUACION">
+                        <label for="EVALUACION" class="form-check-label font-weight-bold">&nbsp;&nbsp;Evaluación</label>
+                    </div> -->
                 </div>
 
 
@@ -77,6 +92,14 @@
                     <ficha-autogestion v-if="TIPO_FICHA=='AUTOGESTION'"></ficha-autogestion>
 
                     <ficha-continuidad v-if="TIPO_FICHA=='CONTINUIDAD'"></ficha-continuidad>
+
+                    <ficha-visita v-if="TIPO_FICHA=='VISITA'"></ficha-visita>
+
+                    <ficha-triada v-if="TIPO_FICHA=='TRIADA'"></ficha-triada>
+
+                  <!--  <ficha-seguimiento v-if="TIPO_FICHA=='SEGUIMIENTO'"></ficha-seguimiento>
+
+                    <ficha-evaluacion v-if="TIPO_FICHA=='EVALUACION'"></ficha-evaluacion> -->
                 </div>
 
 
@@ -128,8 +151,17 @@
                     Ficha Continuidad
                 </li>
                 <li>
-                    Ficha Evaluacion
+                    Ficha Visita Centro Práctica
                 </li>
+                <li>
+                    Ficha Triada Informativa
+                </li>
+           <!--     <li>
+                    Ficha Seguimiento
+                </li>
+                <li>
+                    Ficha Evaluación
+                </li> -->
             </ul>
 
 
@@ -145,9 +177,17 @@
             </div>
 
             <div>
-                <ficha-evaluacion></ficha-evaluacion>
+                <ficha-visita></ficha-visita>
             </div>
-
+            <div>
+                <ficha-triada></ficha-triada>
+            </div>
+       <!--     <div>
+                <ficha-seguimiento></ficha-seguimiento>
+            </div>
+            <div>
+                <ficha-evaluacion></ficha-evaluacion>
+            </div>-->
         </kendo-tabstrip>
 
         </kendo-window>
@@ -168,9 +208,15 @@ import FichaEvaluacion from "./form/fichaEvaluacion";
 import FichaContinuidad from "./form/fichaContinuidad";
 import FichaAutogestion from "./form/fichaAutogestion";
 import Regions from "../common/json/Regions.json";
+import FichaVisita from "./form/fichaVisita";
+import FichaTriada from "./form/fichaTriada";
+import FichaSeguimiento from "./form/fichaSeguimiento";
 
 export default {
     components: {
+        FichaSeguimiento,
+        FichaTriada,
+        FichaVisita,
         FichaAutogestion,
         //   FichaContinuidad,
         FichaEvaluacion,

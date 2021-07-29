@@ -69,36 +69,7 @@
                     />
                     <div class="invalid-feedback">{{ errors.first('EMAIL') }}</div>
                 </div>
-                <div class="form-group col-md-6">
-                    <label class="required">Dirección</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        ID="DIRECCION"
-                        name="DIRECCION"
-                        v-model="form.DIRECCION"
-                        placeholder=""
-                        v-validate="'required|max:100'"
-                        data-vv-as="DIRECCION"
-                        :class="{'is-invalid': errors.has('DIRECCION')}"
-                    />
-                    <div class="invalid-feedback">{{ errors.first('DIRECCION') }}</div>
-                </div>
-                <div class="form-group col-md-3">
-                    <label class="required">Comuna</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        ID="COMUNA"
-                        name="COMUNA"
-                        v-model="form.COMUNA"
-                        placeholder=""
-                        v-validate="'required|max:100'"
-                        data-vv-as="COMUNA"
-                        :class="{'is-invalid': errors.has('COMUNA')}"
-                    />
-                    <div class="invalid-feedback">{{ errors.first('COMUNA') }}</div>
-                </div>
+
                 <div class="form-group col-md-3">
                     <label class="required">Teléfono</label>
                     <input
@@ -118,7 +89,37 @@
 
                 <h4>Información Asignatura </h4>
             <div class="row">
-                <div class="form-group col-md-9">
+                <div class="form-group col-md-6">
+                    <label class="required">Nivel de práctica</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        ID="NIVEL_PRACTICA"
+                        name="NIVEL_PRACTICA"
+                        v-model="form.NIVEL_PRACTICA"
+                        placeholder=""
+                        v-validate="'required|max:100'"
+                        data-vv-as="NIVEL_PRACTICA"
+                        :class="{'is-invalid': errors.has('NIVEL_PRACTICA')}"
+                    />
+                    <div class="invalid-feedback">{{ errors.first('NIVEL_PRACTICA') }}</div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="required">Cantidad de horas de pasantía</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        ID="HORAS_PASANTIA"
+                        name="HORAS_PASANTIA"
+                        v-model="form.HORAS_PASANTIA"
+                        placeholder=""
+                        v-validate="'required|max:100'"
+                        data-vv-as="HORAS_PASANTIA"
+                        :class="{'is-invalid': errors.has('HORAS_PASANTIA')}"
+                    />
+                    <div class="invalid-feedback">{{ errors.first('HORAS_PASANTIA') }}</div>
+                </div>
+                <div class="form-group col-md-6">
                     <label class="required">Profesor(a) Tutor responsable UCSC</label>
                     <input
                         type="text"
@@ -133,25 +134,11 @@
                     />
                     <div class="invalid-feedback">{{ errors.first('PROFESOR_TUTOR') }}</div>
                 </div>
-                <div class="form-group col-md-3">
-                    <label class="required">Nivel de Práctica</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        ID="NIVEL_PRACTICA"
-                        name="NIVEL_PRACTICA"
-                        v-model="form.NIVEL_PRACTICA"
-                        placeholder=""
-                        v-validate="'required|max:100'"
-                        data-vv-as="NIVEL_PRACTICA"
-                        :class="{'is-invalid': errors.has('NIVEL_PRACTICA')}"
-                    />
-                    <div class="invalid-feedback">{{ errors.first('NIVEL_PRACTICA') }}</div>
-                </div>
+
             </div>
                 <h4>Información Centro de práctica </h4>
             <div class="row">
-                <div class="form-group col-md-12">
+                <div class="form-group col-md-3">
                     <label class="required">RBD</label>
                     <input
                         type="text"
@@ -167,7 +154,7 @@
                     />
                     <div class="invalid-feedback">{{ errors.first('RBD') }}</div>
                 </div>
-                <div class="form-group col-md-12">
+                <div class="form-group col-md-9">
                     <label class="required">Nombre del Centro de Práctica</label>
                     <input
                         type="text"
@@ -182,137 +169,7 @@
                     />
                     <div class="invalid-feedback">{{ errors.first('CENTRO_PRACTICA') }}</div>
                 </div>
-                <div id="dependencia" class="form-group col-md-12" >
-                    <label class="required">Dependencia Administrativa</label><br>
-                    <input type="radio" id="Particular" v-model="form.DEPENDENCIA" value="Particular" name="dependencia">
-                    <label for="Particular">Particular</label>
-                    <input type="radio" id="subvencionado"v-model="form.DEPENDENCIA" value="subvencionado" name="dependencia">
-                    <label for="subvencionado">P. Subvencionado</label>
-                    <input type="radio" id="municipalizado" v-model="form.DEPENDENCIA" value="municipalizado" name="dependencia">
-                    <label for="municipalizado">Municipalizado</label>
-                    <input type="radio" id="corporado" v-model="form.DEPENDENCIA" value="corporado" name="dependencia">
-                    <label for="corporado">Corporado</label>
-                </div>
-                <div class="form-group col-md-12">
-                    <label class="required">Enseñanza</label><br>
-                    <input type="radio" id="media" v-model="form.ENSENANZA" value="media" name="ensenanza">
-                    <label for="media">Media</label>
-                    <input type="radio" id="hc" v-model="form.ENSENANZA" value="hc" name="ensenanza">
-                    <label for="hc">HC</label>
-                    <input type="radio" id="tp" v-model="form.ENSENANZA" value="tp" name="ensenanza">
-                    <label for="tp">Basica</label>
-                    <input type="radio" id="basica" v-model="form.ENSENANZA" value="basica" name="ensenanza">
-                    <label for="basica">Básica</label>
-                    <input type="radio" id="parv" v-model="form.ENSENANZA" value="parv" name="ensenanza">
-                    <label for="parv">Ed. Parvularia</label>
-                    <input type="radio" id="otra" v-model="form.ENSENANZA" value="otra" name="ensenanza">
-                    <label for="otra">Otra</label>
-                </div>
-                <div class="form-group col-md-6">
-                    <label class="required">Dirección</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        ID="DIRECCION_CP"
-                        name="DIRECCION_CP"
-                        v-model="form.DIRECCION_CP"
-                        placeholder=""
-                        v-validate="'required|max:100'"
-                        data-vv-as="DIRECCION_CP"
-                        :class="{'is-invalid': errors.has('DIRECCION_CP')}"
-                    />
-                    <div class="invalid-feedback">{{ errors.first('DIRECCION_CP') }}</div>
-                </div>
-                <div class="form-group col-md-3">
-                    <label class="required">Comuna</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        ID="COMUNA_CP"
-                        name="COMUNA_CP"
-                        v-model="form.COMUNA_CP"
-                        placeholder=""
-                        v-validate="'required|max:100'"
-                        data-vv-as="COMUNA_CP"
-                        :class="{'is-invalid': errors.has('COMUNA_CP')}"
-                    />
-                    <div class="invalid-feedback">{{ errors.first('COMUNA_CP') }}</div>
-                </div>
-                <div class="form-group col-md-3">
-                    <label class="required">Teléfono</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        ID="TELEFONO_CP"
-                        name="TELEFONO_CP"
-                        v-model="form.TELEFONO_CP"
-                        placeholder=""
-                        v-validate="'required|max:100'"
-                        data-vv-as="TELEFONO_CP"
-                        :class="{'is-invalid': errors.has('TELEFONO_CP')}"
-                    />
-                    <div class="invalid-feedback">{{ errors.first('TELEFONO_CP') }}</div>
-                </div>
-                <div class="form-group col-md-6">
-                    <label class="required">Nombre Director(a)</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        ID="DIRECTOR_CP"
-                        name="DIRECTOR_CP"
-                        v-model="form.DIRECTOR_CP"
-                        placeholder=""
-                        v-validate="'required|max:100'"
-                        data-vv-as="DIRECTOR_CP"
-                        :class="{'is-invalid': errors.has('DIRECTOR_CP')}"
-                    />
-                    <div class="invalid-feedback">{{ errors.first('DIRECTOR_CP') }}</div>
-                </div>
-                <div class="form-group col-md-6">
-                    <label class="required">Email Director(a)</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        ID="EMAIL_DIRECTOR_CP"
-                        name="EMAIL_DIRECTOR_CP"
-                        v-model="form.EMAIL_DIRECTOR_CP"
-                        placeholder=""
-                        v-validate="'required|max:100'"
-                        data-vv-as="EMAIL_DIRECTOR_CP"
-                        :class="{'is-invalid': errors.has('EMAIL_DIRECTOR_CP')}"
-                    />
-                    <div class="invalid-feedback">{{ errors.first('EMAIL_DIRECTOR_CP') }}</div>
-                </div>
-                <div class="form-group col-md-6">
-                    <label class="required">Nombre Jefe(a) de UTP</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        ID="NOMBRE_UTP_CP"
-                        name="NOMBRE_UTP_CP"
-                        v-model="form.NOMBRE_UTP_CP"
-                        placeholder=""
-                        v-validate="'required|max:100'"
-                        data-vv-as="NOMBRE_UTP_CP"
-                        :class="{'is-invalid': errors.has('NOMBRE_UTP_CP')}"
-                    />
-                    <div class="invalid-feedback">{{ errors.first('NOMBRE_UTP_CP') }}</div>
-                </div>
-                <div class="form-group col-md-6">
-                    <label class="required">Email Jefe(a) de UTP</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        ID="EMAIL_UTP_CP"
-                        name="EMAIL_UTP_CP"
-                        v-model="form.EMAIL_UTP_CP"
-                        placeholder=""
-                        v-validate="'required|max:100'"
-                        data-vv-as="EMAIL_UTP_CP"
-                        :class="{'is-invalid': errors.has('EMAIL_UTP')}"
-                    />
-                    <div class="invalid-feedback">{{ errors.first('EMAIL_UTP_CP') }}</div>
-                </div>
+
                 <div class="form-group col-md-6">
                     <label class="required">Nombre Profesor(a) Colaborador(a) Centro de Práctica</label>
                     <input
@@ -328,7 +185,7 @@
                     />
                     <div class="invalid-feedback">{{ errors.first('NOMBRE_PROF_COLABORADOR_CP') }}</div>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-6">
                     <label class="required">RUT Profesor(a) Colaborador(a) Centro de práctica</label>
                     <input
                         type="text"
@@ -343,7 +200,7 @@
                     />
                     <div class="invalid-feedback">{{ errors.first('RUT_PROF_COLABORADOR_CP') }}</div>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-6">
                     <label class="required">Email Profesor(a) Colaborador(a) Centro de práctica</label>
                     <input
                         type="text"
@@ -358,7 +215,7 @@
                     />
                     <div class="invalid-feedback">{{ errors.first('EMAIL_PROF_COLABORADOR_CP') }}</div>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-6">
                     <label class="required">Teléfono de Contacto</label>
                     <input
                         type="text"
@@ -373,7 +230,7 @@
                     />
                     <div class="invalid-feedback">{{ errors.first('TELEFONO_PROF_COLABORADOR_CP') }}</div>
                 </div>
-                <div class="form-group col-md-9">
+                <div class="form-group col-md-6">
                     <label class="required">Título</label>
                     <input
                         type="text"
@@ -388,7 +245,7 @@
                     />
                     <div class="invalid-feedback">{{ errors.first('TITULO_PROF_COLABORADOR_CP') }}</div>
                 </div>
-                <div class="form-group col-md-12">
+                <div class="form-group col-md-3">
                     <label class="required">Egresado de la UCSC</label><br>
                     <input type="radio" id="si" value="si" name="egresado_ucsc">
                     <label for="si">Sí</label>

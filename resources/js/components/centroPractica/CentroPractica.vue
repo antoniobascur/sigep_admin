@@ -81,35 +81,59 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group col-md-6">
-                        <label class="required">Dependencia Administrativa</label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            ID="DEPENDENCIA_ADMINISTRATIVA"
-                            name="DEPENDENCIA_ADMINISTRATIVA"
-                            v-model="form.DEPENDENCIA_ADMINISTRATIVA"
-                            placeholder="Ej: Colegio ..."
-                            v-validate="'required|max:100'"
-                            data-vv-as="Dependencia Administrativa"
-                            :class="{'is-invalid': errors.has('DEPENDENCIA_ADMINISTRATIVA')}"
-                        />
-                        <div class="invalid-feedback">{{ errors.first('DEPENDENCIA_ADMINISTRATIVA') }}</div>
+                    <div id="dependencia" class="form-group col-md-12" >
+                        <label class="required">Dependencia Administrativa</label><br>
+                        <input type="radio" id="Particular" v-model="form.DEPENDENCIA" value="Particular" name="dependencia">
+                        <label for="Particular">Particular</label>
+                        <input type="radio" id="subvencionado"v-model="form.DEPENDENCIA" value="subvencionado" name="dependencia">
+                        <label for="subvencionado">Particular Subvencionado</label>
+                        <input type="radio" id="municipal" v-model="form.DEPENDENCIA" value="municipal" name="dependencia">
+                        <label for="municipal">Municipal</label>
+                        <input type="radio" id="servicio_local_andalien" v-model="form.DEPENDENCIA" value="servicio_local_andalien" name="dependencia">
+                        <label for="servicio_local_andalien">Servicio Local de Educación Pública Andalién Sur</label>
+                        <input type="radio" id="daem_talcahuano" v-model="form.DEPENDENCIA" value="daem_talcahuano" name="dependencia">
+                        <label for="daem_talcahuano">Daem Talcahuano</label>
+                        <input type="radio" id="daem_hualpen" v-model="form.DEPENDENCIA" value="daem_hualpen" name="dependencia">
+                        <label for="daem_hualpen">Daem Hualpén</label>
+                        <input type="radio" id="daem_san_pedro" v-model="form.DEPENDENCIA" value="daem_san_pedro" name="dependencia">
+                        <label for="daem_san_pedro">Daem San Pedro</label>
+                        <input type="radio" id="daem_coronel" v-model="form.DEPENDENCIA" value="daem_coronel" name="dependencia">
+                        <label for="daem_coronel">Daem Coronel</label>
+                        <input type="radio" id="daem_lota" v-model="form.DEPENDENCIA" value="daem_lota" name="dependencia">
+                        <label for="daem_lota">Daem Lota</label>
+                        <input type="radio" id="daem_penco" v-model="form.DEPENDENCIA" value="daem_penco" name="dependencia">
+                        <label for="daem_penco">Daem Penco</label>
+                        <input type="radio" id="daem_tome" v-model="form.DEPENDENCIA" value="daem_tome" name="dependencia">
+                        <label for="daem_tome">Daem Tomé</label>
+                        <input type="radio" id="arzobispado" v-model="form.DEPENDENCIA" value="arzobispado" name="dependencia">
+                        <label for="arzobispado">Arzobispado de Concepción</label>
+                        <input type="radio" id="junji" v-model="form.DEPENDENCIA" value="junji" name="dependencia">
+                        <label for="junji">JUNJI</label>
+                        <input type="radio" id="cepas" v-model="form.DEPENDENCIA" value="cepas" name="dependencia">
+                        <label for="cepas">CEPAS</label>
+                        <input type="radio" id="hogar_cristo" v-model="form.DEPENDENCIA" value="hogar_cristo" name="dependencia">
+                        <label for="hogar_cristo">Hogar de Cristo</label>
+                        <input type="radio" id="integra" v-model="form.DEPENDENCIA" value="integra" name="dependencia">
+                        <label for="integra">Integra</label>
+                        <input type="radio" id="coemco" v-model="form.DEPENDENCIA" value="coemco" name="dependencia">
+                        <label for="coemco">Coemco</label>
+                        <input type="radio" id="otro" v-model="form.DEPENDENCIA" value="otro" name="dependencia">
+                        <label for="otro">Otro</label>
                     </div>
-                    <div class="form-group col-md-6">
-                        <label class="required">Tipo Enseñanza</label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            ID="TIPO_ENSENANZA"
-                            name="TIPO_ENSENANZA"
-                            v-model="form.TIPO_ENSENANZA"
-                            placeholder="Ej: Colegio ..."
-                            v-validate="'required|max:100'"
-                            data-vv-as="Tipo Enseñanza"
-                            :class="{'is-invalid': errors.has('TIPO_ENSENANZA')}"
-                        />
-                        <div class="invalid-feedback">{{ errors.first('TIPO_ENSENANZA') }}</div>
+                    <div class="form-group col-md-12">
+                        <label class="required">Enseñanza</label><br>
+                        <input type="radio" id="hc" v-model="form.ENSENANZA" value="hc" name="ensenanza">
+                        <label for="hc">HC</label>
+                        <input type="radio" id="tp" v-model="form.ENSENANZA" value="tp" name="ensenanza">
+                        <label for="tp">TP</label>
+                        <input type="radio" id="ed_artistica" v-model="form.ENSENANZA" value="ed_artistica" name="ensenanza">
+                        <label for="ed_artistica">Educación Artística</label>
+                        <input type="radio" id="ed_especial" v-model="form.ENSENANZA" value="ed_especial" name="ensenanza">
+                        <label for="ed_especial">Educación Especial</label>
+                        <input type="radio" id="ed_jovenes_adultos" v-model="form.ENSENANZA" value="ed_jovenes_adultos" name="ensenanza">
+                        <label for="ed_jovenes_adultos">Educación de Jóvenes y Adultos</label>
+                        <input type="radio" id="no_convencional" v-model="form.ENSENANZA" value="no_convencional" name="ensenanza">
+                        <label for="no_convencional">No Convencional</label>
                     </div>
                 </div>
                 <div class="row">
@@ -209,6 +233,21 @@
                         <div class="invalid-feedback">{{ errors.first('EMAIL_DIRECTOR') }}</div>
                     </div>
                 </div>
+                <div class="form-group col-md-6">
+                    <label class="required">Nombre ducador(a) o Profesor(a) Colaborador(a) Centro de Práctica</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        ID="NOMBRE_PROF_COLABORADOR_CP"
+                        name="NOMBRE_PROF_COLABORADOR_CP"
+                        v-model="form.NOMBRE_PROF_COLABORADOR_CP"
+                        placeholder=""
+                        v-validate="'required|max:100'"
+                        data-vv-as="NOMBRE_PROF_COLABORADOR_CP"
+                        :class="{'is-invalid': errors.has('NOMBRE_PROF_COLABORADOR_CP')}"
+                    />
+                    <div class="invalid-feedback">{{ errors.first('NOMBRE_PROF_COLABORADOR_CP') }}</div>
+                </div>
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="required">Nombre Jefe UTP</label>
@@ -243,34 +282,34 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label class="required">Grupo Practica</label>
+                        <label class="required">Cupos Otorgados</label>
                         <input
                             type="text"
                             class="form-control"
-                            ID="GRUPO_PRACTICA"
-                            name="GRUPO_PRACTICA"
-                            v-model="form.GRUPO_PRACTICA"
+                            ID="CUPO_OTORGADO"
+                            name="CUPO_OTORGADO"
+                            v-model="form.CUPO_OTORGADO"
                             placeholder="Ej: EJemplo ..."
                             v-validate="'required|max:200'"
-                            data-vv-as="Grupo Practica"
-                            :class="{'is-invalid': errors.has('GRUPO_PRACTICA')}"
+                            data-vv-as="cupo otorgado"
+                            :class="{'is-invalid': errors.has('CUPO_OTORGADO')}"
                         />
-                        <div class="invalid-feedback">{{ errors.first('GRUPO_PRACTICA') }}</div>
+                        <div class="invalid-feedback">{{ errors.first('CUPO_OTORGADO') }}</div>
                     </div>
                     <div class="form-group col-md-6">
-                        <label class="required">Cupos Practica</label>
+                        <label class="required">Observaciones</label>
                         <input
                             type="text"
                             class="form-control"
-                            ID="CUPOS_PRACTICA"
-                            name="CUPOS_PRACTICA"
-                            v-model="form.CUPOS_PRACTICA"
+                            ID="OBSERVACIONES_CP"
+                            name="OBSERVACIONES_CP"
+                            v-model="form.OBSERVACIONES_CP"
                             placeholder="Ej: 5 ..."
                             v-validate="'required|max:200'"
-                            data-vv-as="Cupos Practica"
-                            :class="{'is-invalid': errors.has('CUPOS_PRACTICA')}"
+                            data-vv-as="Observaciones"
+                            :class="{'is-invalid': errors.has('OBSERVACIONES_CP')}"
                         />
-                        <div class="invalid-feedback">{{ errors.first('CUPOS_PRACTICA') }}</div>
+                        <div class="invalid-feedback">{{ errors.first('OBSERVACIONES_CP') }}</div>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary float-right" :disabled="submit">
