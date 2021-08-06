@@ -1,0 +1,18 @@
+{"NivelEnsenanza": [
+    {
+        "name": "Párvulo"
+    },
+    {
+        "name": "Media"
+    },
+    {
+        "name": "Básico"
+    },
+    {
+        "name": "Superior"
+    },
+    {
+        "name": "Otro"
+    }
+]
+}

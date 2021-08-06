@@ -1,6 +1,6 @@
 <template>
     <div class="loading-container loader d-flex align-items-center">
-        <i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>
+        <i class="fa fa-circle-o-notch fa-spin fa-fw" aria-hidden="true"></i>
     </div>
 </template>
 <style >

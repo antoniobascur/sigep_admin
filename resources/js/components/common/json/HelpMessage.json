@@ -22,6 +22,10 @@
     "PROGRAMACION_PRACTICA": {
         "TITULO":"Programación Practica",
         "HELP":"En esta sección se puede observar ...."
+    },
+    "CUPOS_PRACTICA": {
+        "TITULO":"CUPOS Practica",
+        "HELP":"En esta sección se puede observar ...."
     }
 
 }

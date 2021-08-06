@@ -7,17 +7,18 @@
             <div class="form-group col-md-6">
                 <label class="required">Año </label>
 
-                <input
-                    type="text"
+                <kendo-dropdownlist
+                    :ref="'ANIO'"
                     class="form-control"
-                    ID="ANIO"
                     name="ANIO"
                     v-model="form.ANIO"
-                    placeholder="Ej: 2021"
-                    v-validate="'required|max:100'"
-                    data-vv-as="RUT"
-                    :class="{'is-invalid': errors.has('ANIO')}"
-                />
+                    :data-source="dsAnio"
+                    :data-text-field="'name'"
+                    :data-value-field="'name'"
+                    :optionLabel="'Seleccione'"
+                    :filter="'contains'"
+                    :class="{'is-invalid': errors.has('dsAnio')}"
+                ></kendo-dropdownlist>
 
                 <div class="invalid-feedback">{{ errors.first('ANIO') }}</div>
             </div>
@@ -76,22 +77,27 @@
 
                 <div class="invalid-feedback">{{ errors.first('NIVEL_PRACTICA') }}</div>
             </div>
+            <div class="form-group col-md-6">
+                <label class="required">Tipo Practica </label>
+
+                <kendo-dropdownlist
+                    :ref="'TIPO_PRACTICA'"
+                    class="form-control"
+                    name="TIPO_PRACTICA"
+                    v-model="form.TIPO_PRACTICA"
+                    :data-source="dsTipoPractica"
+                    :data-text-field="'name'"
+                    :data-value-field="'name'"
+                    :optionLabel="'Seleccione'"
+                    :filter="'contains'"
+                    :class="{'is-invalid': errors.has('dsTipoPractica')}"
+                ></kendo-dropdownlist>
+
+                <div class="invalid-feedback">{{ errors.first('TIPO_PRACTICA') }}</div>
+            </div>
             <h5 class="col-md-12"><i class="fa fa-angle-right" aria-hidden="true"></i> Asignatura </h5>
             <div class="form-group col-md-4">
                 <label class="required">Código Asignatura </label>
-
-<!--                <input-->
-<!--                    type="text"-->
-<!--                    class="form-control"-->
-<!--                    ID="CODIGO_ASIGNATURA"-->
-<!--                    name="CODIGO_ASIGNATURA"-->
-<!--                    v-model="form.CODIGO_ASIGNATURA"-->
-<!--                    placeholder=""-->
-<!--                    v-on:keyup="searchAsignatura"-->
-<!--                    v-validate="'required|max:100'"-->
-<!--                    data-vv-as="CODIGO_ASIGNATURA"-->
-<!--                    :class="{'is-invalid': errors.has('CODIGO_ASIGNATURA')}"-->
-<!--                />-->
 
                 <kendo-dropdownlist
                     :ref="'CODIGO_ASIGNATURA'"
@@ -132,8 +138,8 @@
                 </div>
             </div>
             </div>
-            <h5 class="col-md-12"><i class="fa fa-angle-right" aria-hidden="true"></i> Centro de practica</h5>
-            <div class="form-group col-md-4">
+            <h5 class="col-md-12"><i class="fa fa-angle-right" aria-hidden="true"></i>Cupos Disponibles</h5>
+<!--            <div class="form-group col-md-4">
                 <label class="required">RBD</label>
                 <input
                     type="text"
@@ -180,26 +186,27 @@
                         Asociar
                     </span>
                 </div>
-            </div>
-            <div class="col-md-12" v-if="this.listaCentros">
-                <h6 class="col-md-12"><i class="fa fa-angle-double-right" aria-hidden="true"></i>Lista de centros asociados</h6>
+            </div>-->
+            <label class="col-md-12 ml-2" v-if="!this.listaCupos"><i class="fa fa-info-circle" aria-hidden="true"></i><i>Debe completar el apartado general para conocer los cupos disponibles</i></label>
+
+            <div class="col-md-12" v-if="this.listaCupos">
                 <table class="table">
                     <thead>
                     <tr>
                         <th scope="col">RBD</th>
                         <th scope="col">Centro</th>
                         <th scope="col">Comuna</th>
-                        <th scope="col">Cupo</th>
+                        <th scope="col">Modalidad</th>
                         <th scope="col">Eliminar</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for=" row in this.form.CENTROS" :key="row.RBD">
-                        <th scope="row">{{row.RBD}}</th>
-                        <td>{{row.CENTRO_PRACTICA}}</td>
-                        <td>{{row.COMUNA_PRACTICA}}</td>
-                        <td>{{row.CUPOS_PRACTICA}}</td>
-                        <td><i class="fa fa-minus-square" aria-hidden="true" @click="deleteCentro(row.RBD)"></i></td>
+                    <tr v-for=" row in this.dsCuposPracticas" :key="row.ID">
+                        <th scope="row">{{row.RBD_CENTRO_PRACTICA}}</th>
+                        <td>{{row.NOMBRE_CENTRO_PRACTICA}}</td>
+                        <td>{{row.COMUNA_CENTRO_PRACTICA}}</td>
+                        <td>{{row.MODALIDAD}}</td>
+                        <td><i class="fa fa-minus-square" aria-hidden="true" @click="deleteCentro(row.ID)"></i></td>
                     </tr>
 
                     </tbody>
@@ -211,10 +218,136 @@
         <div class="row">
             <h5 class="col-md-12"><i class="fa fa-angle-right" aria-hidden="true"></i> Calendario</h5>
             <div class="col-md-12">
-                <scheduler></scheduler>
+<!--                <scheduler></scheduler>
+                <editor :resizable-content="true"
+                        :resizable-toolbar="true"
+                        :value="htmlText"
+                        style="height:280px"
+                        rows="10"
+                        cols="30">
+                </editor>-->
             </div>
+            <div class="form-group col-md-4">
+                <label class="required">Nro. Semanas Permanencia </label>
 
+                <input
+                    type="number"
+                    class="form-control"
+                    ID="N_SEMANAS_PERMANENCIA"
+                    name="N_SEMANAS_PERMANENCIA"
+                    v-model="form.N_SEMANAS_PERMANENCIA"
+                    placeholder="Ej: 1"
+                    v-validate="'required|max:100'"
+                    data-vv-as="RUT"
+                    :class="{'is-invalid': errors.has('N_SEMANAS_PERMANENCIA')}"
+                />
+
+                <div class="invalid-feedback">{{ errors.first('N_SEMANAS_PERMANENCIA') }}</div>
+            </div>
+            <div class="form-group col-md-4">
+                <label class="required">Nro. Horas Aula </label>
+
+                <input
+                    type="number"
+                    class="form-control"
+                    ID="N_HORAS_AULA"
+                    name="N_HORAS_AULA"
+                    v-model="form.N_HORAS_AULA"
+                    placeholder="Ej: 2"
+                    v-validate="'required|max:100'"
+                    data-vv-as="RUT"
+                    :class="{'is-invalid': errors.has('N_HORAS_AULA')}"
+                />
+
+                <div class="invalid-feedback">{{ errors.first('N_HORAS_AULA') }}</div>
+            </div>
+            <div class="form-group col-md-4">
+                <label class="required">Nro. Horas Administrativas </label>
+
+                <input
+                    type="number"
+                    class="form-control"
+                    ID="N_HORAS_ADMINISTRATIVAS"
+                    name="N_HORAS_ADMINISTRATIVAS"
+                    v-model="form.N_HORAS_ADMINISTRATIVAS"
+                    placeholder="Ej: 2"
+                    v-validate="'required|max:100'"
+                    :disabled="buscandoProf"
+                    data-vv-as="RUT"
+                    :class="{'is-invalid': errors.has('N_HORAS_ADMINISTRATIVAS')}"
+                />
+
+                <div class="invalid-feedback">{{ errors.first('PROF_COLABORADOR') }}</div>
+            </div>
+            <h5 class="col-md-12"><i class="fa fa-angle-right" aria-hidden="true"></i> Descripción</h5>
+            <div class="col-md-12">
+                <label class="required">Características </label>
+                <editor :resizable-content="true"
+                        :resizable-toolbar="true"
+                        :value="htmlText"
+                        style="height:200px"
+                        rows="10"
+                        cols="30"
+                        :pdf="pdf"
+                >
+<!--                    <editor-tool :name="'fontName'"></editor-tool>-->
+                    <editor-tool :name="'fontSize'"></editor-tool>
+
+                    <editor-tool :name="'bold'"></editor-tool>
+                    <editor-tool :name="'italic'"></editor-tool>
+                    <editor-tool :name="'underline'"></editor-tool>
+
+                    <editor-tool :name="'insertUnorderedList'"></editor-tool>
+                    <editor-tool :name="'insertOrderedList'"></editor-tool>
+                    <editor-tool :name="'indent'"></editor-tool>
+                    <editor-tool :name="'outdent'"></editor-tool>
+
+                    <editor-tool :name="'justifyLeft'"></editor-tool>
+                    <editor-tool :name="'justifyCenter'"></editor-tool>
+                    <editor-tool :name="'justifyRight'"></editor-tool>
+                    <editor-tool :name="'justifyFull'"></editor-tool>
+
+                    <editor-tool :name="'viewHtml'"></editor-tool>
+                    <editor-tool :name="'pdf'"></editor-tool>
+
+
+                </editor>
+            </div>
+            <br>
+            <div class="col-md-12">
+                <label class="required">Tareas </label>
+                <editor :resizable-content="true"
+                        :resizable-toolbar="true"
+                        :value="htmlText"
+                        style="height:200px"
+                        rows="10"
+                        cols="30"
+                        :pdf="pdf"
+                >
+                    <!--                    <editor-tool :name="'fontName'"></editor-tool>-->
+                    <editor-tool :name="'fontSize'"></editor-tool>
+
+                    <editor-tool :name="'bold'"></editor-tool>
+                    <editor-tool :name="'italic'"></editor-tool>
+                    <editor-tool :name="'underline'"></editor-tool>
+
+                    <editor-tool :name="'insertUnorderedList'"></editor-tool>
+                    <editor-tool :name="'insertOrderedList'"></editor-tool>
+                    <editor-tool :name="'indent'"></editor-tool>
+                    <editor-tool :name="'outdent'"></editor-tool>
+
+                    <editor-tool :name="'justifyLeft'"></editor-tool>
+                    <editor-tool :name="'justifyCenter'"></editor-tool>
+                    <editor-tool :name="'justifyRight'"></editor-tool>
+                    <editor-tool :name="'justifyFull'"></editor-tool>
+
+                    <editor-tool :name="'viewHtml'"></editor-tool>
+                    <editor-tool :name="'pdf'"></editor-tool>
+
+                </editor>
+            </div>
         </div>
+        <br>
         <button type="submit" class="btn btn-primary float-right" :disabled="submit">
             <i
                 class="fa"
@@ -237,8 +370,14 @@ import eventHub from "../../../eventHub";
 import Periodos from "../../common/json/Periodos.json";
 import NivelesPractica from "../../common/json/NivelesPractica.json";
 import AlertMessage from "../../common/json/AlertMessage.json";
+import TipoPractica from "../../common/json/TipoPractica.json";
+import Anios from "../../common/json/Anios.json";
+import { Editor, EditorTool } from '@progress/kendo-editor-vue-wrapper';
+
 export default {
     components: {
+        Editor,
+    EditorTool,
         Loading,
         MultiSelect,
         DateInput,
@@ -251,15 +390,38 @@ export default {
             dsPeriodo:[],
             dsAsignatura:[],
             dsNivelPractica:[],
-            listaCentros:false,
+            dsCuposPracticas:[],
+            dsTipoPractica:[],
+            dsAnio:[],
+            listaCupos:false,
             buscandoCentro:false,
             buscandoAsignatura:false,
+            pdf: {
+                fileName: "Export.pdf",
+                proxyURL: "https://demos.telerik.com/kendo-ui/service/export",
+                paperSize: "a4",
+                margin: {
+                    bottom: 20,
+                    left: 20,
+                    right: 20,
+                    top: 20
+                }
+            },
+            htmlText:'<p>Escribir aquí...</p>',
             form:{
                 ID: 0,
                 ANIO: null,
                 PERIODO: null,
                 CARRERA: null,
+                UA: null,
                 NIVEL_PRACTICA: null,
+                TIPO_PRACTICA: null,
+                NIVEL_ENSENANZA: null,
+                N_SEMANAS_PERMANENCIA: null,
+                N_HORAS_AULA: null,
+                N_HORAS_ADMINISTRATIVAS: null,
+                TAREAS: null,
+                CARACTERISTICAS: null,
                 CODIGO_ASIGNATURA: null,
                 NOMBRE_ASIGNATURA: null,
                 SECCION_ASIGNATURA:null,
@@ -269,8 +431,7 @@ export default {
                 CENTRO_PRACTICA: null,
                 COMUNA_PRACTICA: null,
                 CUPOS_PRACTICA: null,
-
-                CENTROS:[]
+                CUPOS:[]
             }
 
         }
@@ -280,9 +441,15 @@ export default {
         this.getPeriodos();
         this.getNivelPractica();
         this.getCarreras();
+        this.getTipoPractica();
+        this.getAnio();
+        //this.getCuposByProgramacion();
     },
     methods: {
+        getTipoPractica(){
+            this.dsTipoPractica=TipoPractica.TipoPractica;
 
+        },
         getCarreras(){
             let url = Urls["CARRERAS"].GET_ALL;
             axios
@@ -310,8 +477,8 @@ export default {
         },
         addCentro(){
 
-            if(this.form.CENTROS.find(el => el.RBD === this.form.RBD)==null && this.form.RBD!=null ){
-                this.form.CENTROS.push({
+            if(this.form.CUPOS.find(el => el.RBD === this.form.RBD)==null && this.form.RBD!=null ){
+                this.form.CUPOS.push({
                     RBD: this.form.RBD,
                     CENTRO_PRACTICA: this.form.CENTRO_PRACTICA,
                     COMUNA_PRACTICA: this.form.COMUNA_PRACTICA,
@@ -339,18 +506,22 @@ export default {
 
         },
         deleteCentro(rbd){
-            let index =  this.form.CENTROS.find(el => el.RBD === rbd);
+            let index =  this.form.CUPOS.find(el => el.RBD === rbd);
             console.log(index);
-            this.form.CENTROS.splice(index, 1);
+            this.form.CUPOS.splice(index, 1);
         },
         isExistCentro(find_key){
-            return this.form.CENTROS.some(x => x[find_key]);
+            return this.form.CUPOS.some(x => x[find_key]);
         },
         getPeriodos(){
             this.dsPeriodo=Periodos.Periodos;
         },
         getNivelPractica(){
             this.dsNivelPractica=NivelesPractica.NivelesPractica;
+        },
+        getAnio(){
+            this.dsAnio=Anios.Anios;
+
         },
         searchEstablecimiento() {
             var keyword = this.form.RBD;
@@ -472,6 +643,84 @@ export default {
             this.form.SECCION_ASIGNATURA=value.dataItem.SECCION_ASIGNATURA;
             this.form.PROFESOR_ASIGNATURA=value.dataItem.NOMBRE;
             this.form.RUT_PROFESOR_ASIGNATURA=value.dataItem.RUT_PROFESOR_TUTOR;
+        },
+        getCuposByProgramacion(){
+            console.log("buscadnocupos");
+            let url = Urls["CUPOS_PRACTICA"].GET_CUPOS_PROGRAMACION;
+            let formData = new FormData();
+            formData.append("ANIO", this.form.ANIO);
+            formData.append("PERIODO", this.form.PERIODO);
+            formData.append("UA", this.form.CARRERA);
+            formData.append("CARRERA", this.form.CARRERA);
+            formData.append("TIPO_PRACTICA", this.form.TIPO_PRACTICA);
+            formData.append("NIVEL_PRACTICA", this.form.NIVEL_PRACTICA);
+            axios
+                .post(url, formData, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                        "X-Requested-With": "XMLHttpRequest",
+                        "X-CSRF-TOKEN": window.csrf_token,
+                    },
+                })
+                .then((response) => {
+                    if (response.data.data.length > 0) {
+
+
+                        this.dsCuposPracticas = response.data.data;
+                        this.listaCupos=true;
+                    }
+                })
+                .catch(function (error) {
+                    //this.loading = false;
+                    toastr.error(
+                        AlertMessage.FORMULARIO.SAVE_ERROR
+                    );
+                    console.log("ERROR:", error);
+                    onError();
+                });
+
+        }
+    },
+    watch:{
+       'form.PERIODO': function () {
+       //console.log(this.form.PERIODO);
+        if(this.form.PERIODO!=null&&this.form.ANIO!=null&&this.form.CARRERA!=null&&this.form.NIVEL_PRACTICA!=null&&this.form.TIPO_PRACTICA!=null){
+
+            this.getCuposByProgramacion();
+        }
+       },
+        'form.ANIO': function () {
+            // console.log(this.form.ANIO);
+            if(this.form.PERIODO!=null&&this.form.ANIO!=null&&this.form.CARRERA!=null&&this.form.NIVEL_PRACTICA!=null&&this.form.TIPO_PRACTICA!=null){
+
+                this.getCuposByProgramacion();
+            }
+        },
+        'form.UA': function () {
+            //console.log(this.form.UA);
+            if(this.form.PERIODO!=null&&this.form.ANIO!=null&&this.form.CARRERA!=null&&this.form.NIVEL_PRACTICA!=null&&this.form.TIPO_PRACTICA!=null){
+
+                this.getCuposByProgramacion();
+            }
+        },
+        'form.NIVEL_PRACTICA': function () {
+            //console.log(this.form.NIVEL_PRACTICA);
+            if(this.form.PERIODO!=null&&this.form.ANIO!=null&&this.form.CARRERA!=null&&this.form.NIVEL_PRACTICA!=null&&this.form.TIPO_PRACTICA!=null){
+
+                this.getCuposByProgramacion();
+            }
+        },
+        'form.TIPO_PRACTICA': function () {
+            // console.log(this.form.TIPO_PRACTICA);
+            console.log(this.form.PERIODO);
+            console.log(this.form.TIPO_PRACTICA);
+            console.log(this.form.NIVEL_PRACTICA);
+            console.log(this.form.UA);
+            console.log(this.form.PERIODO);
+            if(this.form.PERIODO!=null&&this.form.ANIO!=null&&this.form.CARRERA!=null&&this.form.NIVEL_PRACTICA!=null&&this.form.TIPO_PRACTICA!=null){
+
+                this.getCuposByProgramacion();
+            }
         }
     }
 }

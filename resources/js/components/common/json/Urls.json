@@ -53,5 +53,20 @@
         "SAVE": "api/ficha/save",
         "GET": "api/ficha/get/",
         "DELETE": "api/ficha/delete/"
+    },
+    "PROFESOR_COLABORADOR": {
+        "GET_ALL": "api/profesorColaborador/getAll",
+        "SAVE": "api/profesorColaborador/save",
+        "GET": "api/profesorColaborador/get/",
+        "GET_BY_RUN": "api/profesorColaborador/getByRun/",
+        "DELETE": "api/profesorColaborador/delete/"
+    },
+    "CUPOS_PRACTICA": {
+        "GET_ALL": "api/cupoPractica/getAll",
+        "SAVE": "api/cupoPractica/save",
+        "GET": "api/cupoPractica/get/",
+        "GET_BY_RUN": "api/cupoPractica/getByRun/",
+        "DELETE": "api/cupoPractica/delete/",
+        "GET_CUPOS_PROGRAMACION": "api/cupoPractica/getCuposByProgramacion"
     }
 }

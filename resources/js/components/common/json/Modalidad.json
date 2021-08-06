@@ -1,0 +1,16 @@
+
+{"Modalidad": [
+    {
+        "name": "Individual",
+        "value": 1
+    },
+    {
+        "name": "Duplas",
+        "value": 2
+    },
+    {
+        "name": "Trios",
+        "value": 3
+    }
+]
+}

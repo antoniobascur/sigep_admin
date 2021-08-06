@@ -80,3 +80,17 @@ Route::group(['prefix' => 'asignatura'], function () {
     Route::get('/getAllByUa/{id}', ['uses' => 'AsignaturaController@getAllByUa']);
 
 });
+Route::group(['prefix' => 'profesorColaborador'], function () {
+    Route::get('/getAll', ['uses' => 'ProfesorColaboradorController@getAll']);
+    Route::post('/save', ['uses' => 'ProfesorColaboradorController@save']);
+    Route::post('/get/{id}', ['uses' => 'ProfesorColaboradorController@get']);
+    Route::post('/getByRun', ['uses' => 'ProfesorColaboradorController@getByRun']);
+    Route::get('/delete/{id}', ['uses' => 'ProfesorColaboradorController@delete']);
+});
+Route::group(['prefix' => 'cupoPractica'], function () {
+    Route::get('/getAll', ['uses' => 'CuposPracticasController@getAll']);
+    Route::post('/save', ['uses' => 'CuposPracticasController@save']);
+    Route::post('/get/{id}', ['uses' => 'CuposPracticasController@get']);
+    Route::post('/getCuposByProgramacion', ['uses' => 'CuposPracticasController@getCuposByProgramacion']);
+    Route::get('/delete/{id}', ['uses' => 'CuposPracticasController@delete']);
+});

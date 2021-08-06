@@ -28,6 +28,36 @@ class RulesValidation{
         'TITULO' => 'required',
     ];
     }
+    public static function ValidateProfesorColab(){
+        return [
+            'ID' => 'required',
+            'RUN' => 'required',
+            'NOMBRE' => 'required',
+            'APELLIDO' => 'required',
+            'EMAIL' => 'required',
+            'ESPECIALIDAD' => 'required',
+        ];
+    }
+
+    public static function ValidateCuposPractica(){
+        return [
+            'ID' => 'required',
+            'ANIO' => 'required',
+            'PERIODO' => 'required',
+            'CARRERA' => 'required',
+            'MODALIDAD' => 'required',
+            'ESTADO' => 'required',
+            'TIPO_PRACTICA' => 'required',
+            'NIVEL_ENSENANZA' => 'required',
+            'CURSOS_INTERVENCION' => 'required',
+            'NIVEL_PRACTICA' => 'required',
+            'CENTRO_PRACTICAS_ID' => 'required',
+            'RBD_CENTRO_PRACTICA' => 'required',
+            'RUT_PROFESOR_COLABORADOR' => 'required',
+            'PROFESOR_COLABORADOR' => 'required',
+        ];
+    }
+
     public static function ValidateTipoSolicitud(){
         return [
             'ID' => 'required',

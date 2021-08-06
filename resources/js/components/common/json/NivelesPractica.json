@@ -1,16 +1,22 @@
 
 {"NivelesPractica": [
     {
-        "name": "Nivel 1"
+        "name": "I"
     },
     {
-        "name": "Nivel 2"
+        "name": "II"
     },
     {
-        "name": "Nivel 3"
+        "name": "III"
     },
     {
-        "name": "Nivel 3"
+        "name": "IV"
+    },
+    {
+        "name": "V"
+    },
+    {
+        "name": "VI"
     }
     ]
 }

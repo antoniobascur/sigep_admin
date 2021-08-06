@@ -114,7 +114,9 @@ import '@progress/kendo-ui/js/messages/kendo.messages.es-CL';
 import { TabStrip,LayoutInstaller } from '@progress/kendo-layout-vue-wrapper'
 import { SchedulerInstaller } from '@progress/kendo-scheduler-vue-wrapper'
 //Vue.use(DateinputsInstaller)
+import { EditorInstaller } from '@progress/kendo-editor-vue-wrapper'
 
+Vue.use(EditorInstaller)
 Vue.use(SchedulerInstaller)
 Vue.use(DialogInstaller)
 Vue.use(ChartInstaller)
@@ -145,7 +147,7 @@ import ProfesorTutor from "./components/profesorTutor/ProfesorTutor";
 import TipoSolicitud from "./components/tipoSolicitud/TipoSolicitud";
 import FichaPractica from "./components/ficha/FichaPractica";
 import ProgramacionPractica from "./components/programacionPractica/ProgramacionPractica";
-
+import CuposPractica from "./components/cuposPractica/CuposPractica";
 // configuración de router
 let router = new VueRouter({
    // base: process.env.MIX_ROUTER_BASE,
@@ -180,6 +182,10 @@ let router = new VueRouter({
             path: '/programacionPractica',
             name: 'programacionPractica',
             component: ProgramacionPractica
+        },{
+            path: '/cuposPractica',
+            name: 'cuposPractica',
+            component: CuposPractica
         }
     ]
 });
