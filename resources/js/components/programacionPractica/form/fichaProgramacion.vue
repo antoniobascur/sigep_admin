@@ -44,10 +44,10 @@
                 <label class="required">Carrera </label>
 
                 <kendo-dropdownlist
-                    :ref="'CARRERA'"
+                    :ref="'UA'"
                     class="form-control"
-                    name="CARRERA"
-                    v-model="form.CARRERA"
+                    name="UA"
+                    v-model="form.UA"
                     :data-source="dsCarrera"
                     :data-text-field="'CARRERA'"
                     @select="getAsignaturasByUa"
@@ -105,8 +105,8 @@
                     name="CODIGO_ASIGNATURA"
                     v-model="form.CODIGO_ASIGNATURA"
                     :data-source="dsAsignatura"
-                    :data-text-field="'COD_ASIGNATURA'"
-                    :data-value-field="'COD_ASIGNATURA'"
+                    :data-text-field="'ASIGNATURA_SECCION'"
+                    :data-value-field="'ASIGNATURA_SECCION'"
                     :optionLabel="'Seleccione'"
                     @select="getInfoAsignatura"
                     :filter="'contains'"
@@ -134,7 +134,7 @@
             </div>
             <div class="form-group col-md-4" v-else>
             <div class="d-flex flex-column" >
-                <div class="mt-4"><label><i class="fa fa-info-circle" aria-hidden="true"></i> Debe ingresar un Código de asignatura valido</label>
+                <div class="mt-4"><label><i class="fa fa-info-circle" aria-hidden="true"></i> Debe seleccionar una carrera</label>
                 </div>
             </div>
             </div>
@@ -206,7 +206,7 @@
                         <td>{{row.NOMBRE_CENTRO_PRACTICA}}</td>
                         <td>{{row.COMUNA_CENTRO_PRACTICA}}</td>
                         <td>{{row.MODALIDAD}}</td>
-                        <td><i class="fa fa-minus-square" aria-hidden="true" @click="deleteCentro(row.ID)"></i></td>
+                        <td><i class="fa fa-minus-square" aria-hidden="true" @click="deleteCupo(row.ID)"></i></td>
                     </tr>
 
                     </tbody>
@@ -272,7 +272,6 @@
                     v-model="form.N_HORAS_ADMINISTRATIVAS"
                     placeholder="Ej: 2"
                     v-validate="'required|max:100'"
-                    :disabled="buscandoProf"
                     data-vv-as="RUT"
                     :class="{'is-invalid': errors.has('N_HORAS_ADMINISTRATIVAS')}"
                 />
@@ -285,7 +284,8 @@
                 <editor :resizable-content="true"
                         :resizable-toolbar="true"
                         :value="htmlText"
-                        style="height:200px"
+                        v-model="form.CARACTERISTICAS"
+                        style="height:150px"
                         rows="10"
                         cols="30"
                         :pdf="pdf"
@@ -315,14 +315,17 @@
             </div>
             <br>
             <div class="col-md-12">
+                <br>
                 <label class="required">Tareas </label>
                 <editor :resizable-content="true"
                         :resizable-toolbar="true"
                         :value="htmlText"
-                        style="height:200px"
+                        style="height:150px"
                         rows="10"
                         cols="30"
                         :pdf="pdf"
+                        v-model="form.TAREAS"
+
                 >
                     <!--                    <editor-tool :name="'fontName'"></editor-tool>-->
                     <editor-tool :name="'fontSize'"></editor-tool>
@@ -377,7 +380,7 @@ import { Editor, EditorTool } from '@progress/kendo-editor-vue-wrapper';
 export default {
     components: {
         Editor,
-    EditorTool,
+        EditorTool,
         Loading,
         MultiSelect,
         DateInput,
@@ -402,8 +405,8 @@ export default {
                 paperSize: "a4",
                 margin: {
                     bottom: 20,
-                    left: 20,
-                    right: 20,
+                    left: 25,
+                    right: 25,
                     top: 20
                 }
             },
@@ -431,8 +434,14 @@ export default {
                 CENTRO_PRACTICA: null,
                 COMUNA_PRACTICA: null,
                 CUPOS_PRACTICA: null,
+                ESTADO:"ACTIVO",
                 CUPOS:[]
-            }
+            },
+            propsToPass: {
+                titulo: "Programación de practicas",
+                ayuda: "lorem ",
+                element: "PROGRAMACION_PRACTICA",
+            },
 
         }
 
@@ -471,7 +480,7 @@ export default {
                     onError();
                 })
                 .finally(() => {
-                    eventHub.$emit("LoadingOff");
+                    eventHub.$emit("LoadingOff",{obj:false});
                 });
 
         },
@@ -505,10 +514,10 @@ export default {
             }
 
         },
-        deleteCentro(rbd){
-            let index =  this.form.CUPOS.find(el => el.RBD === rbd);
+        deleteCupo(id){
+            let index =  this.dsCuposPracticas.find(el => el.ID === id);
             console.log(index);
-            this.form.CUPOS.splice(index, 1);
+            this.dsCuposPracticas.splice(index, 1);
         },
         isExistCentro(find_key){
             return this.form.CUPOS.some(x => x[find_key]);
@@ -562,8 +571,13 @@ export default {
                 })
                 .finally(() => {
                     this.buscandoCentro=false;
-                    eventHub.$emit("LoadingOff");
+                    eventHub.$emit("LoadingOff",{obj:false});
                 });
+        },
+        selectCarrera(value){
+            console.log(value);
+            this.form.CARRERA=value.dataItem.CARRERA
+            console.log(this.form.CARRERA);
         },
         searchAsignatura() {
             var keyword = this.form.CODIGO_ASIGNATURA;
@@ -603,11 +617,14 @@ export default {
                 })
                 .finally(() => {
                     this.buscandoAsignatura=false;
-                    eventHub.$emit("LoadingOff");
+                    eventHub.$emit("LoadingOff",{obj:false});
                 });
         },
         getAsignaturasByUa(value){
-            console.log(value.dataItem.UA);
+            console.log(value.dataItem.CARRERA);
+            this.form.CARRERA=value.dataItem.CARRERA;
+            console.log(this.form.CARRERA);
+            this.form.UA=value.dataItem.UA;
             this.buscandoAsignatura=true;
             let url = Urls["ASIGNATURA"].GET_ALL_UA+value.dataItem.UA;
             axios
@@ -634,7 +651,7 @@ export default {
                 })
                 .finally(() => {
                     this.buscandoAsignatura=false;
-                    eventHub.$emit("LoadingOff");
+                    eventHub.$emit("LoadingOff",{obj:false});
                 });
         },
         getInfoAsignatura(value){
@@ -650,10 +667,11 @@ export default {
             let formData = new FormData();
             formData.append("ANIO", this.form.ANIO);
             formData.append("PERIODO", this.form.PERIODO);
-            formData.append("UA", this.form.CARRERA);
+            formData.append("UA", this.form.UA);
             formData.append("CARRERA", this.form.CARRERA);
             formData.append("TIPO_PRACTICA", this.form.TIPO_PRACTICA);
             formData.append("NIVEL_PRACTICA", this.form.NIVEL_PRACTICA);
+
             axios
                 .post(url, formData, {
                     headers: {
@@ -679,6 +697,76 @@ export default {
                     onError();
                 });
 
+        },
+        validate() {
+            this.$validator.validate().then((results) => {
+                if (results) this.saveForm();
+                else {
+                    toastr.error(
+                        AlertMessage.FORMULARIO.VALIDATE_ERROR
+                    );
+
+                }
+            });
+        },
+        saveForm() {
+         eventHub.$emit("LoadingOff",{obj:true});
+
+            let url = Urls[this.propsToPass.element].SAVE;
+            let formData = new FormData();
+
+            formData.append("ID", this.form.ID);
+            formData.append("ANIO", this.form.ANIO);
+            formData.append("PERIODO", this.form.PERIODO);
+            formData.append("CARRERA", this.form.CARRERA);
+            formData.append("UA", this.form.UA);
+            formData.append("NIVEL_PRACTICA", this.form.NIVEL_PRACTICA);
+            formData.append("TIPO_PRACTICA", this.form.TIPO_PRACTICA);
+            formData.append("NIVEL_ENSENANZA", this.form.NIVEL_ENSENANZA);
+            formData.append("N_SEMANAS_PERMANENCIA", this.form.N_SEMANAS_PERMANENCIA);
+            formData.append("N_HORAS_AULA", this.form.N_HORAS_AULA);
+            formData.append("N_HORAS_ADMINISTRATIVAS", this.form.N_HORAS_ADMINISTRATIVAS);
+            formData.append("TAREAS", this.form.TAREAS);
+            formData.append("CARACTERISTICAS", this.form.CARACTERISTICAS);
+            formData.append("COD_ASIGNATURA", this.form.CODIGO_ASIGNATURA);
+            formData.append("NOMBRE_ASIGNATURA", this.form.NOMBRE_ASIGNATURA);
+            formData.append("CUPOS", JSON.stringify(this.dsCuposPracticas));
+            formData.append("ESTADO", this.form.ESTADO);
+
+
+            axios
+                .post(url, formData, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                        "X-Requested-With": "XMLHttpRequest",
+                        "X-CSRF-TOKEN": window.csrf_token,
+                    },
+                })
+                .then((response) => {
+                    this.submit = false;
+
+                    if (response.status) {
+                        this.form.ID = response.data.data.id;
+
+                        console.log("axios");
+                        console.log(response);
+                        toastr.success(AlertMessage.FORMULARIO.SAVE_EXITO);
+                   eventHub.$emit( "updateToGrid",
+                            {obj: this.form}
+                        );
+                        eventHub.$emit("LoadingOff",{obj:false});
+                        eventHub.$emit("closeKendoWindows");
+                    }
+
+                })
+                .catch(function (error) {
+                    // this.loading = false;
+                    toastr.error(
+                        AlertMessage.FORMULARIO.SAVE_ERROR
+                    );
+                    console.log("ERROR:", error);
+                    onError();
+                });
         }
     },
     watch:{

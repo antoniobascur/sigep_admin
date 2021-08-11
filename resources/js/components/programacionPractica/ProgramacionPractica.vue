@@ -26,16 +26,7 @@
                             </div>
                         </div>
                         <!-- CUERPO-->
-                        <hr>
-                        <H5>Ejemplo calendario</H5>
-                        <div class="row">
-
-
-                        <div class="col-md-12">
-
-                        </div>
-
-                        </div>
+                        <Grid></Grid>
                         <!-- CUERPO-->
                     </div>
                 </div>
@@ -55,6 +46,46 @@
         >
             <ficha-programacion></ficha-programacion>
         </kendo-window>
+
+        <kendo-window
+            :ref="'view_cupos'"
+            :width="'80%'"
+            :height="'auto'"
+            :title="'Lista de cupos'"
+            :visible="false"
+            :modal="true"
+            style="display:none;"
+            :scrollable="false"
+            :actions="actions"
+        >
+            <div class="col-md-12" >
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">RBD CENTRO</th>
+                        <th scope="col">NOMBRE CENTRO</th>
+                        <th scope="col">COMUNA</th>
+                        <th scope="col">MODALIDAD</th>
+                        <th scope="col">CURSOS INTERVENCIÓN</th>
+                        <th scope="col">ESTADO</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for=" row in this.form.CUPOS" :key="row.ID">
+                        <td>{{row.RBD}}</td>
+                        <td>{{row.NOMBRE_CENTRO_PRACTICA}}</td>
+                        <td>{{row.COMUNA_CENTRO_PRACTICA}}</td>
+                        <td>{{row.MODALIDAD}}</td>
+                        <td>{{row.CURSOS_INTERVENCION.replace('[',' ').replace(']','')}}</td>
+                        <td>{{row.ESTADO}}</td>
+
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </kendo-window>
     </div>
 </template>
 
@@ -63,26 +94,202 @@
 import {KendoWindow} from "@progress/kendo-window-vue-wrapper";
 import HelpButton from "../common/HelpButton";
 import FichaProgramacion from "./form/fichaProgramacion";
+import eventHub from "../../eventHub";
+import AlertMessage from "../common/json/AlertMessage.json";
+import Grid from "./grid/Grid";
+import Loading from "../common/Loading";
+import Urls from "../common/json/Urls.json";
 export default {
     components: {
         FichaProgramacion,
         HelpButton,
         KendoWindow,
+        Loading,
+        Grid
     },
     computed: {
         windowFormNuevo() {
             return this.$refs["form_programacion"];
-        }
+        },
+        windowCupos(){
+            return this.$refs["view_cupos"];
+
+        },
+        form() {
+            return this.$store.state.fichaProgramacion;
+        },
+
+    },
+    created: function () {
+        eventHub.$on("closeKendoWindows", () => {
+            this.windowFormNuevo.kendoWidget().close();
+        });
+        eventHub.$on("LoadingOff", (data) => {
+            this.loading = data.data;
+        });
+        eventHub.$on("onEditProgramacionPractica", (data) => {
+
+            this.form.ID = data.obj.ID;
+            this.form.ANIO= data.obj.ANIO;
+            this.form.PERIODO= data.obj.PERIODO;
+            this.form.CARRERA = data.obj.CARRERA;
+            this.form.UA= data.obj.UA;
+            this.form.NIVEL_PRACTICA= data.obj.NIVEL_PRACTICA;
+            this.form.TIPO_PRACTICA= data.obj.TIPO_PRACTICA;
+            this.form.NIVEL_ENSENANZA= data.obj.NIVEL_ENSENANZA;
+            this.form.N_SEMANAS_PERMANENCIA= data.obj.N_SEMANAS_PERMANENCIA;
+            this.form.N_HORAS_AULA = data.obj.N_HORAS_AULA;
+            this.form.N_HORAS_ADMINISTRATIVAS= data.obj.N_HORAS_ADMINISTRATIVAS;
+            this.form.TAREAS= data.obj.TAREAS;
+            this.form.CARACTERISTICAS= data.obj.CARACTERISTICAS;
+            this.form.CODIGO_ASIGNATURA= data.obj.CODIGO_ASIGNATURA;
+            this.form.NOMBRE_ASIGNATURA= data.obj.NOMBRE_ASIGNATURA;
+            this.form.SECCION_ASIGNATURA= data.obj.SECCION_ASIGNATURA;
+            this.form.PROFESOR_ASIGNATURA= data.obj.PROFESOR_ASIGNATURA;
+            this.form.RUT_PROFESOR_ASIGNATURA= data.obj.RUT_PROFESOR_ASIGNATURA;
+            this.form.RBD= data.obj.RBD;
+            this.form.CENTRO_PRACTICA= data.obj.CENTRO_PRACTICA;
+            this.form.COMUNA_PRACTICA= data.obj.COMUNA_PRACTICA;
+            this.form.CUPOS_PRACTICA= data.obj.CUPOS_PRACTICA;
+            this.form.ESTADO= data.obj.ESTADO;
+            this.form.CUPOS= JSON.parse(data.obj.CUPOS);;
+
+            this.form.EDITAR_FORMULARIO = true;
+
+            console.log("se hizo click");
+            this.tituloKendoWindowsFormNuevo="EDITAR CUPO";
+
+            this.$nextTick(() => {
+                this.windowFormNuevo.kendoWidget().center().open();
+
+            });
+
+
+        });
+        eventHub.$on("onDuplicateProgramacionPractica", (data) => {
+
+            this.form.ID = data.obj.ID;
+            this.form.ANIO= data.obj.ANIO;
+            this.form.PERIODO= data.obj.PERIODO;
+            this.form.CARRERA = data.obj.CARRERA;
+            this.form.UA= data.obj.UA;
+            this.form.NIVEL_PRACTICA= data.obj.NIVEL_PRACTICA;
+            this.form.TIPO_PRACTICA= data.obj.TIPO_PRACTICA;
+            this.form.NIVEL_ENSENANZA= data.obj.NIVEL_ENSENANZA;
+            this.form.N_SEMANAS_PERMANENCIA= data.obj.N_SEMANAS_PERMANENCIA;
+            this.form.N_HORAS_AULA = data.obj.N_HORAS_AULA;
+            this.form.N_HORAS_ADMINISTRATIVAS= data.obj.N_HORAS_ADMINISTRATIVAS;
+            this.form.TAREAS= data.obj.TAREAS;
+            this.form.CARACTERISTICAS= data.obj.CARACTERISTICAS;
+            this.form.CODIGO_ASIGNATURA= data.obj.CODIGO_ASIGNATURA;
+            this.form.NOMBRE_ASIGNATURA= data.obj.NOMBRE_ASIGNATURA;
+            this.form.SECCION_ASIGNATURA= data.obj.SECCION_ASIGNATURA;
+            this.form.PROFESOR_ASIGNATURA= data.obj.PROFESOR_ASIGNATURA;
+            this.form.RUT_PROFESOR_ASIGNATURA= data.obj.RUT_PROFESOR_ASIGNATURA;
+            this.form.RBD= data.obj.RBD;
+            this.form.CENTRO_PRACTICA= data.obj.CENTRO_PRACTICA;
+            this.form.COMUNA_PRACTICA= data.obj.COMUNA_PRACTICA;
+            this.form.CUPOS_PRACTICA= data.obj.CUPOS_PRACTICA;
+            this.form.ESTADO= data.obj.ESTADO;
+            this.form.CUPOS= JSON.parse(data.obj.CUPOS);;
+
+            this.form.EDITAR_FORMULARIO = false;
+
+
+            this.tituloKendoWindowsFormNuevo="NUEVO CUPO BASADO EN UNO EXISTENTE";
+
+            this.$nextTick(() => {
+                this.windowFormNuevo.kendoWidget().center().open();
+
+            });
+
+
+        });
+        eventHub.$on("onDeleteProgramacionPractica", (data) => {
+            this.form.ID = data.obj.ID;
+
+            kendo
+                .confirm(AlertMessage.CONFIRMACION.ELIMINACION + this.form.ID + " ?")
+                .then((result) => {
+                    this.delete();
+                });
+        });
+        eventHub.$on("onViewCupos", (data) => {
+           // this.form.ID = data.obj.ID;
+
+            this.onDialogCupos(data.obj.ID);
+
+        });
+
     },
     methods: {
         resetForm() {
-
+            this.form.ID= 0;
+            this.form.ANIO= null;
+            this.form.PERIODO= null;
+            this.form.CARRERA= null;
+            this.form.UA= null;
+            this.form.NIVEL_PRACTICA= null;
+            this.form.TIPO_PRACTICA= null;
+            this.form.NIVEL_ENSENANZA= null;
+            this.form.N_SEMANAS_PERMANENCIA= null;
+            this.form.N_HORAS_AULA= null;
+            this.form.N_HORAS_ADMINISTRATIVAS= null;
+            this.form.TAREAS= null;
+            this.form.CARACTERISTICAS= null;
+            this.form.CODIGO_ASIGNATURA= null;
+            this.form.NOMBRE_ASIGNATURA= null;
+            this.form.SECCION_ASIGNATURA=null;
+            this.form.PROFESOR_ASIGNATURA=null;
+            this.form.RUT_PROFESOR_ASIGNATURA=null;
+            this.form.RBD= null;
+            this.form.CENTRO_PRACTICA= null;
+            this.form.COMUNA_PRACTICA= null;
+            this.form.CUPOS_PRACTICA= null;
+            this.form.ESTADO="ACTIVO";
+            this.form.CUPOS=[];
         },
         onDialogFormNew() {
             this.$nextTick(() => {
                 this.windowFormNuevo.kendoWidget().center().open();
             });
         },
+        onDialogCupos(id) {
+            console.log("onDialogCupos: "+id);
+            this.getDataCupos(id);
+            this.$nextTick(() => {
+                this.windowCupos.kendoWidget().center().open();
+            });
+        },
+
+        getDataCupos(id) {
+            eventHub.$emit("LoadingOff",{obj:true});
+
+            let url = Urls[this.propsToPass.element].GET_ALL_CUPOS_PROGRAMACION+id;
+            axios
+                .get(url, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                        "X-Requested-With": "XMLHttpRequest",
+                        "X-CSRF-TOKEN": window.csrf_token,
+                    },
+                })
+                .then((response) => {
+                    //console.log(response.data.data);
+                    if (response.data.data.length > 0) {
+                        this.$store.state.fichaProgramacion.CUPOS = response.data.data;
+                    }
+                    eventHub.$emit("LoadingOff",{obj:false});
+                })
+                .catch(function (error) {
+                    console.log("ERROR:", error);
+                    onError();
+                })
+                .finally(() => {
+
+
+                });
+        }
     },
     data: function () {
         return {
@@ -94,7 +301,12 @@ export default {
                 ayuda: "lorem ",
                 element: "PROGRAMACION_PRACTICA",
             },
-        }}
+        }},
+    beforeDestroy() {
+        eventHub.$off("onEditProgramacionPractica");
+        eventHub.$off("onDuplicateProgramacionPractica");
+        eventHub.$off("onDeleteProgramacionPractica");
+    },
 
 }
 </script>

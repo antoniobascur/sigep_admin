@@ -266,24 +266,7 @@ export default {
                 ayuda: "lorem ",
                 element: "CUPOS_PRACTICA",
             },
-         /*   form: {
-                ID: 0,
-                ANIO: null,
-                PERIODO: null,
-                CARRERA: null,
-                UA: null,
-                RBD_CENTRO_PRACTICA:null,
-                ID_CENTRO_PRACTICA:null,
-                CENTRO_PRACTICA:null,
-                NIVEL_PRACTICA: null,
-                NIVEL_ENSENANZA: null,
-                MODALIDAD_PRACTICA: null,
-                CURSO_INTERVENCION: null,
-                PROF_COLABORADOR: null,
-                RUN_PROF_COLABORADOR: null,
-                ESTADO:"DISPONIBLE",
-                TIPO_PRACTICA:null
-            }*/
+
         }
     },
     computed: {

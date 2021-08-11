@@ -94,3 +94,10 @@ Route::group(['prefix' => 'cupoPractica'], function () {
     Route::post('/getCuposByProgramacion', ['uses' => 'CuposPracticasController@getCuposByProgramacion']);
     Route::get('/delete/{id}', ['uses' => 'CuposPracticasController@delete']);
 });
+Route::group(['prefix' => 'programacionPractica'], function () {
+    Route::get('/getAll', ['uses' => 'ProgramacionPracticaController@getAll']);
+    Route::post('/save', ['uses' => 'ProgramacionPracticaController@save']);
+    Route::post('/get/{id}', ['uses' => 'ProgramacionPracticaController@get']);
+    Route::get('/delete/{id}', ['uses' => 'ProgramacionPracticaController@delete']);
+    Route::get('/getAllCuposProgramacion/{id}', ['uses' => 'ProgramacionPracticaController@getAllCuposProgramacion']);
+});

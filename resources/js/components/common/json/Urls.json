@@ -68,5 +68,12 @@
         "GET_BY_RUN": "api/cupoPractica/getByRun/",
         "DELETE": "api/cupoPractica/delete/",
         "GET_CUPOS_PROGRAMACION": "api/cupoPractica/getCuposByProgramacion"
+    },
+    "PROGRAMACION_PRACTICA": {
+        "GET_ALL": "api/programacionPractica/getAll",
+        "SAVE": "api/programacionPractica/save",
+        "GET": "api/programacionPractica/get/",
+        "DELETE": "api/programacionPractica/delete/",
+        "GET_ALL_CUPOS_PROGRAMACION": "api/programacionPractica/getAllCuposProgramacion/"
     }
 }

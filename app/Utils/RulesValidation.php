@@ -58,6 +58,19 @@ class RulesValidation{
         ];
     }
 
+    public static function ValidateProgramacionPractica(){
+        return [
+            'ID' => 'required',
+            'ANIO' => 'required',
+            'PERIODO' => 'required',
+            'CARRERA' => 'required',
+            'TIPO_PRACTICA' => 'required',
+            'NIVEL_ENSENANZA' => 'required',
+            'NIVEL_PRACTICA' => 'required'
+
+        ];
+    }
+
     public static function ValidateTipoSolicitud(){
         return [
             'ID' => 'required',

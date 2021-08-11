@@ -15,6 +15,9 @@ export const state = {
     dsTipoSolicitud: {
         data: []
     },
+    dsProgramacionPracticas:{
+        data: []
+    },
     dsSteps: {
         data: []
     },
@@ -113,6 +116,32 @@ export const state = {
         ESTADO:"DISPONIBLE",
         TIPO_PRACTICA:null,
         EDITAR_FORMULARIO:false
+    },
+    fichaProgramacion:{
+        ID: 0,
+        ANIO: null,
+        PERIODO: null,
+        CARRERA: null,
+        UA: null,
+        NIVEL_PRACTICA: null,
+        TIPO_PRACTICA: null,
+        NIVEL_ENSENANZA: null,
+        N_SEMANAS_PERMANENCIA: null,
+        N_HORAS_AULA: null,
+        N_HORAS_ADMINISTRATIVAS: null,
+        TAREAS: null,
+        CARACTERISTICAS: null,
+        CODIGO_ASIGNATURA: null,
+        NOMBRE_ASIGNATURA: null,
+        SECCION_ASIGNATURA:null,
+        PROFESOR_ASIGNATURA:null,
+        RUT_PROFESOR_ASIGNATURA:null,
+        RBD: null,
+        CENTRO_PRACTICA: null,
+        COMUNA_PRACTICA: null,
+        CUPOS_PRACTICA: null,
+        ESTADO:"ACTIVO",
+        CUPOS:[]
     }
 
 
