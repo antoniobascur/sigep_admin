@@ -25,6 +25,23 @@ class ProgramacionPracticaController extends Controller
         return response()->json($respuesta, 200);
     }
 
+
+
+    public function changeStateProgramacion(Request $request){
+        try {
+            $id = $request->ID;
+
+            $estado= $request->ESTADO;
+
+            $result = ProgramacionPractica::changeStateProgramacion($id,$estado);
+
+            $respuesta = Helper::createStdResponse(true, "Procesado con éxito!", $result);
+        } catch (Exception $e) {
+            return response()->json(Helper::createStdResponse(false, "Error " . $e->getCode(), "", $e->getMessage()), 400);
+        }
+        return response()->json($respuesta, 200);
+    }
+
     public function getAllCuposProgramacion($id){
         try {
 

@@ -125,7 +125,8 @@ export default {
             this.windowFormNuevo.kendoWidget().close();
         });
         eventHub.$on("LoadingOff", (data) => {
-            this.loading = data.data;
+
+            this.loading = data.obj;
         });
         eventHub.$on("onEditProgramacionPractica", (data) => {
 
@@ -142,7 +143,7 @@ export default {
             this.form.N_HORAS_ADMINISTRATIVAS= data.obj.N_HORAS_ADMINISTRATIVAS;
             this.form.TAREAS= data.obj.TAREAS;
             this.form.CARACTERISTICAS= data.obj.CARACTERISTICAS;
-            this.form.CODIGO_ASIGNATURA= data.obj.CODIGO_ASIGNATURA;
+            this.form.CODIGO_ASIGNATURA= data.obj.COD_ASIGNATURA;
             this.form.NOMBRE_ASIGNATURA= data.obj.NOMBRE_ASIGNATURA;
             this.form.SECCION_ASIGNATURA= data.obj.SECCION_ASIGNATURA;
             this.form.PROFESOR_ASIGNATURA= data.obj.PROFESOR_ASIGNATURA;
@@ -152,8 +153,8 @@ export default {
             this.form.COMUNA_PRACTICA= data.obj.COMUNA_PRACTICA;
             this.form.CUPOS_PRACTICA= data.obj.CUPOS_PRACTICA;
             this.form.ESTADO= data.obj.ESTADO;
-            this.form.CUPOS= JSON.parse(data.obj.CUPOS);;
 
+            this.getDataCupos(data.obj.ID);
             this.form.EDITAR_FORMULARIO = true;
 
             console.log("se hizo click");
@@ -167,8 +168,9 @@ export default {
 
         });
         eventHub.$on("onDuplicateProgramacionPractica", (data) => {
-
-            this.form.ID = data.obj.ID;
+            console.log("onDuplicateProgramacionPractica");
+            console.log(data);
+            this.form.ID = 0;
             this.form.ANIO= data.obj.ANIO;
             this.form.PERIODO= data.obj.PERIODO;
             this.form.CARRERA = data.obj.CARRERA;
@@ -181,7 +183,7 @@ export default {
             this.form.N_HORAS_ADMINISTRATIVAS= data.obj.N_HORAS_ADMINISTRATIVAS;
             this.form.TAREAS= data.obj.TAREAS;
             this.form.CARACTERISTICAS= data.obj.CARACTERISTICAS;
-            this.form.CODIGO_ASIGNATURA= data.obj.CODIGO_ASIGNATURA;
+            this.form.CODIGO_ASIGNATURA= data.obj.COD_ASIGNATURA;
             this.form.NOMBRE_ASIGNATURA= data.obj.NOMBRE_ASIGNATURA;
             this.form.SECCION_ASIGNATURA= data.obj.SECCION_ASIGNATURA;
             this.form.PROFESOR_ASIGNATURA= data.obj.PROFESOR_ASIGNATURA;
@@ -191,12 +193,12 @@ export default {
             this.form.COMUNA_PRACTICA= data.obj.COMUNA_PRACTICA;
             this.form.CUPOS_PRACTICA= data.obj.CUPOS_PRACTICA;
             this.form.ESTADO= data.obj.ESTADO;
-            this.form.CUPOS= JSON.parse(data.obj.CUPOS);;
 
-            this.form.EDITAR_FORMULARIO = false;
+            this.getDataCupos(data.obj.ID);
+            this.form.EDITAR_FORMULARIO = true;
 
 
-            this.tituloKendoWindowsFormNuevo="NUEVO CUPO BASADO EN UNO EXISTENTE";
+            this.tituloKendoWindowsFormNuevo="NUEVA PROGRAMACIÓN BASADA EN UNA EXISTENTE";
 
             this.$nextTick(() => {
                 this.windowFormNuevo.kendoWidget().center().open();
@@ -218,6 +220,11 @@ export default {
            // this.form.ID = data.obj.ID;
 
             this.onDialogCupos(data.obj.ID);
+
+        });
+        eventHub.$on("onChangeEstado", (data) => {
+
+                    this.changeEstado(data.obj.ID,data.obj.ESTADO);
 
         });
 
@@ -261,7 +268,76 @@ export default {
                 this.windowCupos.kendoWidget().center().open();
             });
         },
+        delete() {
+            this.loading = true;
+            let url = Urls[this.propsToPass.element].DELETE + this.form.ID;
 
+
+            axios
+                .get(url, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                        "X-Requested-With": "XMLHttpRequest",
+                        "X-CSRF-TOKEN": window.csrf_token,
+                    },
+                })
+                .then((response) => {
+
+                    this.submit = false;
+
+                    if (response.status) {
+
+                        this.form.ID = response.data.data;
+
+                        eventHub.$emit( "updateToGrid",
+                            {obj: this.form}
+                        );
+                        toastr.success(AlertMessage.GRID.ELIMINACION_EXITO);
+                    }
+                })
+                .catch(function (error) {
+                    this.loading = false;
+                    console.log("ERROR:", error);
+                    toastr.error(AlertMessage.GRID.ELIMINACION_ERROR);
+                    onError();
+                });
+        },
+        changeEstado(ID,ESTADO){
+
+
+            console.log("buscadnocupos");
+            let url = Urls[this.propsToPass.element].CHANGE_STATE_PROGRAMACION;
+            let formData = new FormData();
+            formData.append("ID", ID);
+            formData.append("ESTADO", (ESTADO=="INACTIVO")?"ACTIVO":"INACTIVO");
+            axios
+                .post(url, formData, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                        "X-Requested-With": "XMLHttpRequest",
+                        "X-CSRF-TOKEN": window.csrf_token,
+                    },
+                })
+                .then((response) => {
+                    if (response.status) {
+
+                        this.form.ID = response.data.data;
+
+                        eventHub.$emit( "updateToGrid",
+                            {obj: this.form}
+                        );
+
+                    }
+                })
+                .catch(function (error) {
+                    //this.loading = false;
+                    toastr.error(
+                        AlertMessage.FORMULARIO.SAVE_ERROR
+                    );
+                    console.log("ERROR:", error);
+                    onError();
+                });
+        },
         getDataCupos(id) {
             eventHub.$emit("LoadingOff",{obj:true});
 
@@ -279,14 +355,14 @@ export default {
                     if (response.data.data.length > 0) {
                         this.$store.state.fichaProgramacion.CUPOS = response.data.data;
                     }
-                    eventHub.$emit("LoadingOff",{obj:false});
+
                 })
                 .catch(function (error) {
                     console.log("ERROR:", error);
                     onError();
                 })
                 .finally(() => {
-
+                    eventHub.$emit("LoadingOff",{obj:false});
 
                 });
         }

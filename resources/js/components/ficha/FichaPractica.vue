@@ -21,176 +21,99 @@
                             <div class="p-2 bd-highlight">
                                 <button class="btn btn-primary" @click="onDialogFormNew">
                                     <i class="fa fa-plus" aria-hidden="true"></i>
-                                    Nuevo
+                                    Nueva Ficha
                                 </button>
-                                <button class="btn btn-success" @click="onDialogFormUpdate">
-                                    <i class="fa fa-plus" aria-hidden="true"></i>
-                                    Actualizar
-                                </button>
+
                             </div>
                         </div>
-                        <Grid></Grid>
+                    <Grid></Grid>
                         <!--TODO:Contenido-->
                     </div>
                 </div>
+                <kendo-window
+                    :ref="'form_nuevo'"
+                    :width="'70%'"
+                    :height="'auto'"
+                    :title="this.tituloKendoWindowsFormNuevo"
+                    :visible="false"
+                    :modal="true"
+                    :resizable= "true"
+                    style="display:none;"
+                    :scrollable="false"
+                    :actions="actions"
+                >
+
+                    <Principal></Principal>
+
+                </kendo-window>
             </div>
 
             <kendo-window
-                :ref="'form_nuevo'"
-                :width="'80%'"
+                :ref="'form_actualizar'"
+                :width="'70%'"
                 :height="'auto'"
-                :title="this.tituloKendoWindowsFormNuevo"
+                :title="this.tituloKendoWindowsFormActualizar"
                 :visible="false"
                 :modal="true"
                 style="display:none;"
                 :scrollable="false"
                 :actions="actions"
             >
-                <H5>Seleccione Tipo de Ficha</H5>
-                <div id="tipoficha" class="form-group col-md-12">
-                    <div class="form-check form-check-inline">
-                        <input type="radio" class="form-check-input" id="ADSCRIPCION" v-model="TIPO_FICHA" value="ADSCRIPCION" name="ADSCRIPCION">
-                        <label class="required form-check-label font-weight-bold">&nbsp;&nbsp;Adscripción</label>
+                <H5>Información Ficha: {{this.form.ID }}</h5>
+                <!--          <div>
+
+                            <div>
+                                 <ul id="progressbar" class="text-center">
+                                     <li class="active" id="step1">
+                                         <div class="d-none d-md-block">STEP 1</div>
+                                     </li>
+                                     <li class="active" id="step2">
+                                         <div class="d-none d-md-block">STEP 2</div>
+                                     </li>
+                                     <li class="" id="step3">
+                                         <div class="d-none d-md-block">STEP 3</div>
+                                     </li>
+                                     <li class="" id="step4">
+                                         <div class="d-none d-md-block">STEP 4</div>
+                                     </li>
+                                     <li class="" id="step5">
+                                         <div class="d-none d-md-block">STEP 5</div>
+                                     </li>
+                                     <li class="" id="step6">
+                                         <div class="d-none d-md-block">STEP 5</div>
+                                     </li>
+                                 </ul>
+                             </div>
+
+                    <hr>
+                </div>-->
+                <kendo-tabstrip>
+                    <ul>
+                        <li class="k-state-active">Ficha Visita Centro Práctica</li>
+                        <li>Ficha Tríada Informativa</li>
+                        <li>Ficha Seguimiento</li>
+                        <li>Ficha Evaluación</li>
+                        <li>Control de Asistencia</li>
+                    </ul>
+                    <div>
+                        <VisitaCentro></VisitaCentro>
                     </div>
-                    <div class="form-check form-check-inline">
-                        <input type="radio" class="form-check-input" id="AUTOGESTION" v-model="TIPO_FICHA" value="AUTOGESTION" name="AUTOGESTION">
-                        <label for="AUTOGESTION" class="form-check-label font-weight-bold">&nbsp;&nbsp;Autogestión</label>
+                    <div>
+                        <Triada></Triada>
+
                     </div>
-                    <div class="form-check form-check-inline">
-                        <input type="radio" class="form-check-input" id="CONTINUIDAD" v-model="TIPO_FICHA" value="CONTINUIDAD" name="CONTINUIDAD">
-                        <label for="CONTINUIDAD" class="form-check-label font-weight-bold">&nbsp;&nbsp;Continuidad</label>
+                    <div>
+                        <Seguimiento></Seguimiento>
                     </div>
-                    <div class="form-check form-check-inline">
-                        <input type="radio" class="form-check-input" id="VISITA" v-model="TIPO_FICHA" value="VISITA" name="VISITA">
-                        <label for="VISITA" class="form-check-label font-weight-bold">&nbsp;&nbsp;Visita</label>
+                     <div>
+                         <Evaluacion></Evaluacion>
+                     </div>
+                    <div>
+
                     </div>
-                    <div class="form-check form-check-inline">
-                        <input type="radio" class="form-check-input" id="TRIADA" v-model="TIPO_FICHA" value="TRIADA" name="TRIADA">
-                        <label for="TRIADA" class="form-check-label font-weight-bold">&nbsp;&nbsp;Triada Informativa</label>
-                    </div>
-            <!--        <div class="form-check form-check-inline">
-                        <input type="radio" class="form-check-input" id="SEGUIMIENTO" v-model="TIPO_FICHA" value="SEGUIMIENTO" name="SEGUIMIENTO">
-                        <label for="SEGUIMIENTO" class="form-check-label font-weight-bold">&nbsp;&nbsp;Seguimiento</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input type="radio" class="form-check-input" id="EVALUACION" v-model="TIPO_FICHA" value="EVALUACION" name="EVALUACION">
-                        <label for="EVALUACION" class="form-check-label font-weight-bold">&nbsp;&nbsp;Evaluación</label>
-                    </div> -->
-                </div>
-
-
-                <div>
-                    <div v-if="this.TIPO_FICHA!=null">
-                        <hr>
-                        <h3 class="text-center" >{{this.tituloKendoWindowsFormNuevo +'DE '+ this.TIPO_FICHA}}</h3>
-                        <hr>
-                    </div>
-
-
-                    <ficha-adscripcion v-if="TIPO_FICHA=='ADSCRIPCION'"></ficha-adscripcion>
-
-                    <ficha-autogestion v-if="TIPO_FICHA=='AUTOGESTION'"></ficha-autogestion>
-
-                    <ficha-continuidad v-if="TIPO_FICHA=='CONTINUIDAD'"></ficha-continuidad>
-
-                    <ficha-visita v-if="TIPO_FICHA=='VISITA'"></ficha-visita>
-
-                    <ficha-triada v-if="TIPO_FICHA=='TRIADA'"></ficha-triada>
-
-                  <!--  <ficha-seguimiento v-if="TIPO_FICHA=='SEGUIMIENTO'"></ficha-seguimiento>
-
-                    <ficha-evaluacion v-if="TIPO_FICHA=='EVALUACION'"></ficha-evaluacion> -->
-                </div>
-
-
+                </kendo-tabstrip>
 
             </kendo-window>
-
-        <kendo-window
-            :ref="'form_actualizar'"
-            :width="'80%'"
-            :height="'auto'"
-            :title="this.tituloKendoWindowsFormActualizar"
-            :visible="false"
-            :modal="true"
-            style="display:none;"
-            :scrollable="false"
-            :actions="actions"
-        >
-
-            <div >
-
-                <hr>
-                <H5>Información Ficha: 1</H5>
-
-                <div>
-                    <ul id="progressbar" class="text-center">
-                        <li class="active" id="step1"><div class="d-none d-md-block">STEP 1</div></li>
-                        <li class="active" id="step2"><div class="d-none d-md-block">STEP 2</div></li>
-                        <li class="" id="step3"><div class="d-none d-md-block">STEP 3</div></li>
-                        <li class="" id="step4"><div class="d-none d-md-block">STEP 4</div></li>
-                        <li class="" id="step5"><div class="d-none d-md-block">STEP 5</div></li>
-                        <li class="" id="step6"><div class="d-none d-md-block">STEP 5</div></li>
-                    </ul>
-                </div>
-
-                <hr>
-            </div>
-
-
-
-        <kendo-tabstrip>
-            <ul>
-                <li class="k-state-active" >
-                    Ficha de Adscripción
-                </li>
-                <li>
-                    Ficha Autogestion
-                </li>
-                <li>
-                    Ficha Continuidad
-                </li>
-                <li>
-                    Ficha Visita Centro Práctica
-                </li>
-                <li>
-                    Ficha Triada Informativa
-                </li>
-           <!--     <li>
-                    Ficha Seguimiento
-                </li>
-                <li>
-                    Ficha Evaluación
-                </li> -->
-            </ul>
-
-
-            <div>
-                <ficha-adscripcion></ficha-adscripcion>
-            </div>
-            <div>
-                <ficha-autogestion></ficha-autogestion>
-            </div>
-            <div>
-                <ficha-continuidad></ficha-continuidad>
-
-            </div>
-
-            <div>
-                <ficha-visita></ficha-visita>
-            </div>
-            <div>
-                <ficha-triada></ficha-triada>
-            </div>
-       <!--     <div>
-                <ficha-seguimiento></ficha-seguimiento>
-            </div>
-            <div>
-                <ficha-evaluacion></ficha-evaluacion>
-            </div>-->
-        </kendo-tabstrip>
-
-        </kendo-window>
         </div>
     </div>
 </template>
@@ -202,26 +125,25 @@ import Loading from "../common/Loading";
 import {MultiSelect} from "@progress/kendo-dropdowns-vue-wrapper";
 import {DateInput} from "@progress/kendo-vue-dateinputs";
 import {KendoWindow} from "@progress/kendo-window-vue-wrapper";
-import Grid from "../ficha/grid/Grid";
-import FichaAdscripcion from "./form/fichaAdscripcion";
-import FichaEvaluacion from "./form/fichaEvaluacion";
-import FichaContinuidad from "./form/fichaContinuidad";
-import FichaAutogestion from "./form/fichaAutogestion";
+import Grid from "./grid/Grid";
+
+
+
 import Regions from "../common/json/Regions.json";
-import FichaVisita from "./form/fichaVisita";
-import FichaTriada from "./form/fichaTriada";
-import FichaSeguimiento from "./form/fichaSeguimiento";
+import VisitaCentro from "./section/visitaCentro/VisitaCentro";
+import Triada from "./section/triada/Triada";
+import Seguimiento from "./section/seguimiento/Seguimiento";
+import Evaluacion from "./section/evaluacion/Evaluacion";
+import Principal from "./section/principal/Principal";
+import eventHub from "../../eventHub";
 
 export default {
     components: {
-        FichaSeguimiento,
-        FichaTriada,
-        FichaVisita,
-        FichaAutogestion,
-        //   FichaContinuidad,
-        FichaEvaluacion,
-        FichaContinuidad,
-        FichaAdscripcion,
+        Principal,
+        Seguimiento,
+        Triada,
+        VisitaCentro,
+        Evaluacion,
         HelpButton,
         Loading,
         MultiSelect,
@@ -236,21 +158,21 @@ export default {
             loading: false,
             submit: false,
             TIPO_FICHA: "ADSCRIPCION",
-            tituloKendoWindowsFormNuevo:"NUEVA FICHA ",
-            tituloKendoWindowsFormActualizar:"VER FICHA ",
+            tituloKendoWindowsFormNuevo: "NUEVA FICHA ",
+            tituloKendoWindowsFormActualizar: "VER FICHA ",
             propsToPass: {
                 titulo: "Ficha Practica",
                 ayuda: "lorem ",
-                element: "FICHA_ADSCRIPCION",
+                element: "FICHA_PRACTICA",
             },
             dsRegiones: [],
             dsComunas: [],
             form: {
                 EDITAR_FORMULARIO: false,
-                ADSCRIPCION:false,
-                AUTOGESTION:false,
-                CONTINUIDAD:false,
-                OTRO:false
+                ADSCRIPCION: false,
+                AUTOGESTION: false,
+                CONTINUIDAD: false,
+                OTRO: false
 
             }
 
@@ -265,7 +187,6 @@ export default {
         },
 
 
-
     },
     methods: {
         resetForm() {
@@ -276,11 +197,39 @@ export default {
                 this.windowFormNuevo.kendoWidget().center().open();
             });
         },
-        onDialogFormUpdate(){
+        onDialogFormUpdate() {
             this.$nextTick(() => {
                 this.windowFormActualizar.kendoWidget().center().open();
             });
         }
+    },
+    created: function () {
+        eventHub.$on("closeKendoWindows", () => {
+            this.windowFormNuevo.kendoWidget().close();
+            this.windowFormActualizar.kendoWidget().close();
+        });
+        eventHub.$on("LoadingOff", (data) => {
+
+            this.loading = data.obj;
+        });
+        eventHub.$on("onOpenFichas", (data) => {
+
+            this.form.ID = data.obj.ID;
+
+
+           // this.getDataCupos(data.obj.ID);
+            this.form.EDITAR_FORMULARIO = true;
+
+            console.log("se hizo click");
+            this.tituloKendoWindowsFormNuevo="EDITAR CUPO";
+
+            this.$nextTick(() => {
+                this.windowFormActualizar.kendoWidget().center().open();
+
+            });
+
+
+        });
     }
 }
 </script>
@@ -313,12 +262,15 @@ export default {
 #progressbar #step3:before {
     content: "3";
 }
+
 #progressbar #step4:before {
     content: "4";
 }
+
 #progressbar #step5:before {
     content: "5";
 }
+
 #progressbar #step6:before {
     content: "6";
 }

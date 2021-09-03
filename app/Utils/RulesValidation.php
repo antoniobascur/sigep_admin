@@ -80,7 +80,7 @@ class RulesValidation{
     }
     public static function ValidateFichaAdscripcion(){
         return [
-            'ID' => 'required',
+            /*     'ID' => 'required',
             'CARRERA' => 'required',
             'NOMBRE' => 'required',
             'RUT' => 'required',
@@ -88,7 +88,7 @@ class RulesValidation{
             'DIRECCION' => 'required',
             'COMUNA' => 'required',
             'TELEFONO' => 'required',
-        /*    'PROFESOR_TUTOR' => 'required',
+       'PROFESOR_TUTOR' => 'required',
             'NIVEL_PRACTICA' => 'required',
             'RBD' => 'required',
             'CENTRO_PRACTICA' => 'required',

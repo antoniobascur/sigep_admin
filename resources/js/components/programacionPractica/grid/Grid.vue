@@ -21,7 +21,7 @@
             <kendo-grid-column field="NIVEL_PRACTICA" title="<b>NIVEL_PRACTICA</b>" ></kendo-grid-column>
             <kendo-grid-column field="TIPO_PRACTICA" title="<b>TIPO_PRACTICA</b>"></kendo-grid-column>
             <kendo-grid-column field="CUPOS" title="<b>CUPOS</b>" :template="cuposTemplate"></kendo-grid-column>
-            <kendo-grid-column field="ESTADO" title="<b>ESTADO</b>"></kendo-grid-column>
+            <kendo-grid-column field="ESTADO" title="<b>ESTADO</b>" :template="estadoTemplate"></kendo-grid-column>
             <kendo-grid-column title="<b>Acciones</b>" :template="actionsTemplate" :width="70"></kendo-grid-column>
         </kendo-grid>
     </div>
@@ -31,6 +31,7 @@
 import {Grid} from "@progress/kendo-grid-vue-wrapper";
 import OptionsGrid from "./OptionsGrid";
 import CuposGrid from "./CuposGrid";
+import EstadoGrid from "./EstadoGrid";
 import eventHub from "../../../eventHub";
 import NoRecords from "../../common/NoRecords";
 import Urls from "../../common/json/Urls.json";
@@ -72,7 +73,7 @@ export default {
     },
     methods: {
         getData() {
-
+            eventHub.$emit("LoadingOff",{obj:true});
             let url = Urls[this.propsToPass.element].GET_ALL;
             axios
                 .get(url, {
@@ -102,6 +103,13 @@ export default {
             this.skip = event.page.skip;
             this.take = event.page.take;
 
+        },
+        estadoTemplate(e){
+
+            return {
+                template: Vue.component("estados", EstadoGrid),
+                templateArgs: e,
+            };
         },
         cuposTemplate(e) {
             return {

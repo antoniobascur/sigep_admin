@@ -83,57 +83,39 @@
                 <div class="row">
                     <div id="dependencia" class="form-group col-md-12" >
                         <label class="required">Dependencia Administrativa</label><br>
-                        <input type="radio" id="Particular" v-model="form.DEPENDENCIA" value="Particular" name="dependencia">
-                        <label for="Particular">Particular</label>
-                        <input type="radio" id="subvencionado"v-model="form.DEPENDENCIA" value="subvencionado" name="dependencia">
-                        <label for="subvencionado">Particular Subvencionado</label>
-                        <input type="radio" id="municipal" v-model="form.DEPENDENCIA" value="municipal" name="dependencia">
-                        <label for="municipal">Municipal</label>
-                        <input type="radio" id="servicio_local_andalien" v-model="form.DEPENDENCIA" value="servicio_local_andalien" name="dependencia">
-                        <label for="servicio_local_andalien">Servicio Local de Educación Pública Andalién Sur</label>
-                        <input type="radio" id="daem_talcahuano" v-model="form.DEPENDENCIA" value="daem_talcahuano" name="dependencia">
-                        <label for="daem_talcahuano">Daem Talcahuano</label>
-                        <input type="radio" id="daem_hualpen" v-model="form.DEPENDENCIA" value="daem_hualpen" name="dependencia">
-                        <label for="daem_hualpen">Daem Hualpén</label>
-                        <input type="radio" id="daem_san_pedro" v-model="form.DEPENDENCIA" value="daem_san_pedro" name="dependencia">
-                        <label for="daem_san_pedro">Daem San Pedro</label>
-                        <input type="radio" id="daem_coronel" v-model="form.DEPENDENCIA" value="daem_coronel" name="dependencia">
-                        <label for="daem_coronel">Daem Coronel</label>
-                        <input type="radio" id="daem_lota" v-model="form.DEPENDENCIA" value="daem_lota" name="dependencia">
-                        <label for="daem_lota">Daem Lota</label>
-                        <input type="radio" id="daem_penco" v-model="form.DEPENDENCIA" value="daem_penco" name="dependencia">
-                        <label for="daem_penco">Daem Penco</label>
-                        <input type="radio" id="daem_tome" v-model="form.DEPENDENCIA" value="daem_tome" name="dependencia">
-                        <label for="daem_tome">Daem Tomé</label>
-                        <input type="radio" id="arzobispado" v-model="form.DEPENDENCIA" value="arzobispado" name="dependencia">
-                        <label for="arzobispado">Arzobispado de Concepción</label>
-                        <input type="radio" id="junji" v-model="form.DEPENDENCIA" value="junji" name="dependencia">
-                        <label for="junji">JUNJI</label>
-                        <input type="radio" id="cepas" v-model="form.DEPENDENCIA" value="cepas" name="dependencia">
-                        <label for="cepas">CEPAS</label>
-                        <input type="radio" id="hogar_cristo" v-model="form.DEPENDENCIA" value="hogar_cristo" name="dependencia">
-                        <label for="hogar_cristo">Hogar de Cristo</label>
-                        <input type="radio" id="integra" v-model="form.DEPENDENCIA" value="integra" name="dependencia">
-                        <label for="integra">Integra</label>
-                        <input type="radio" id="coemco" v-model="form.DEPENDENCIA" value="coemco" name="dependencia">
-                        <label for="coemco">Coemco</label>
-                        <input type="radio" id="otro" v-model="form.DEPENDENCIA" value="otro" name="dependencia">
-                        <label for="otro">Otro</label>
+
+                        <kendo-dropdownlist
+                            :ref="'DEPENDENCIA_ADMINISTRATIVA'"
+                            class="form-control"
+                            name="DEPENDENCIA_ADMINISTRATIVA"
+                            v-model="form.DEPENDENCIA_ADMINISTRATIVA"
+                            :data-source="dsDependencia"
+                            :data-text-field="'name'"
+                            :data-value-field="'name'"
+                            :optionLabel="'Seleccione'"
+                            :filter="'contains'"
+                            :class="{'is-invalid': errors.has('dsDependencia')}"
+                        ></kendo-dropdownlist>
+
+                        <div class="invalid-feedback">{{ errors.first('DEPENDENCIA_ADMINISTRATIVA') }}</div>
                     </div>
                     <div class="form-group col-md-12">
-                        <label class="required">Enseñanza</label><br>
-                        <input type="radio" id="hc" v-model="form.ENSENANZA" value="hc" name="ensenanza">
-                        <label for="hc">HC</label>
-                        <input type="radio" id="tp" v-model="form.ENSENANZA" value="tp" name="ensenanza">
-                        <label for="tp">TP</label>
-                        <input type="radio" id="ed_artistica" v-model="form.ENSENANZA" value="ed_artistica" name="ensenanza">
-                        <label for="ed_artistica">Educación Artística</label>
-                        <input type="radio" id="ed_especial" v-model="form.ENSENANZA" value="ed_especial" name="ensenanza">
-                        <label for="ed_especial">Educación Especial</label>
-                        <input type="radio" id="ed_jovenes_adultos" v-model="form.ENSENANZA" value="ed_jovenes_adultos" name="ensenanza">
-                        <label for="ed_jovenes_adultos">Educación de Jóvenes y Adultos</label>
-                        <input type="radio" id="no_convencional" v-model="form.ENSENANZA" value="no_convencional" name="ensenanza">
-                        <label for="no_convencional">No Convencional</label>
+                        <label class="required">Nivel Enseñanza</label><br>
+
+                        <kendo-dropdownlist
+                            :ref="'TIPO_ENSENANZA'"
+                            class="form-control"
+                            name="TIPO_ENSENANZA"
+                            v-model="form.TIPO_ENSENANZA"
+                            :data-source="dsNivelEnsenanza"
+                            :data-text-field="'name'"
+                            :data-value-field="'name'"
+                            :optionLabel="'Seleccione'"
+                            :filter="'contains'"
+                            :class="{'is-invalid': errors.has('dsNivelEnsenanza')}"
+                        ></kendo-dropdownlist>
+
+                        <div class="invalid-feedback">{{ errors.first('TIPO_ENSENANZA') }}</div>
                     </div>
                 </div>
                 <div class="row">
@@ -338,6 +320,8 @@ import Communes from "../common/json/Communes.json";
 import AlertMessage from "../common/json/AlertMessage.json";
 import eventHub from "../../eventHub";
 import Grid from "./grid/Grid";
+import DependenciaAdministrativa from "../common/json/DependenciaAdministrativa.json";
+import NivelEnsenanza from "../common/json/NivelEnsenanza.json";
 
 export default {
     components: {
@@ -358,6 +342,8 @@ export default {
                 ayuda: "lorem ",
                 element: "CENTRO_PRACTICAS",
             },
+            dsDependencia: [],
+            dsNivelEnsenanza:[],
             dsRegiones: [],
             dsComunas: [],
             form: {
@@ -393,6 +379,7 @@ export default {
     },
     created: function () {
         //this.loading = false;
+        this.getNivelEnsenanza();
         this.getRegion();
        this.dsComunas=Communes.communes;
         eventHub.$on("LoadingOff", () => {
@@ -441,8 +428,15 @@ export default {
                     this.delete();
                 });
         });
+        this.getDependencia();
     },
     methods: {
+        getNivelEnsenanza(){
+            this.dsNivelEnsenanza=NivelEnsenanza.NivelEnsenanza;
+        },
+        getDependencia() {
+            this.dsDependencia = DependenciaAdministrativa.DependenciaAdministrativa;
+        },
         getRegion() {
             this.dsRegiones = Regions["regions"];
         },

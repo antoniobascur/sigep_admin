@@ -197,4 +197,6 @@ AND CUPOS_PRACTICA.NIVEL_PRACTICA=?",
         //dd($results);
         return $results;
     }
+
+
 }

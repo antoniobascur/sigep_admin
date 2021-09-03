@@ -11,121 +11,60 @@ use Illuminate\Support\Facades\DB;
 class Ficha
 {
     public $id;
-    public $carrera;
-    public $nombre;
-    public $rut;
-    public $email;
-    public $direccion;
-    public $comuna;
-    public $telefono;
-    public $profesorTutor;
-    public $nivelPractica;
-    public $rbd;
-    public $centroPractica;
-    public $dependencia;
-    public $ensenanza;
-    public $direccionCp;
-    public $comunaCp;
-    public $telefonoCp;
-    public $directorCp;
-    public $emailDirectorCp;
-    public $nombreUtpCp;
-    public $emailUtpCp;
-    public $nombreProfesorColaboradorCp;
-    public $rutProfesorColaboradorCp;
-    public $emailProfesorColaboradorCp;
-    public $telefonoProfesorColaboradorCp;
-    public $tituloProfesorColaboradorCp;
-    public $egresadoUcsc;
+    public $tipoFicha;
+    public $runEstudiante;
+    public $inicioPractica;
+    public $terminoPractica;
+    public $observacion;
+    public $cartaPresentacionGenerada;
+    public $especialidad;
+    public $idCuposProgramacionPractica;
+    public $fechaHoraCreacion;
+    public $fechaHoraActualizacion;
+    public $estado;
+
+
+
 
     const CONEXION_BD = 'mysql_SIGEP';
 
     /**
-     * FichaAdscripcion constructor.
-     * @param null $carrera
-     * @param null $nombre
-     * @param null $rut
-     * @param null $email
-     * @param null $direccion
-     * @param null $comuna
-     * @param null $telefono
-     * @param null $profesorTutor
-     * @param null $nivelPractica
-     * @param null $rbd
-     * @param null $centroPractica
-     * @param null $dependencia
-     * @param null $ensenanza
-     * @param null $direccionCp
-     * @param null $comunaCp
-     * @param null $telefonoCp
-     * @param null $directorCp
-     * @param null $emailDirectorCp
-     * @param null $nombreUtpCp
-     * @param null $emailUtpCp
-     * @param null $nombreProfesorColaboradorCp
-     * @param null $rutProfesorColaboradorCp
-     * @param null $emailProfesorColaboradorCp
-     * @param null $telefonoProfesorColaboradorCp
-     * @param null $tituloProfesorColaboradorCp
-     * @param null $egresadoUcsc
+     * @param $id
+     * @param $tipoFicha
+     * @param $runEstudiante
+     * @param $inicioPractica
+     * @param $terminoPractica
+     * @param $observacion
+     * @param $cartaPresentacionGenerada
+     * @param $especialidad
+     * @param $idCuposProgramacionPractica
+     * @param $fechaHoraCreacion
+     * @param $fechaHoraActualizacion
+     * @param $estado
      */
-
-
     public function __construct(
-        $carrera = null,
-        $nombre= null,
-        $rut= null,
-        $email= null,
-        $direccion= null,
-        $comuna= null,
-        $telefono= null,
-        $profesorTutor= null,
-        $nivelPractica= null,
-        $rbd= null,
-        $centroPractica= null,
-        $dependencia= null,
-        $ensenanza= null,
-        $direccionCp= null,
-        $comunaCp= null,
-        $telefonoCp= null,
-        $directorCp= null,
-        $emailDirectorCp= null,
-        $nombreUtpCp= null,
-        $emailUtpCp= null,
-        $nombreProfesorColaboradorCp = null,
-        $rutProfesorColaboradorCp = null,
-        $emailProfesorColaboradorCp = null,
-        $telefonoProfesorColaboradorCp = null,
-        $tituloProfesorColaboradorCp = null,
-        $egresadoUcsc= null
+        $id,
+        $tipoFicha,
+        $runEstudiante,
+        $inicioPractica,
+        $terminoPractica,
+        $observacion,
+        $cartaPresentacionGenerada,
+        $especialidad,
+        $idCuposProgramacionPractica
+
     ) {
-        $this->carrera = $carrera;
-        $this->nombre = $nombre;
-        $this->rut = $rut;
-        $this->email = $email;
-        $this->direccion = $direccion;
-        $this->comuna = $comuna;
-        $this->telefono = $telefono;
-        $this->profesorTutor = $profesorTutor;
-        $this->nivelPractica = $nivelPractica;
-        $this->rbd = $rbd;
-        $this->centroPractica = $centroPractica;
-        $this->dependencia = $dependencia;
-        $this->ensenanza = $ensenanza;
-        $this->direccionCp = $direccionCp;
-        $this->comunaCp = $comunaCp;
-        $this->telefonoCp = $telefonoCp;
-        $this->directorCp = $directorCp;
-        $this->emailDirectorCp = $emailDirectorCp;
-        $this->nombreUtpCp = $nombreUtpCp;
-        $this->emailUtpCp = $emailUtpCp;
-        $this->nombreProfesorColaboradorCp = $nombreProfesorColaboradorCp;
-        $this->rutProfesorColaboradorCp = $rutProfesorColaboradorCp;
-        $this->emailProfesorColaboradorCp = $emailProfesorColaboradorCp;
-        $this->telefonoProfesorColaboradorCp = $telefonoProfesorColaboradorCp;
-        $this->tituloProfesorColaboradorCp = $tituloProfesorColaboradorCp;
-        $this->egresadoUcsc = $egresadoUcsc;
+        $this->id = $id;
+        $this->tipoFicha = $tipoFicha;
+        $this->runEstudiante = $runEstudiante;
+        $this->inicioPractica = $inicioPractica;
+        $this->terminoPractica = $terminoPractica;
+        $this->observacion = $observacion;
+        $this->cartaPresentacionGenerada = $cartaPresentacionGenerada;
+        $this->especialidad = $especialidad;
+        $this->idCuposProgramacionPractica = $idCuposProgramacionPractica;
     }
+
 
     /**
      * @param $id
@@ -156,9 +95,18 @@ class Ficha
         try {
             $results = DB::connection(self::CONEXION_BD)->select(
                 "
-            SELECT * FROM
-	        FICHA
-	  	    "
+            SELECT
+FICHA.ID,FICHA.TIPO_FICHA,FICHA.RUN_ESTUDIANTE,FICHA.ESTADO AS ESTADO_FICHA,
+CUPOS_PROGRAMACION_PRACTICA.ID AS ID_CUPOS_PROGRAMACION_PRACTICA,CUPOS_PROGRAMACION_PRACTICA.N_INTEGRANTES AS N_INTEGRANTES_CUPOS_PROGRAMACION_PRACTICA,CUPOS_PROGRAMACION_PRACTICA.ESTADO AS ESTADO_CUPOS_PROGRAMACION_PRACTICA,
+PROGRAMACION_PRACTICA.ID AS ID_PROGRAMACION_PRACTICA,PROGRAMACION_PRACTICA.ANIO,PROGRAMACION_PRACTICA.PERIODO,PROGRAMACION_PRACTICA.CARRERA,PROGRAMACION_PRACTICA.UA,PROGRAMACION_PRACTICA.NIVEL_PRACTICA,PROGRAMACION_PRACTICA.TIPO_PRACTICA,PROGRAMACION_PRACTICA.NIVEL_ENSENANZA,PROGRAMACION_PRACTICA.N_SEMANAS_PERMANENCIA,PROGRAMACION_PRACTICA.N_HORAS_AULA,PROGRAMACION_PRACTICA.N_HORAS_ADMINISTRATIVAS,PROGRAMACION_PRACTICA.COD_ASIGNATURA,PROGRAMACION_PRACTICA.NOMBRE_ASIGNATURA,PROGRAMACION_PRACTICA.ESTADO AS ESTADO_PROGRAMACION_PRACTICA,
+CUPOS_PRACTICA.MODALIDAD,CUPOS_PRACTICA.RBD_CENTRO_PRACTICA,CUPOS_PRACTICA.RUT_PROFESOR_COLABORADOR,CUPOS_PRACTICA.PROFESOR_COLABORADOR,
+CENTRO_PRACTICAS.NOMBRE_ESTABLECIMIENTO,
+ESTUDIANTE.NOMBRE AS NOMBRE_ESTUDIANTE,ESTUDIANTE.APELLIDO AS APELLIDO_ESTUDIANTE, ESTUDIANTE.EMAIL AS EMAIL_ESTUDIANTE,ESTUDIANTE.TELEFONO AS TELEFONO_ESTUDIANTE ,ESTUDIANTE.COMUNA AS COMUNA_ESTUDIANTE
+FROM FICHA JOIN CUPOS_PROGRAMACION_PRACTICA ON FICHA.CUPOS_PROGRAMACION_PRACTICA_ID=CUPOS_PROGRAMACION_PRACTICA.ID
+JOIN PROGRAMACION_PRACTICA ON PROGRAMACION_PRACTICA.ID=CUPOS_PROGRAMACION_PRACTICA.PROGRAMACION_PRACTICA_ID
+JOIN CUPOS_PRACTICA ON CUPOS_PRACTICA.ID= CUPOS_PROGRAMACION_PRACTICA.CUPOS_PRACTICA_ID
+JOIN CENTRO_PRACTICAS ON  CENTRO_PRACTICAS.RBD=CUPOS_PRACTICA.RBD_CENTRO_PRACTICA
+left JOIN ESTUDIANTE ON ESTUDIANTE.RUN=FICHA.RUN_ESTUDIANTE"
             );
         } catch (\Illuminate\Database\QueryException $ex) {
             $results = "Error: " . $ex->getMessage();
@@ -176,29 +124,43 @@ class Ficha
             DB::connection(self::CONEXION_BD)->insert(
                 "INSERT INTO FICHA
                         (ID,
-                        NIVEL_PRACTICA,
+                        TIPO_FICHA,
+                        RUN_ESTUDIANTE,
                         INICIO_PRACTICA,
                         TERMINO_PRACTICA,
                         OBSERVACION,
+                        CARTA_PRESENTACION_GENERADA,
+                        ESPECIALIDAD,
+                        CUPOS_PROGRAMACION_PRACTICA_ID,
                         FECHA_HORA_CREACION,
-                        FICHA_HORA_ACTUALIZACION
+                        FICHA_HORA_ACTUALIZACION,
+                        ESTADO
                         ) values
-                        (?,?,?,?,?,?,?)
+                        (?,?,?,?,?,?,?,?,?,?,?,?)
                         ON DUPLICATE KEY UPDATE ID = VALUES(ID),
-                        NIVEL_PRACTICA = VALUES(NIVEL_PRACTICA),
+                        TIPO_FICHA = VALUES(TIPO_FICHA),
+                        RUN_ESTUDIANTE = VALUES(RUN_ESTUDIANTE),
                         INICIO_PRACTICA = VALUES(INICIO_PRACTICA),
                         TERMINO_PRACTICA = VALUES(TERMINO_PRACTICA),
                         OBSERVACION = VALUES(OBSERVACION),
+                        CARTA_PRESENTACION_GENERADA = VALUES(CARTA_PRESENTACION_GENERADA),
+                        ESPECIALIDAD = VALUES(ESPECIALIDAD),
+                        CUPOS_PROGRAMACION_PRACTICA_ID = VALUES(CUPOS_PROGRAMACION_PRACTICA_ID),
                         FECHA_HORA_CREACION = VALUES(FECHA_HORA_CREACION),
                         FICHA_HORA_ACTUALIZACION = VALUES(FICHA_HORA_ACTUALIZACION)",
                 [
                     $this->id,
-                    $this->rut,
-                    '2',
-                    '1',
-                    '6',
-                    '5',
-                    '3'
+                    $this->tipoFicha,
+                    $this->runEstudiante,
+                    $this->inicioPractica,
+                    $this->terminoPractica,
+                    $this->observacion,
+                    $this->cartaPresentacionGenerada,
+                    $this->especialidad,
+                    $this->idCuposProgramacionPractica,
+                    $this->fechaHoraCreacion,
+                    $this->fechaHoraActualizacion,
+                    $this->estado
 
                 ]
             );

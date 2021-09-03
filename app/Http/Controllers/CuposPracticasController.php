@@ -132,4 +132,6 @@ class CuposPracticasController extends Controller
         }
         return response()->json($respuesta, 200);
     }
+
+
 }

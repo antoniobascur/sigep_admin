@@ -136,6 +136,8 @@ JOIN CENTRO_PRACTICAS  ON CUPOS_PRACTICA.CENTRO_PRACTICAS_ID=CENTRO_PRACTICAS.ID
         return $results;
     }
 
+
+
     public static function delete($id)
     {
         try {
@@ -152,6 +154,24 @@ JOIN CENTRO_PRACTICAS  ON CUPOS_PRACTICA.CENTRO_PRACTICAS_ID=CENTRO_PRACTICAS.ID
 
         return $id;
     }
+
+    public static function changeStateProgramacion($id,$estado)
+    {
+        try {
+            $submit = DB::connection(self::CONEXION_BD)->delete(
+                "UPDATE PROGRAMACION_PRACTICA SET PROGRAMACION_PRACTICA.ESTADO=? where  PROGRAMACION_PRACTICA.ID=? ",
+                array($estado,$id)
+            );
+            // dd($submit);
+            $id = $submit;
+        } catch (\Illuminate\Database\QueryException $ex) {
+            $id = "Error: " . $ex->getMessage();
+            // dd($id);
+        }
+
+        return $id;
+    }
+
 
     public function save()
     {

@@ -44,12 +44,7 @@ Route::group(['prefix' => 'tipoSolicitud'], function () {
 });
 
 
-Route::group(['prefix' => 'ficha'], function () {
-    Route::get('/getAll', ['uses' => 'FichaController@getAll']);
-    Route::post('/save', ['uses' => 'FichaController@save']);
-    Route::post('/get/{id}', ['uses' => 'FichaController@get']);
-    Route::get('/delete/{id}', ['uses' => 'FichaController@delete']);
-});
+
 
 Route::group(['prefix' => 'estudiante'], function () {
     Route::get('/getAll', ['uses' => 'EstudianteController@getAll']);
@@ -92,6 +87,7 @@ Route::group(['prefix' => 'cupoPractica'], function () {
     Route::post('/save', ['uses' => 'CuposPracticasController@save']);
     Route::post('/get/{id}', ['uses' => 'CuposPracticasController@get']);
     Route::post('/getCuposByProgramacion', ['uses' => 'CuposPracticasController@getCuposByProgramacion']);
+    Route::post('/getCuposByCuposProgramacionPractica', ['uses' => 'CuposPracticasController@getCuposByCuposProgramacionPractica']);
     Route::get('/delete/{id}', ['uses' => 'CuposPracticasController@delete']);
 });
 Route::group(['prefix' => 'programacionPractica'], function () {
@@ -100,4 +96,18 @@ Route::group(['prefix' => 'programacionPractica'], function () {
     Route::post('/get/{id}', ['uses' => 'ProgramacionPracticaController@get']);
     Route::get('/delete/{id}', ['uses' => 'ProgramacionPracticaController@delete']);
     Route::get('/getAllCuposProgramacion/{id}', ['uses' => 'ProgramacionPracticaController@getAllCuposProgramacion']);
+    Route::post('/changeStateProgramacion', ['uses' => 'ProgramacionPracticaController@changeStateProgramacion']);
+
+});
+Route::group(['prefix' => 'cuposProgramacionPractica'], function () {
+
+    Route::post('/getCuposByCuposProgramacionPractica', ['uses' => 'CuposProgramacionPracticaController@getCuposByCuposProgramacionPractica']);
+
+});
+
+Route::group(['prefix' => 'ficha'], function () {
+    Route::get('/getAll', ['uses' => 'FichaController@getAll']);
+    Route::post('/save', ['uses' => 'FichaController@save']);
+    Route::post('/get/{id}', ['uses' => 'FichaController@get']);
+    Route::get('/delete/{id}', ['uses' => 'FichaController@delete']);
 });

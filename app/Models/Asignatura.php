@@ -87,8 +87,7 @@ class Asignatura{
         try {
             $results = DB::connection(self::CONEXION_BD)->select(
                 "
-            SELECT * FROM
-	        ASIGNATURA
+            SELECT  CONCAT(ASIGNATURA.COD_ASIGNATURA, '-', ASIGNATURA.SECCION_ASIGNATURA) AS ASIGNATURA_SECCION,ASIGNATURA.*,PROFESOR_TUTOR.NOMBRE,PROFESOR_TUTOR.APELLIDO  from  ASIGNATURA join PROFESOR_TUTOR ON ASIGNATURA.RUT_PROFESOR_TUTOR=PROFESOR_TUTOR.RUN
 	  	    "
             );
         } catch (\Illuminate\Database\QueryException $ex) {

@@ -74,6 +74,16 @@
         "SAVE": "api/programacionPractica/save",
         "GET": "api/programacionPractica/get/",
         "DELETE": "api/programacionPractica/delete/",
-        "GET_ALL_CUPOS_PROGRAMACION": "api/programacionPractica/getAllCuposProgramacion/"
+        "GET_ALL_CUPOS_PROGRAMACION": "api/programacionPractica/getAllCuposProgramacion/",
+        "CHANGE_STATE_PROGRAMACION": "api/programacionPractica/changeStateProgramacion"
+    },
+    "CUPOS_PROGRAMACION_PRACTICA": {
+        "GET_CUPOS_PROGRAMACION_PRACTICA": "api/cuposProgramacionPractica/getCuposByCuposProgramacionPractica"
+    },
+    "FICHA_PRACTICA": {
+        "GET_ALL": "api/ficha/getAll",
+        "SAVE": "api/ficha/save",
+        "GET": "api/ficha/get/",
+        "DELETE": "api/ficha/delete/"
     }
 }

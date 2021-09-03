@@ -21,16 +21,59 @@ export const state = {
     dsSteps: {
         data: []
     },
+    dsFicha: {
+        data: []
+    },
     ficha:{
+        ID: null,
+        TIPO_FICHA:null,
+        RUT_ESTUDIANTE: null,
+        NOMBRE_ESTUDIANTE: null,
+        EMAIL_ESTUDIANTE: null,
+        TELEFONO_ESTUDIANTE: null,
+        ANIO: null,
+        PERIODO: null,
         CARRERA: null,
-        NOMBRE: null,
+        UA: null,
+        NIVEL_PRACTICA: null,
+        TIPO_PRACTICA: null,
+        ID_CUPOS_PROGRAMACION_PRACTICA: null,
+        CANTIDAD_VECES:null,
+        EX_ALUMNO_ESTABLECIMIENTO:null,
+        RAZON_CONTINUIDAD:null,
+        RBD_CP:null,
+        NOMBRE_CP:null,
+        COMUNA_CP:null,
+        REGION_CP:null,
+        DEPENDENCIA_CP:null,
+        TIPO_ENSENANZA_CP:null,
+        DIRECTIVO_CP:null,
+        CARGO_DIRECTIVO_CP:null,
+        TELEFONO_CONTACTO_CP:null,
+        EMAIL_CONTACTO_CP:null,
+        MODALIDAD_PRACTICA_CUPO:null,
+        CURSO_INTERVENCION_CUPO:null,
+        NOMBRE_PROF_COLABORADOR_CUPO:null,
+        EMAIL_PROF_COLABORADOR_CUPO:null,
+        FUNCION_PROF_COLABORADOR_CUPO:null,
+        INFO_CUPO:null,
+        OBSERVACION:null
+    },
+    ficha_old:{
+        ANIO: null,
+        PERIODO: null,
+        CARRERA: null,
+        UA: null,
+        NIVEL_PRACTICA: null,
+        TIPO_PRACTICA: null,
+        NIVEL_ENSENANZA: null,
+        NOMBRE_ESTUDIANTE:null,
         RUT: null,
         EMAIL: null,
         DIRECCION: null,
         COMUNA: null,
         TELEFONO: null,
         PROFESOR_TUTOR: null,
-        NIVEL_PRACTICA: null,
         HORAS_PASANTIA: null,
         RBD: null,
         CENTRO_PRACTICA: null,
@@ -141,7 +184,14 @@ export const state = {
         COMUNA_PRACTICA: null,
         CUPOS_PRACTICA: null,
         ESTADO:"ACTIVO",
-        CUPOS:[]
+        CUPOS:[],
+        EDITAR_FORMULARIO:false
+    },
+    fichaEvaluacion:{
+
+    },
+    fichaSeguimiento:{
+
     }
 
 

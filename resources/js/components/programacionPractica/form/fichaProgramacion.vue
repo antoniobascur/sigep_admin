@@ -134,7 +134,7 @@
             </div>
             <div class="form-group col-md-4" v-else>
             <div class="d-flex flex-column" >
-                <div class="mt-4"><label><i class="fa fa-info-circle" aria-hidden="true"></i> Debe seleccionar una carrera</label>
+                <div class="mt-4" v-if="this.form.UA===null"><label><i class="fa fa-info-circle" aria-hidden="true"></i> Debe seleccionar una carrera</label>
                 </div>
             </div>
             </div>
@@ -411,7 +411,7 @@ export default {
                 }
             },
             htmlText:'<p>Escribir aquí...</p>',
-            form:{
+          /*  form:{
                 ID: 0,
                 ANIO: null,
                 PERIODO: null,
@@ -436,7 +436,7 @@ export default {
                 CUPOS_PRACTICA: null,
                 ESTADO:"ACTIVO",
                 CUPOS:[]
-            },
+            },*/
             propsToPass: {
                 titulo: "Programación de practicas",
                 ayuda: "lorem ",
@@ -453,6 +453,14 @@ export default {
         this.getTipoPractica();
         this.getAnio();
         //this.getCuposByProgramacion();
+        this.getAsignaturasByUa(0,true);
+    },
+    computed: {
+
+        form() {
+            return this.$store.state.fichaProgramacion;
+        },
+
     },
     methods: {
         getTipoPractica(){
@@ -620,13 +628,23 @@ export default {
                     eventHub.$emit("LoadingOff",{obj:false});
                 });
         },
-        getAsignaturasByUa(value){
-            console.log(value.dataItem.CARRERA);
-            this.form.CARRERA=value.dataItem.CARRERA;
-            console.log(this.form.CARRERA);
-            this.form.UA=value.dataItem.UA;
+        getAsignaturasByUa(value,dupli=false){
+            console.log("buscando");
+            let ua;
+            if(!dupli){
+                console.log(value.dataItem.CARRERA);
+                this.form.CARRERA=value.dataItem.CARRERA;
+                console.log(this.form.CARRERA);
+                this.form.UA=value.dataItem.UA;
+
+                ua = value.dataItem.UA;
+            }else{
+                ua = value;
+            }
+            let url = Urls["ASIGNATURA"].GET_ALL_UA+ua;
             this.buscandoAsignatura=true;
-            let url = Urls["ASIGNATURA"].GET_ALL_UA+value.dataItem.UA;
+
+
             axios
                 .get(url, {
                     headers: {
@@ -655,7 +673,7 @@ export default {
                 });
         },
         getInfoAsignatura(value){
-            console.log(value);
+            console.log("getInfoAsignatura: "+value);
             this.form.NOMBRE_ASIGNATURA=value.dataItem.NOMBRE_ASIGNATURA;
             this.form.SECCION_ASIGNATURA=value.dataItem.SECCION_ASIGNATURA;
             this.form.PROFESOR_ASIGNATURA=value.dataItem.NOMBRE;
@@ -789,6 +807,7 @@ export default {
             if(this.form.PERIODO!=null&&this.form.ANIO!=null&&this.form.CARRERA!=null&&this.form.NIVEL_PRACTICA!=null&&this.form.TIPO_PRACTICA!=null){
 
                 this.getCuposByProgramacion();
+                this.getAsignaturasByUa(this.form.UA,true);
             }
         },
         'form.NIVEL_PRACTICA': function () {

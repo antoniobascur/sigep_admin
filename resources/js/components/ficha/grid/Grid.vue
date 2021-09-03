@@ -15,10 +15,13 @@
             @pagechange="pageChangeHandler"
         >
             <kendo-grid-column field="ID" title="<b>ID</b>"></kendo-grid-column>
-            <kendo-grid-column field="NIVEL_PRACTICA" title="<b>Nivel Práctica</b>"></kendo-grid-column>
-            <kendo-grid-column field="TIPO_SOLICITUD_ID" title="<b>Tipo Ficha</b>"></kendo-grid-column>
-            <kendo-grid-column field="RUN_ESTUDIANTE" title="<b>Rut estudiante</b>"></kendo-grid-column>
-
+            <kendo-grid-column field="TIPO_FICHA" title="<b>TIPO_FICHA</b>"></kendo-grid-column>
+            <kendo-grid-column field="RUN_ESTUDIANTE" title="<b>RUN_ESTUDIANTE</b>"></kendo-grid-column>
+            <kendo-grid-column field="NOMBRE_ESTUDIANTE" title="<b>NOMBRE_ESTUDIANTE</b>"></kendo-grid-column>
+            <kendo-grid-column field="MODALIDAD" title="<b>MODALIDAD</b>"></kendo-grid-column>
+            <kendo-grid-column field="NOMBRE_ESTABLECIMIENTO" title="<b>NOMBRE_ESTABLECIMIENTO</b>"></kendo-grid-column>
+            <kendo-grid-column field="ESTADO_CUPOS_PROGRAMACION_PRACTICA" title="<b>ESTADO_CUPOS_PROGRAMACION_PRACTICA</b>"></kendo-grid-column>
+            <kendo-grid-column field="ESTADO_FICHA" title="<b>ESTADO_FICHA</b>"></kendo-grid-column>
             <kendo-grid-column title="<b>Acciones</b>" :template="actionsTemplate" :width="70"></kendo-grid-column>
         </kendo-grid>
     </div>
@@ -40,7 +43,7 @@ export default {
             propsToPass: {
                 titulo: "Ficha",
                 ayuda: "lorem ",
-                element: "FICHA",
+                element: "FICHA_PRACTICA",
             },
             pageable: {
                 pageSize: 10,
@@ -52,14 +55,14 @@ export default {
     },
     computed: {
         ficha() {
-            return this.$store.state.ficha;
+            return this.$store.state.dsFicha;
         },
         dsData: {
             get() {
-                return this.$store.state.ficha.data;
+                return this.$store.state.dsFicha.data;
             },
             set(val) {
-                this.$store.state.ficha.data = val;
+                this.$store.state.dsFicha.data = val;
             },
         },
 
@@ -82,7 +85,7 @@ export default {
                 .then((response) => {
                     //console.log(response.data.data);
                     if (response.data.data.length > 0) {
-                        this.$store.state.fichaAdscripcion.data = response.data.data;
+                        this.$store.state.dsFicha.data = response.data.data;
                     }
                 })
                 .catch(function (error) {
@@ -90,7 +93,7 @@ export default {
                     onError();
                 })
                 .finally(() => {
-                    eventHub.$emit("LoadingOff");
+                    eventHub.$emit("LoadingOff",{obj:false});
                 });
         },
         pageChangeHandler: function (event) {

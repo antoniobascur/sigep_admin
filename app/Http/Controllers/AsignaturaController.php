@@ -24,7 +24,13 @@ class AsignaturaController extends Controller
 
     public function getAllByUa($code){
         try {
-            $result = Asignatura::getAllByUa($code);
+            if($code!=0){
+                $result = Asignatura::getAllByUa($code);
+            }else{
+                $result = Asignatura::getAll();
+
+            }
+
 
             $respuesta = Helper::createStdResponse(true, "Procesado con éxito!", $result);
         } catch (Exception $e) {
@@ -32,5 +38,6 @@ class AsignaturaController extends Controller
         }
         return response()->json($respuesta, 200);
     }
+
 
 }
