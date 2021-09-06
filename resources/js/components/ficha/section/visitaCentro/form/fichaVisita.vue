@@ -4,87 +4,20 @@
 
             <div class="row">
                 <div class="form-group col-md-3">
-                    <label class="required"> Carrera</label>
-
-                    <kendo-dropdownlist
-                        :ref="'CARRERA'"
-                        class="form-control"
-                        name="CARRERA"
-                        v-model="form.CARRERA"
-                        :data-source="dsCarrera"
-                        :data-text-field="'CARRERA'"
-                        :data-value-field="'UA'"
-                        :optionLabel="'Seleccione'"
-                        :filter="'contains'"
-                        :class="{'is-invalid': errors.has('dsCarrera')}"
-                    ></kendo-dropdownlist>
-
-                    <div class="invalid-feedback">{{ errors.first('CARRERA') }}</div>
-                </div>
-
-                <div class="form-group col-md-9">
-
-                    <label class="required">Nombre Educador(a) en formación)</label>
+                    <label class="required">Fecha Visita</label>
                     <input
-                        type="text"
+                        type="date"
                         class="form-control"
-                        ID="NOMBRE"
-                        name="NOMBRE"
-                        v-model="form.NOMBRE"
-                        placeholder="Ej: Descripción ..."
-                        v-validate="'required|max:100'"
-                        data-vv-as="NOMBRE"
-                        :class="{'is-invalid': errors.has('NOMBRE')}"
-                    />
-                    <div class="invalid-feedback">{{ errors.first('NOMBRE') }}</div>
-                </div>
-                <div class="form-group col-md-12">
-                    <label class="required">Nombre del Centro de Práctica</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        ID="CENTRO_PRACTICA"
-                        name="CENTRO_PRACTICA"
-                        v-model="form.CENTRO_PRACTICA"
+                        ID="FECHA_VISITA"
+                        name="FECHA_VISITA"
+                        v-model="form.FECHA_VISITA"
                         placeholder=""
                         v-validate="'required|max:100'"
-                        data-vv-as="CENTRO_PRACTICA"
-                        :class="{'is-invalid': errors.has('CENTRO_PRACTICA')}"
+                        data-vv-as="FECHA_VISITA"
+                        :class="{'is-invalid': errors.has('FECHA_VISITA')}"
                     />
-                    <div class="invalid-feedback">{{ errors.first('CENTRO_PRACTICA') }}</div>
+                    <div class="invalid-feedback">{{ errors.first('FECHA_VISITA') }}</div>
                 </div>
-
-
-            <div class="form-group col-md-6">
-                <label class="required">Nombre Jefe UTP</label>
-                <input
-                    type="text"
-                    class="form-control"
-                    ID="NOMBRE_UTP_CP"
-                    name="NOMBRE_UTP_CP"
-                    v-model="form.NOMBRE_UTP_CP"
-                    placeholder=""
-                    v-validate="'required|max:100'"
-                    data-vv-as="NOMBRE_UTP_CP"
-                    :class="{'is-invalid': errors.has('NOMBRE_UTP_CP')}"
-                />
-                <div class="invalid-feedback">{{ errors.first('NOMBRE_UTP_CP') }}</div>
-            </div>
-            <div class="form-group col-md-6">
-                <label class="required">Nombre ducador(a) o Profesor(a) Colaborador(a) Centro de Práctica</label>
-                <input
-                    type="text"
-                    class="form-control"
-                    ID="NOMBRE_PROF_COLABORADOR_CP"
-                    name="NOMBRE_PROF_COLABORADOR_CP"
-                    v-model="form.NOMBRE_PROF_COLABORADOR_CP"
-                    placeholder=""
-                    v-validate="'required|max:100'"
-                    data-vv-as="NOMBRE_PROF_COLABORADOR_CP"
-                    :class="{'is-invalid': errors.has('NOMBRE_PROF_COLABORADOR_CP')}"
-                />
-                <div class="invalid-feedback">{{ errors.first('NOMBRE_PROF_COLABORADOR_CP') }}</div>
-            </div>
             <div class="form-group col-md-3">
                 <label class="required">Propósito de la Visita</label>
                 <input
@@ -100,25 +33,11 @@
                 />
                 <div class="invalid-feedback">{{ errors.first('PROPOSITO_VISITA') }}</div>
             </div>
-                <div class="form-group col-md-3">
-                    <label class="required">Fecha Visita</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        ID="FECHA_VISITA"
-                        name="FECHA_VISITA"
-                        v-model="form.FECHA_VISITA"
-                        placeholder=""
-                        v-validate="'required|max:100'"
-                        data-vv-as="FECHA_VISITA"
-                        :class="{'is-invalid': errors.has('FECHA_VISITA')}"
-                    />
-                    <div class="invalid-feedback">{{ errors.first('FECHA_VISITA') }}</div>
-                </div>
+
                 <div class="form-group col-md-3">
                 <label class="required">N° de Visita</label>
                 <input
-                    type="text"
+                    type="number"
                     class="form-control"
                     ID="N_VISITA"
                     name="N_VISITA"
@@ -130,21 +49,44 @@
                 />
                 <div class="invalid-feedback">{{ errors.first('N_VISITA') }}</div>
             </div>
-            <div class="form-group col-md-6">
-                <label class="required">Observaciones del establecimiento sobre el/la Educador(a) en formación </label>
-                <input
-                    type="text"
-                    class="form-control"
-                    ID="OBSERVACIONES_VISITA"
-                    name="OBSERVACIONES_VISITA"
-                    v-model="form.OBSERVACIONES_VISITA"
-                    placeholder=""
-                    v-validate="'required|max:100'"
-                    data-vv-as="OBSERVACIONES_VISITA"
-                    :class="{'is-invalid': errors.has('OBSERVACIONES_VISITA')}"
-                />
-                <div class="invalid-feedback">{{ errors.first('OBSERVACIONES_VISITA') }}</div>
-            </div>
+
+
+                <h5 class="col-md-12 mt-2">Observaciones del establecimiento sobre el/la Educador(a) en formación </h5>
+                <div class="col-md-12">
+
+                    <editor :resizable-content="true"
+                            :resizable-toolbar="true"
+                            :value="htmlText"
+                            style="height:80px"
+                            rows="10"
+                            cols="30"
+                            :pdf="pdf"
+                            v-model="form.OBSERVACIONES_VISITA"
+
+                    >
+                        <!--                    <editor-tool :name="'fontName'"></editor-tool>-->
+                        <editor-tool :name="'fontSize'"></editor-tool>
+
+                        <editor-tool :name="'bold'"></editor-tool>
+                        <editor-tool :name="'italic'"></editor-tool>
+                        <editor-tool :name="'underline'"></editor-tool>
+
+                        <editor-tool :name="'insertUnorderedList'"></editor-tool>
+                        <editor-tool :name="'insertOrderedList'"></editor-tool>
+                        <editor-tool :name="'indent'"></editor-tool>
+                        <editor-tool :name="'outdent'"></editor-tool>
+
+                        <editor-tool :name="'justifyLeft'"></editor-tool>
+                        <editor-tool :name="'justifyCenter'"></editor-tool>
+                        <editor-tool :name="'justifyRight'"></editor-tool>
+                        <editor-tool :name="'justifyFull'"></editor-tool>
+
+                        <editor-tool :name="'viewHtml'"></editor-tool>
+                        <editor-tool :name="'pdf'"></editor-tool>
+
+                    </editor>
+                    <br>
+                </div>
             </div>
             <button type="submit" class="btn btn-primary float-right" :disabled="submit">
                 <i
@@ -167,10 +109,11 @@ import {MultiSelect} from "@progress/kendo-dropdowns-vue-wrapper";
 import Urls from "../../../../common/json/Urls.json";
 import AlertMessage from "../../../../common/json/AlertMessage.json";
 import eventHub from "../../../../../eventHub";
+import { Editor, EditorTool } from '@progress/kendo-editor-vue-wrapper';
 
 export default {
     components: {
-
+        Editor,
         MultiSelect,
         DateInput,
     },
@@ -184,7 +127,7 @@ export default {
     },
     computed: {
         form() {
-            return this.$store.state.ficha;
+            return this.$store.state.fichaVisita;
         },
     },
 

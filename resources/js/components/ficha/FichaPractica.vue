@@ -109,7 +109,7 @@
                          <Evaluacion></Evaluacion>
                      </div>
                     <div>
-
+                        <Asistencia></Asistencia>
                     </div>
                 </kendo-tabstrip>
 
@@ -135,11 +135,13 @@ import Triada from "./section/triada/Triada";
 import Seguimiento from "./section/seguimiento/Seguimiento";
 import Evaluacion from "./section/evaluacion/Evaluacion";
 import Principal from "./section/principal/Principal";
+import Asistencia from "./section/controlAsistencia/Asistencia";
 import eventHub from "../../eventHub";
 
 export default {
     components: {
         Principal,
+        Asistencia,
         Seguimiento,
         Triada,
         VisitaCentro,

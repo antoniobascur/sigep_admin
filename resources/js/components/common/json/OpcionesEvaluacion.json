@@ -1,0 +1,20 @@
+{
+    "OpcionesEvaluacion": [
+    {
+        "name": "Siempre",
+        "value": "Siempre"
+    },
+    {
+        "name": "A veces",
+        "value": "A veces"
+    },
+    {
+        "name": "No observado",
+        "value": "No observado"
+    },
+    {
+        "name": "Nunca",
+        "value": "Nunca"
+    }
+]
+}

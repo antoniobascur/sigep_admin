@@ -1,7 +1,37 @@
 <template>
     <div>
-        <h5>Nueva Tríada </h5>
-        <FichaTriada></FichaTriada>
+
+        <div class="d-flex flex-row-reverse bd-highlight">
+
+            <div class="p-2 bd-highlight">
+                <button class="btn btn-primary" @click="onDialogFormNew">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    Nueva
+                </button>
+
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <Grid></Grid>
+        </div>
+
+        <kendo-window
+            :ref="'form_nuevo'"
+            :width="'70%'"
+            :height="'auto'"
+            :title="this.tituloKendoWindowsFormNuevo"
+            :visible="false"
+            :modal="true"
+            :resizable= "true"
+            style="display:none;"
+            :scrollable="false"
+            :actions="actions"
+        >
+
+            <FichaTriada></FichaTriada>
+
+        </kendo-window>
     </div>
 
 </template>
@@ -13,7 +43,7 @@ import Loading from "../../../common/Loading";
 import {MultiSelect} from "@progress/kendo-dropdowns-vue-wrapper";
 import {DateInput} from "@progress/kendo-vue-dateinputs";
 import {KendoWindow} from "@progress/kendo-window-vue-wrapper";
-import Grid from "../../grid/Grid";
+import Grid from "./grid/Grid";
 import {TabStrip} from "@progress/kendo-layout-vue-wrapper";
 export default {
     components: {
@@ -31,7 +61,7 @@ export default {
             actions: ["Maximize", "Close"],
             loading: false,
             submit: false,
-            tituloKendoWindowsFormNuevo: "NUEVA VISITA CENTRO ",
+            tituloKendoWindowsFormNuevo: "NUEVA FICHA TRIADA ",
             tituloKendoWindowsFormActualizar: "VER FICHA ",
             propsToPass: {
                 titulo: "Ficha Practica",
@@ -47,7 +77,24 @@ export default {
             }
 
         }
-    }
+    },
+    computed: {
+        windowFormNuevo() {
+            return this.$refs["form_nuevo"];
+        },
+    },
+
+    methods: {
+        resetForm() {
+
+        },
+        onDialogFormNew() {
+            this.$nextTick(() => {
+                this.windowFormNuevo.kendoWidget().center().open();
+            });
+        },
+
+    },
 }
 </script>
 

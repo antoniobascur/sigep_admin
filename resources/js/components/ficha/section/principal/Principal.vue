@@ -546,7 +546,7 @@
                 <editor :resizable-content="true"
                         :resizable-toolbar="true"
                         :value="htmlText"
-                        style="height:80px"
+                        style="height:60px"
                         rows="10"
                         cols="30"
                         :pdf="pdf"

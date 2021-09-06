@@ -24,6 +24,21 @@ export const state = {
     dsFicha: {
         data: []
     },
+    dsControlAsistencia: {
+        data: []
+    },
+    dsFichaEvaluacion: {
+        data: []
+    },
+    dsFichaSeguimiento: {
+        data: []
+    },
+    dsFichaTriada: {
+        data: []
+    },
+    dsFichaVisita: {
+        data: []
+    },
     ficha:{
         ID: null,
         TIPO_FICHA:null,
@@ -188,10 +203,52 @@ export const state = {
         EDITAR_FORMULARIO:false
     },
     fichaEvaluacion:{
-
+        Evaluacion_p1: null,
+        Evaluacion_p2: null,
+        Evaluacion_p3: null,
+        Evaluacion_p4: null,
+        Evaluacion_p5: null,
+        Evaluacion_p6: null,
+        Evaluacion_p7: null,
+        Evaluacion_p8: null,
+        Evaluacion_p10: null,
+        Evaluacion_p11: null,
+        Evaluacion_p12: null,
+        Evaluacion_p13: null,
+        Evaluacion_p14: null,
     },
     fichaSeguimiento:{
-
+        FECHA_SEGUIMIENTO:null,
+        Seguimiento_p1: null,
+        Seguimiento_p2: null,
+        Seguimiento_p3: null,
+        Seguimiento_p4: null,
+        Seguimiento_p5: null,
+        Seguimiento_p6: null,
+        Seguimiento_p7: null,
+        Seguimiento_p8: null,
+        Seguimiento_p10: null,
+        Seguimiento_p11: null,
+        Seguimiento_p12: null,
+        Seguimiento_p13: null,
+    },
+    fichaTriadica:{
+        FECHA_SEMINARIO: null,
+        ASISTENTES: null,
+        TEMATICAS_TRIADA: null,
+        REFLEXIONES_TRIADA: null,
+    },
+    fichaVisita:{
+        FECHA_VISITA: null,
+        PROPOSITO_VISITA: null,
+        N_VISITA: null,
+        OBSERVACIONES_VISITA: null,
+    },
+    fichaAsistencia:{
+        FECHA_ASITENCIA: null,
+        HORA_LLEGADA: null,
+        HORA_SALIDA: null,
+        OBSERVACIONES: null,
     }
 
 
